@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Features — Throughline</title>
+  <meta name="description" content="How Throughline computes cycle time, deploy frequency, PR throughput, and lead time from your Git and CI data — and surfaces the exact stage slowing you down." />
+  <meta name="theme-color" content="#0A0E17" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Cpath d='M3 18 L9 12 L15 15 L23 5' stroke='%23FFB224' stroke-width='2.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ============================ HEADER ============================ -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html" aria-label="Throughline home">
+        <svg class="brand__mark" width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+          <path d="M3 18 L9 12 L15 15 L23 5" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle class="tl-node" cx="3" cy="18" r="2.3" fill="var(--accent)"/>
+          <circle class="tl-node" cx="23" cy="5" r="2.3" fill="var(--accent)"/>
+        </svg>
+        Throughline
+      </a>
+      <button class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+        <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+      </button>
+      <nav class="nav" id="site-nav" aria-label="Primary">
+        <ul class="nav__links">
+          <li><a class="nav__link" href="features.html" aria-current="page">Features</a></li>
+          <li><a class="nav__link" href="pricing.html">Pricing</a></li>
+          <li><a class="nav__link" href="customers.html">Customers</a></li>
+        </ul>
+        <div class="nav__actions">
+          <a class="nav__link" href="#">Sign in</a>
+          <a class="btn btn--primary btn--sm" href="contact.html">Book a demo</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============================ PAGE INTRO ============================ -->
+    <section class="section">
+      <div class="container split">
+        <div class="stack reveal">
+          <span class="eyebrow">Features</span>
+          <h1 class="display">Every metric, measured where it <span style="color:var(--accent)">actually happens</span>.</h1>
+          <p class="lead">Throughline reads your Git history, pull request events, and CI pipelines and turns them into four delivery signals — cycle time, deploy frequency, PR throughput, and lead time. No instrumentation, no story points, no spreadsheets. The data is already there; Throughline just makes it legible.</p>
+          <p class="mono" style="font-size:.8rem;color:var(--dim);">Read-only access · Connects in minutes · SOC&nbsp;2 Type&nbsp;II</p>
+        </div>
+
+        <!-- Supporting visual: four metrics at a glance -->
+        <div class="reveal" data-delay="2">
+          <div class="window">
+            <div class="window__bar">
+              <span class="window__dots"><i></i><i></i><i></i></span>
+              <span class="window__title">throughline — features overview</span>
+            </div>
+            <div class="window__body">
+              <div class="grid grid--2" style="gap:var(--s3);">
+                <div class="metric">
+                  <div class="metric__label">Cycle time <span class="delta delta--up"><span class="delta__arrow">▾</span>18%</span></div>
+                  <div class="metric__value">4.2<span class="unit">h</span></div>
+                  <svg class="spark mt-3" viewBox="0 0 100 30" fill="none" aria-hidden="true"><polyline class="series series--accent" points="0,8 14,12 28,10 42,16 56,14 70,20 84,18 100,24"/></svg>
+                </div>
+                <div class="metric">
+                  <div class="metric__label">Deploy freq <span class="delta delta--up"><span class="delta__arrow">▴</span>12%</span></div>
+                  <div class="metric__value">9.3<span class="unit">/d</span></div>
+                  <svg class="spark mt-3" viewBox="0 0 100 30" fill="none" aria-hidden="true"><polyline class="series series--accent" points="0,18 14,16 28,20 42,14 56,16 70,10 84,12 100,6"/></svg>
+                </div>
+                <div class="metric">
+                  <div class="metric__label">PR throughput <span class="delta delta--up"><span class="delta__arrow">▴</span>6%</span></div>
+                  <div class="metric__value">47<span class="unit">/wk</span></div>
+                  <svg class="spark mt-3" viewBox="0 0 100 30" fill="none" aria-hidden="true"><polyline class="series series--accent" points="0,20 14,22 28,16 42,18 56,14 70,16 84,10 100,12"/></svg>
+                </div>
+                <div class="metric">
+                  <div class="metric__label">Lead time <span class="delta delta--up"><span class="delta__arrow">▾</span>9%</span></div>
+                  <div class="metric__value">1.8<span class="unit">d</span></div>
+                  <svg class="spark mt-3" viewBox="0 0 100 30" fill="none" aria-hidden="true"><polyline class="series series--accent" points="0,10 14,8 28,14 42,12 56,18 70,16 84,22 100,20"/></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================== THE FOUR DELIVERY SIGNALS =================== -->
+    <section class="section section--alt">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="eyebrow">The four delivery signals</span>
+          <h2>What each metric measures, and how Throughline computes it.</h2>
+          <p class="muted">Each signal is derived from timestamped events — commits, PR state changes, pipeline runs, deploy hooks. Nothing is estimated or self-reported.</p>
+        </div>
+
+        <!-- Signal 1: Cycle time -->
+        <div class="split stack-lg reveal" style="margin-bottom:var(--s9);">
+          <div class="stack">
+            <span class="feature-index mono">01 / Cycle time</span>
+            <h3>How long it takes from first commit to merge.</h3>
+            <p class="muted">Cycle time is measured from the first commit on a branch to the moment that branch is merged. It captures real coding effort plus all the waiting in between — for review, for CI, for a second look. When cycle time rises, something upstream is blocking flow.</p>
+            <ul class="stack" style="--s4:var(--s3);">
+              <li class="cluster cluster--tight"><span class="mono" style="color:var(--accent)">→</span> <span class="muted">Source: Git push and merge timestamps</span></li>
+              <li class="cluster cluster--tight"><span class="mono" style="color:var(--accent)">→</span> <span class="muted">Excludes weekends and configurable off-hours</span></li>
+              <li class="cluster cluster--tight"><span class="mono" style="color:var(--accent)">→</span> <span class="muted">Lower is better — improvement shows as a downward trend</span></li>
+            </ul>
+          </div>
+
+          <!-- Cycle time: area chart, trending down -->
+          <div class="reveal" data-delay="1">
+            <div class="card">
+              <div class="cluster" style="justify-content:space-between;margin-bottom:var(--s4);">
+                <span class="metric__label">Cycle time · 12 weeks</span>
+                <span class="cluster cluster--tight" style="font-size:.74rem;">
+                  <span class="badge"><span class="dot" style="background:var(--accent)"></span>This team</span>
+                  <span class="badge"><span class="dot" style="background:var(--steel)"></span>Org avg</span>
+                </span>
+              </div>
+              <figure class="chart" role="img" aria-label="Cycle time trending down over 12 weeks, this team improving below org average.">
+                <svg viewBox="0 0 320 140" width="100%" preserveAspectRatio="none" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="tlAreaFill" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.22"/>
+                      <stop offset="100%" stop-color="var(--accent)" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <g class="chart-grid">
+                    <line x1="0" y1="35" x2="320" y2="35"/>
+                    <line x1="0" y1="70" x2="320" y2="70"/>
+                    <line x1="0" y1="105" x2="320" y2="105"/>
+                  </g>
+                  <!-- Org avg (steel, flatter) -->
+                  <path class="series series--steel" d="M8,48 L37,50 L66,46 L95,52 L124,48 L153,54 L182,50 L211,56 L240,52 L269,54 L298,50 L312,52"/>
+                  <!-- This team (accent, trending down) -->
+                  <path class="area--accent" d="M8,52 L37,60 L66,50 L95,72 L124,66 L153,84 L182,78 L211,96 L240,90 L269,108 L298,114 L312,118 L312,128 L8,128 Z"/>
+                  <path class="series series--accent tl-draw" style="--len:520" d="M8,52 L37,60 L66,50 L95,72 L124,66 L153,84 L182,78 L211,96 L240,90 L269,108 L298,114 L312,118"/>
+                  <circle class="dot-ink" cx="312" cy="118" r="4"/>
+                </svg>
+              </figure>
+              <div class="cluster" style="justify-content:space-between;margin-top:var(--s4);">
+                <span class="mono" style="font-size:.8rem;color:var(--dim);">Week 1</span>
+                <span class="mono" style="font-size:.8rem;color:var(--dim);">Week 12</span>
+              </div>
+              <div class="cluster" style="justify-content:flex-end;margin-top:var(--s3);">
+                <span class="mono" style="font-size:.85rem;">Current: <span style="color:var(--accent);">4.2h</span></span>
+                <span class="delta delta--up" style="margin-left:var(--s4);"><span class="delta__arrow">▾</span>18% vs baseline</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Signal 2: Deploy frequency -->
+        <div class="split split--reverse stack-lg reveal" style="margin-bottom:var(--s9);">
+          <div class="stack">
+            <span class="feature-index mono">02 / Deploy frequency</span>
+            <h3>How often your team ships to production.</h3>
+            <p class="muted">Deploy frequency counts successful production deploys per day. High-frequency teams catch regressions sooner, reduce blast radius, and move faster because each change is smaller. Throughline reads deploy events directly from your CI provider — no webhooks to configure manually.</p>
+            <ul class="stack" style="--s4:var(--s3);">
+              <li class="cluster cluster--tight"><span class="mono" style="color:var(--accent)">→</span> <span class="muted">Source: GitHub Actions, CircleCI, Jenkins, and Buildkite pipeline events</span></li>
+              <li class="cluster cluster--tight"><span class="mono" style="color:var(--accent)">→</span> <span class="muted">Filters to production environment only — staging runs excluded</span></li>
+              <li class="cluster cluster--tight"><span class="mono" style="color:var(--accent)">→</span> <span class="muted">Higher is better — improvement shows as an upward trend</span></li>
+            </ul>
+          </div>
+
+          <!-- Deploy frequency: bar chart, trending up -->
+          <div class="reveal" data-delay="1">
+            <div class="card">
+              <div class="cluster" style="justify-content:space-between;margin-bottom:var(--s4);">
+                <span class="metric__label">Deploys per day · trailing 12 days</span>
+                <span class="metric__value" style="font-size:1.4rem;">9.3<span class="unit">/d</span></span>
+              </div>
+              <div class="bars bars--tall" aria-label="Deploy frequency increasing over trailing 12 days, recent bars highlighted in accent." role="img">
+                <span class="bar" style="--h:32%"></span>
+                <span class="bar" style="--h:44%"></span>
+                <span class="bar" style="--h:28%"></span>
+                <span class="bar" style="--h:52%"></span>
+                <span class="bar" style="--h:48%"></span>
+                <span class="bar" style="--h:60%"></span>
+                <span class="bar" style="--h:42%"></span>
+                <span class="bar" style="--h:72%"></span>
+                <span class="bar" style="--h:64%"></span>
+                <span class="bar bar--accent" style="--h:80%"></span>
+                <span class="bar bar--accent" style="--h:76%"></span>
+                <span class="bar bar--accent" style="--h:95%"></span>
+              </div>
+              <div class="cluster" style="justify-content:space-between;margin-top:var(--s4);">
+                <span class="mono" style="font-size:.8rem;color:var(--dim);">12 days ago</span>
+                <span class="mono" style="font-size:.8rem;color:var(--dim);">Today</span>
+              </div>
+              <div class="cluster" style="justify-content:flex-end;margin-top:var(--s3);">
+                <span class="delta delta--up"><span class="delta__arrow">▴</span>12% vs prior period</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Signal 3: PR throughput -->
+        <div class="split stack-lg reveal" style="margin-bottom:var(--s9);">
+          <div class="stack">
+            <span class="feature-index mono">03 / PR throughput</span>
+            <h3>How many pull requests your team merges per week.</h3>
+            <p class="muted">PR throughput is a direct read of team output. A sudden drop often signals a process problem — a long-running PR blocking others, a review queue that isn't moving, or a branch strategy that forces serialization. Throughline tracks it per team, per author, and per repo.</p>
+            <ul class="stack" style="--s4:var(--s3);">
+              <li class="cluster cluster--tight"><span class="mono" style="color:var(--accent)">→</span> <span class="muted">Source: PR merge events from GitHub, GitLab, or Bitbucket</span></li>
+              <li class="cluster cluster--tight"><span class="mono" style="color:var(--accent)">→</span> <span class="muted">Broken down by author, team, and repository</span></li>
+              <li class="cluster cluster--tight"><span class="mono" style="color:var(--accent)">→</span> <span class="muted">Higher is better — improvement shows as an upward trend</span></li>
+            </ul>
+          </div>
+
+          <!-- PR throughput: sparkline metric cards with per-repo breakdown -->
+          <div class="reveal" data-delay="1">
+            <div class="stack">
+              <div class="card">
+                <div class="cluster" style="justify-content:space-between;margin-bottom:var(--s4);">
+                  <span class="metric__label">PR throughput · last 4 weeks</span>
+                  <span class="delta delta--up"><span class="delta__arrow">▴</span>6%</span>
+                </div>
+                <div class="grid grid--3" style="gap:var(--s3);">
+                  <div class="metric" style="padding:var(--s3) var(--s4);">
+                    <div class="metric__label" style="font-size:.72rem;">api-service</div>
+                    <div class="metric__value" style="font-size:1.2rem;margin-top:4px;">18<span class="unit">/wk</span></div>
+                    <svg class="spark mt-3" viewBox="0 0 100 30" fill="none" aria-hidden="true"><polyline class="series series--accent" points="0,22 25,18 50,14 75,10 100,8"/></svg>
+                  </div>
+                  <div class="metric" style="padding:var(--s3) var(--s4);">
+                    <div class="metric__label" style="font-size:.72rem;">frontend</div>
+                    <div class="metric__value" style="font-size:1.2rem;margin-top:4px;">21<span class="unit">/wk</span></div>
+                    <svg class="spark mt-3" viewBox="0 0 100 30" fill="none" aria-hidden="true"><polyline class="series series--accent" points="0,20 25,22 50,16 75,14 100,10"/></svg>
+                  </div>
+                  <div class="metric" style="padding:var(--s3) var(--s4);">
+                    <div class="metric__label" style="font-size:.72rem;">infra</div>
+                    <div class="metric__value" style="font-size:1.2rem;margin-top:4px;">8<span class="unit">/wk</span></div>
+                    <svg class="spark mt-3" viewBox="0 0 100 30" fill="none" aria-hidden="true"><polyline class="series series--accent" points="0,24 25,20 50,22 75,18 100,14"/></svg>
+                  </div>
+                </div>
+              </div>
+              <div class="card" style="padding:var(--s4) var(--s5);">
+                <div class="cluster" style="justify-content:space-between;">
+                  <span class="metric__label">Team total</span>
+                  <span class="metric__value" style="font-size:1.6rem;">47<span class="unit">/wk</span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Signal 4: Lead time -->
+        <div class="split split--reverse stack-lg reveal">
+          <div class="stack">
+            <span class="feature-index mono">04 / Lead time for changes</span>
+            <h3>From commit to production, end to end.</h3>
+            <p class="muted">Lead time measures the full span from a commit's first push to its arrival in production. Where cycle time ends at merge, lead time captures everything after — deploy queues, staged rollouts, manual gates. Together they show you which half of delivery to focus on.</p>
+            <ul class="stack" style="--s4:var(--s3);">
+              <li class="cluster cluster--tight"><span class="mono" style="color:var(--accent)">→</span> <span class="muted">Source: first push timestamp to successful production deploy event</span></li>
+              <li class="cluster cluster--tight"><span class="mono" style="color:var(--accent)">→</span> <span class="muted">Compared to cycle time to expose post-merge lag</span></li>
+              <li class="cluster cluster--tight"><span class="mono" style="color:var(--accent)">→</span> <span class="muted">Lower is better — improvement shows as a downward trend</span></li>
+            </ul>
+          </div>
+
+          <!-- Lead time: two metric cards + statbar showing breakdown -->
+          <div class="reveal" data-delay="1">
+            <div class="card card--accent">
+              <div class="metric__label" style="margin-bottom:var(--s5);">Lead time breakdown · Platform team</div>
+              <div class="grid grid--2" style="gap:var(--s3);margin-bottom:var(--s5);">
+                <div class="metric" style="padding:var(--s3) var(--s4);">
+                  <div class="metric__label" style="font-size:.72rem;">Cycle time</div>
+                  <div class="metric__value" style="font-size:1.3rem;margin-top:4px;">4.2<span class="unit">h</span></div>
+                </div>
+                <div class="metric" style="padding:var(--s3) var(--s4);">
+                  <div class="metric__label" style="font-size:.72rem;">Post-merge lag</div>
+                  <div class="metric__value" style="font-size:1.3rem;margin-top:4px;">39<span class="unit">m</span></div>
+                </div>
+              </div>
+              <div class="stack">
+                <div>
+                  <div class="cluster" style="justify-content:space-between;"><span class="mono" style="font-size:.82rem;">Pre-merge (cycle time)</span><span class="mono" style="font-size:.82rem;color:var(--accent);">4.2h</span></div>
+                  <div class="statbar mt-3"><span class="statbar__fill" style="--w:86%"></span></div>
+                </div>
+                <div>
+                  <div class="cluster" style="justify-content:space-between;"><span class="mono" style="font-size:.82rem;">Deploy queue &amp; rollout</span><span class="mono muted" style="font-size:.82rem;">26m</span></div>
+                  <div class="statbar mt-3"><span class="statbar__fill statbar__fill--steel" style="--w:22%"></span></div>
+                </div>
+                <div>
+                  <div class="cluster" style="justify-content:space-between;"><span class="mono" style="font-size:.82rem;">Health checks &amp; cutover</span><span class="mono muted" style="font-size:.82rem;">13m</span></div>
+                  <div class="statbar mt-3"><span class="statbar__fill statbar__fill--steel" style="--w:10%"></span></div>
+                </div>
+              </div>
+              <div class="cluster" style="justify-content:space-between;margin-top:var(--s5);">
+                <span class="mono" style="font-size:.82rem;">Lead time total</span>
+                <span class="mono" style="font-size:.9rem;color:var(--accent);">1.8d <span class="delta delta--up" style="margin-left:var(--s3);"><span class="delta__arrow">▾</span>9%</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================== FIND THE BOTTLENECK =================== -->
+    <section class="section">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="eyebrow">Find the bottleneck</span>
+          <h2>Every stage, timed. The worst one, flagged automatically.</h2>
+          <p class="muted">Throughline breaks each change into four stages and computes p50 and p95 for each. When one stage accounts for a disproportionate share of total cycle time, it gets flagged — so you know where to intervene without guessing.</p>
+        </div>
+
+        <div class="split stack-lg reveal">
+          <div class="stack">
+            <h3 style="font-size:1.15rem;">Stage-level timing at every percentile.</h3>
+            <p class="muted">Median (p50) tells you what's normal. The 95th percentile tells you what the worst outliers experience — and it's usually the p95 that's blocking your team's confidence in deploying. Throughline shows both, side by side, for each stage in the delivery pipeline.</p>
+            <p class="muted">When a stage's p95 is more than 3× its p50, Throughline raises a flag. Review wait currently runs at 4.6× — that's why it's marked.</p>
+            <p class="muted">From the flagged row, click through to see the individual PRs that contributed to the p95. Filter by author, team, or date range. Export the list to share in a retro.</p>
+            <div class="stack" style="margin-top:var(--s5);">
+              <div class="cluster cluster--tight">
+                <span class="badge badge--accent"><span class="dot"></span>Flagged</span>
+                <span class="muted" style="font-size:.9rem;">p95 is 3× or more the p50 for this stage</span>
+              </div>
+              <div class="cluster cluster--tight" style="margin-top:var(--s3);">
+                <span class="badge">Drill down</span>
+                <span class="muted" style="font-size:.9rem;">Click any row to see the contributing PRs</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="stack reveal" data-delay="1">
+            <!-- Stage breakdown table -->
+            <div class="table-wrap">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Stage</th>
+                    <th class="num">p50</th>
+                    <th class="num">p95</th>
+                    <th class="num">Share</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="cell-strong">Coding</td>
+                    <td class="num">2.1h</td>
+                    <td class="num">6.4h</td>
+                    <td class="num">24%</td>
+                  </tr>
+                  <tr>
+                    <td class="cell-strong">Review wait <span class="badge badge--accent" style="margin-left:6px;">Flagged</span></td>
+                    <td class="num">3.1h</td>
+                    <td class="num" style="color:var(--accent);">14.2h</td>
+                    <td class="num" style="color:var(--accent);">82%</td>
+                  </tr>
+                  <tr>
+                    <td class="cell-strong">CI &amp; checks</td>
+                    <td class="num">11m</td>
+                    <td class="num">24m</td>
+                    <td class="num">14%</td>
+                  </tr>
+                  <tr>
+                    <td class="cell-strong">Deploy to prod</td>
+                    <td class="num">18m</td>
+                    <td class="num">1.2h</td>
+                    <td class="num">30%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Stage statbars -->
+            <div class="card" style="margin-top:var(--s4);">
+              <div class="metric__label" style="margin-bottom:var(--s4);">Where the week goes · p95 view</div>
+              <div class="stack">
+                <div>
+                  <div class="cluster" style="justify-content:space-between;"><span class="mono" style="font-size:.82rem;">Coding</span><span class="mono muted" style="font-size:.82rem;">6.4h p95</span></div>
+                  <div class="statbar mt-3"><span class="statbar__fill statbar__fill--steel" style="--w:37%"></span></div>
+                </div>
+                <div>
+                  <div class="cluster" style="justify-content:space-between;"><span class="mono" style="font-size:.82rem;">Review wait <span class="badge badge--accent" style="margin-left:6px;">Bottleneck</span></span><span class="mono" style="font-size:.82rem;color:var(--accent);">14.2h p95</span></div>
+                  <div class="statbar mt-3"><span class="statbar__fill" style="--w:82%"></span></div>
+                </div>
+                <div>
+                  <div class="cluster" style="justify-content:space-between;"><span class="mono" style="font-size:.82rem;">CI &amp; checks</span><span class="mono muted" style="font-size:.82rem;">24m p95</span></div>
+                  <div class="statbar mt-3"><span class="statbar__fill statbar__fill--steel" style="--w:8%"></span></div>
+                </div>
+                <div>
+                  <div class="cluster" style="justify-content:space-between;"><span class="mono" style="font-size:.82rem;">Deploy to prod</span><span class="mono muted" style="font-size:.82rem;">1.2h p95</span></div>
+                  <div class="statbar mt-3"><span class="statbar__fill statbar__fill--steel" style="--w:14%"></span></div>
+                </div>
+              </div>
+              <p class="dim" style="font-size:.82rem;margin-top:var(--s5);">Review wait is 5.8× your median coding time. Throughline flags it automatically and links to the PRs that drove the p95.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================== CONNECTS TO YOUR STACK =================== -->
+    <section class="section section--alt">
+      <div class="container">
+        <div class="section__head section__head--center reveal">
+          <span class="eyebrow eyebrow--plain">Integrations</span>
+          <h2 style="margin-top:var(--s3);">Connects to the stack you already run.</h2>
+          <p class="muted center-x">Read-only OAuth access — no agents, no webhooks to configure, no infrastructure to maintain. Throughline connects in minutes and starts computing metrics from your existing history.</p>
+        </div>
+
+        <div class="stack reveal" data-delay="1">
+          <div>
+            <p class="mono" style="font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:var(--s4);">Code hosting</p>
+            <div class="logos">
+              <span class="logo">GitHub</span>
+              <span class="logo">GitLab</span>
+              <span class="logo mono">BITBUCKET</span>
+            </div>
+          </div>
+          <div style="margin-top:var(--s6);">
+            <p class="mono" style="font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:var(--s4);">CI &amp; pipelines</p>
+            <div class="logos">
+              <span class="logo mono">GITHUB ACTIONS</span>
+              <span class="logo">CircleCI</span>
+              <span class="logo mono">JENKINS</span>
+              <span class="logo">Buildkite</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card reveal" style="margin-top:var(--s7);padding:var(--s6);" data-delay="1">
+          <div class="split">
+            <div class="stack">
+              <div class="card__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <h3 style="font-size:1rem;">Read-only by design.</h3>
+              <p class="muted" style="font-size:.9rem;">Throughline requests read access only — it never writes to your repositories, triggers pipelines, or modifies code review state. Your security team can verify the OAuth scope list before you connect.</p>
+            </div>
+            <div class="stack">
+              <div class="card__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <h3 style="font-size:1rem;">Live in under five minutes.</h3>
+              <p class="muted" style="font-size:.9rem;">OAuth connect, pick your repos, choose your team boundaries. Throughline backfills up to 12 months of history on first sync. Metrics are available before your next standup.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================== SECONDARY CAPABILITIES =================== -->
+    <section class="section">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="eyebrow">More capabilities</span>
+          <h2>Built for engineering leads who run multiple teams.</h2>
+          <p class="muted">The four signals are the core. These are the features that make Throughline the tool you keep open — not just the one you check before a quarterly review.</p>
+        </div>
+
+        <!-- 2-column card grid, then a wider card below -->
+        <div class="grid grid--2 reveal" style="gap:var(--s4);margin-bottom:var(--s4);" data-delay="1">
+
+          <div class="card card--hover">
+            <div class="card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            </div>
+            <h3 style="font-size:1rem;margin-top:var(--s4);">Baselines and comparisons.</h3>
+            <p class="muted" style="font-size:.9rem;">Every metric is benchmarked against your own rolling 90-day baseline, not a vendor-defined "elite" threshold. You know what your team has achieved — Throughline shows whether you're above or below it.</p>
+          </div>
+
+          <div class="card card--hover">
+            <div class="card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3h18v18H3z"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+            </div>
+            <h3 style="font-size:1rem;margin-top:var(--s4);">Per-team and org rollups.</h3>
+            <p class="muted" style="font-size:.9rem;">Define team boundaries around the repos and people that match your org chart. Drill into a single team or roll up to org-wide. VPs of Eng see aggregate health; leads see their team's detail.</p>
+          </div>
+
+          <div class="card card--hover">
+            <div class="card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <h3 style="font-size:1rem;margin-top:var(--s4);">Threshold alerts.</h3>
+            <p class="muted" style="font-size:.9rem;">Set a threshold on any metric — cycle time above 8h, deploy frequency below 4/d — and get a Slack or email alert when the 7-day rolling average crosses it. No dashboards to watch.</p>
+          </div>
+
+          <div class="card card--hover">
+            <div class="card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            </div>
+            <h3 style="font-size:1rem;margin-top:var(--s4);">Incident and freeze annotations.</h3>
+            <p class="muted" style="font-size:.9rem;">Mark incidents, code freezes, and major releases directly on the timeline. When a metric spikes, the annotation tells the story — so the chart survives a board review without a paragraph of explanation.</p>
+          </div>
+
+        </div>
+
+        <!-- Full-width pair: export + API -->
+        <div class="grid grid--2 reveal" style="gap:var(--s4);" data-delay="2">
+
+          <div class="card card--hover card--accent">
+            <div class="card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            </div>
+            <h3 style="font-size:1rem;margin-top:var(--s4);">One-click export to slides and Slack.</h3>
+            <p class="muted" style="font-size:.9rem;">Export any chart or table as a ready-to-present slide, or send a formatted weekly digest to a Slack channel. Delivery reviews no longer require someone to manually copy numbers out of a dashboard on Friday afternoon.</p>
+          </div>
+
+          <div class="card card--hover">
+            <div class="card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <h3 style="font-size:1rem;margin-top:var(--s4);">API access.</h3>
+            <p class="muted" style="font-size:.9rem;">Every metric Throughline computes is available via a REST API. Pull delivery data into your internal tooling, pipe it into a data warehouse, or use it to power a custom engineering effectiveness dashboard.</p>
+            <a class="link link--arrow" href="#" style="margin-top:var(--s4);display:inline-flex;">Read the API docs</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= FINAL CTA BAND ======================= -->
+    <section class="section section--alt">
+      <div class="container reveal">
+        <div class="cta-band">
+          <span class="eyebrow eyebrow--plain center-x" style="display:inline-flex;">Get started</span>
+          <h2 class="mt-4">See your real cycle time before the call ends.</h2>
+          <p class="muted">Book a 30-minute demo. We'll connect a repo live and show you your team's four delivery signals — no slides, no pitch deck, no made-up benchmarks.</p>
+          <div class="cluster">
+            <a class="btn btn--primary btn--lg" href="contact.html">Book a demo</a>
+            <a class="btn btn--ghost btn--lg" href="pricing.html">Explore pricing</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================ FOOTER ============================ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a class="brand" href="index.html" aria-label="Throughline home">
+            <svg class="brand__mark" width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M3 18 L9 12 L15 15 L23 5" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="3" cy="18" r="2.3" fill="var(--accent)"/><circle cx="23" cy="5" r="2.3" fill="var(--accent)"/></svg>
+            Throughline
+          </a>
+          <p>Delivery metrics from the data your engineering org already produces. Built for the people accountable for how software ships.</p>
+        </div>
+        <div class="footer__col"><h4>Product</h4><ul>
+          <li><a href="features.html">Features</a></li><li><a href="pricing.html">Pricing</a></li>
+          <li><a href="customers.html">Customers</a></li><li><a href="#">Changelog</a></li></ul></div>
+        <div class="footer__col"><h4>Company</h4><ul>
+          <li><a href="#">About</a></li><li><a href="#">Careers</a></li>
+          <li><a href="contact.html">Contact</a></li><li><a href="#">Blog</a></li></ul></div>
+        <div class="footer__col"><h4>Resources</h4><ul>
+          <li><a href="#">Docs</a></li><li><a href="#">Security</a></li>
+          <li><a href="#">API</a></li><li><a href="#">Status</a></li></ul></div>
+      </div>
+      <div class="footer__bottom">
+        <span>© <span data-year>2026</span> Throughline, Inc. All rights reserved.</span>
+        <span class="footer__status"><span class="dot"></span> All systems operational</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>

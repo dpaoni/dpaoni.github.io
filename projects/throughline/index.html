@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Throughline — Engineering delivery metrics for teams that ship</title>
+  <meta name="description" content="Throughline turns your Git, CI, and code review data into the four metrics that predict delivery — cycle time, deploy frequency, PR throughput, and lead time. See exactly which stage slows you down." />
+  <meta name="theme-color" content="#0A0E17" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Cpath d='M3 18 L9 12 L15 15 L23 5' stroke='%23FFB224' stroke-width='2.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ============================ HEADER ============================ -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html" aria-label="Throughline home">
+        <svg class="brand__mark" width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+          <path d="M3 18 L9 12 L15 15 L23 5" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle class="tl-node" cx="3" cy="18" r="2.3" fill="var(--accent)"/>
+          <circle class="tl-node" cx="23" cy="5" r="2.3" fill="var(--accent)"/>
+        </svg>
+        Throughline
+      </a>
+
+      <button class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+        <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+      </button>
+
+      <nav class="nav" id="site-nav" aria-label="Primary">
+        <ul class="nav__links">
+          <li><a class="nav__link" href="features.html">Features</a></li>
+          <li><a class="nav__link" href="pricing.html">Pricing</a></li>
+          <li><a class="nav__link" href="customers.html">Customers</a></li>
+        </ul>
+        <div class="nav__actions">
+          <a class="nav__link" href="#">Sign in</a>
+          <a class="btn btn--primary btn--sm" href="contact.html">Book a demo</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============================ HERO ============================ -->
+    <section class="section">
+      <div class="container split">
+        <div class="stack reveal">
+          <span class="eyebrow">Engineering delivery metrics</span>
+          <h1 class="display">Trace every change from <span style="color:var(--accent)">commit to production</span>.</h1>
+          <p class="lead">Throughline reads your Git, CI, and code review data and turns it into the four signals that predict delivery — cycle time, deploy frequency, PR throughput, and lead time. See exactly which stage is slowing you down, and prove it with data.</p>
+          <div class="cluster">
+            <a class="btn btn--primary btn--lg" href="contact.html">Book a demo</a>
+            <a class="btn btn--ghost btn--lg" href="features.html">See the metrics</a>
+          </div>
+          <p class="mono" style="font-size:.8rem;color:var(--dim);">Read-only access · Connects in minutes · SOC&nbsp;2 Type&nbsp;II</p>
+        </div>
+
+        <!-- Hero product window -->
+        <div class="reveal" data-delay="2">
+          <div class="window">
+            <div class="window__bar">
+              <span class="window__dots"><i></i><i></i><i></i></span>
+              <span class="window__title">throughline — Platform team</span>
+            </div>
+            <div class="window__body">
+              <div class="cluster" style="justify-content:space-between;align-items:flex-start;">
+                <div>
+                  <div class="metric__label" style="color:var(--dim);">Cycle time · last 30 days</div>
+                  <div class="metric__value" style="margin-top:6px;">4.2<span class="unit">h</span></div>
+                </div>
+                <span class="delta delta--up"><span class="delta__arrow">▾</span> 18%</span>
+              </div>
+
+              <figure class="chart mt-5" role="img" aria-label="Cycle time trending down over the last 30 days, ahead of the team average.">
+                <svg viewBox="0 0 320 112" width="100%" preserveAspectRatio="none" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="tlAreaFill" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.22"/>
+                      <stop offset="100%" stop-color="var(--accent)" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <g class="chart-grid">
+                    <line x1="0" y1="28" x2="320" y2="28"/><line x1="0" y1="56" x2="320" y2="56"/><line x1="0" y1="84" x2="320" y2="84"/>
+                  </g>
+                  <path class="area--accent" d="M8,44 L45,50 L82,42 L119,60 L156,54 L193,70 L230,64 L267,80 L304,86 L304,104 L8,104 Z"/>
+                  <path class="series series--steel" d="M8,42 L45,44 L82,40 L119,46 L156,42 L193,48 L230,44 L267,50 L304,46"/>
+                  <path class="series series--accent tl-draw" style="--len:520" d="M8,44 L45,50 L82,42 L119,60 L156,54 L193,70 L230,64 L267,80 L304,86"/>
+                  <circle class="dot-ink" cx="304" cy="86" r="4"/>
+                </svg>
+              </figure>
+
+              <div class="grid grid--3 mt-5" style="gap:var(--s3);">
+                <div class="metric" style="padding:var(--s3) var(--s4);">
+                  <div class="metric__label">Deploys</div>
+                  <div class="metric__value" style="font-size:1.3rem;margin-top:4px;">9.3<span class="unit">/d</span></div>
+                </div>
+                <div class="metric" style="padding:var(--s3) var(--s4);">
+                  <div class="metric__label">PRs</div>
+                  <div class="metric__value" style="font-size:1.3rem;margin-top:4px;">47<span class="unit">/wk</span></div>
+                </div>
+                <div class="metric" style="padding:var(--s3) var(--s4);">
+                  <div class="metric__label">Review</div>
+                  <div class="metric__value" style="font-size:1.3rem;margin-top:4px;">3.1<span class="unit">h</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== PIPELINE (signature) ===================== -->
+    <section class="section section--tight section--alt">
+      <div class="container">
+        <div class="section__head section__head--center reveal">
+          <span class="eyebrow eyebrow--plain">The throughline</span>
+          <h2 style="margin-top:var(--s3);font-size:clamp(1.4rem,1.1rem+1vw,2rem);">Measured at every stage, from keyboard to production</h2>
+        </div>
+        <div class="pipeline reveal" data-delay="1">
+          <div class="pipeline__track">
+            <div class="pipeline__stage"><span class="pipeline__node"></span><span class="pipeline__txt"><span class="pipeline__name">Commit</span><span class="pipeline__metric">312 / wk</span></span></div>
+            <div class="pipeline__stage"><span class="pipeline__node"></span><span class="pipeline__txt"><span class="pipeline__name">PR opened</span><span class="pipeline__metric">47 / wk</span></span></div>
+            <div class="pipeline__stage"><span class="pipeline__node"></span><span class="pipeline__txt"><span class="pipeline__name">Review</span><span class="pipeline__metric">3.1h median</span></span></div>
+            <div class="pipeline__stage"><span class="pipeline__node"></span><span class="pipeline__txt"><span class="pipeline__name">Merge</span><span class="pipeline__metric">94% &lt; 1 day</span></span></div>
+            <div class="pipeline__stage"><span class="pipeline__node"></span><span class="pipeline__txt"><span class="pipeline__name">Deploy</span><span class="pipeline__metric">9.3 / day</span></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================== LOGO STRIP ======================== -->
+    <section class="section section--tight">
+      <div class="container stack reveal" style="text-align:center;">
+        <p class="mono" style="font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);">Trusted by platform &amp; delivery teams at</p>
+        <div class="logos mt-5">
+          <span class="logo">Northwind</span>
+          <span class="logo mono">LOAMWORKS</span>
+          <span class="logo">Parabola</span>
+          <span class="logo mono">HEXBYTE</span>
+          <span class="logo">Tidewell</span>
+          <span class="logo mono">QUANTA</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== PROBLEM / SOLUTION ===================== -->
+    <section class="section">
+      <div class="container split">
+        <div class="stack reveal">
+          <span class="eyebrow">The problem</span>
+          <h2>Velocity charts don't tell you where to look.</h2>
+          <p class="muted">Story points measure estimates, not flow. Dashboards bolted onto your issue tracker miss the half of delivery that happens in Git and CI. So when the board says "on track" but releases keep slipping, you're left arguing from anecdotes.</p>
+          <p class="muted">Throughline connects the system of record you already have — commits, pull requests, pipelines, deploys — and shows you the one stage that's actually costing you the week.</p>
+          <a class="link link--arrow" href="features.html">How the metrics work</a>
+        </div>
+
+        <div class="reveal" data-delay="1">
+          <div class="card card--accent">
+            <div class="metric__label" style="margin-bottom:var(--s4);">Where the week goes · Platform team</div>
+            <div class="stack">
+              <div>
+                <div class="cluster" style="justify-content:space-between;"><span class="mono" style="font-size:.85rem;">Coding</span><span class="mono muted" style="font-size:.85rem;">2.1h</span></div>
+                <div class="statbar mt-3"><span class="statbar__fill statbar__fill--steel" style="--w:24%"></span></div>
+              </div>
+              <div>
+                <div class="cluster" style="justify-content:space-between;"><span class="mono" style="font-size:.85rem;">Review wait <span class="badge badge--accent" style="margin-left:6px;">Bottleneck</span></span><span class="mono" style="font-size:.85rem;color:var(--accent);">14.2h p95</span></div>
+                <div class="statbar mt-3"><span class="statbar__fill" style="--w:82%"></span></div>
+              </div>
+              <div>
+                <div class="cluster" style="justify-content:space-between;"><span class="mono" style="font-size:.85rem;">CI &amp; checks</span><span class="mono muted" style="font-size:.85rem;">24m</span></div>
+                <div class="statbar mt-3"><span class="statbar__fill statbar__fill--steel" style="--w:14%"></span></div>
+              </div>
+              <div>
+                <div class="cluster" style="justify-content:space-between;"><span class="mono" style="font-size:.85rem;">Deploy to prod</span><span class="mono muted" style="font-size:.85rem;">1.2h</span></div>
+                <div class="statbar mt-3"><span class="statbar__fill statbar__fill--steel" style="--w:30%"></span></div>
+              </div>
+            </div>
+            <p class="dim" style="font-size:.82rem;margin-top:var(--s5);">Review wait is 5.8× your median coding time. Throughline flags it automatically.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================== FEATURES ======================== -->
+    <section class="section section--alt">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="eyebrow">What you get</span>
+          <h2>Four metrics. One source of truth. Zero spreadsheets.</h2>
+          <p class="muted">Every signal is computed from the events your tools already emit — no agents to install, no manual logging, no story-point math.</p>
+        </div>
+
+        <!-- Feature 1 -->
+        <div class="split stack-lg reveal" style="margin-bottom:var(--s9);">
+          <div class="stack">
+            <span class="feature-index mono">01 / Metrics</span>
+            <h3>The four delivery signals, computed continuously</h3>
+            <p class="muted">Cycle time, deployment frequency, PR throughput, and lead time for changes — the metrics research ties to elite delivery. Throughline derives each one from your actual Git and CI history, recomputed on every event.</p>
+            <ul class="stack" style="--s4:var(--s3);">
+              <li class="cluster cluster--tight"><span class="mono" style="color:var(--accent)">→</span> <span class="muted">No estimates, no self-reporting — events only</span></li>
+              <li class="cluster cluster--tight"><span class="mono" style="color:var(--accent)">→</span> <span class="muted">Per-team, per-repo, and org-wide rollups</span></li>
+              <li class="cluster cluster--tight"><span class="mono" style="color:var(--accent)">→</span> <span class="muted">Benchmarked against your own 90-day baseline</span></li>
+            </ul>
+          </div>
+          <div>
+            <div class="grid grid--2" style="gap:var(--s3);">
+              <div class="metric">
+                <div class="metric__label">Cycle time <span class="delta delta--up"><span class="delta__arrow">▾</span>18%</span></div>
+                <div class="metric__value">4.2<span class="unit">h</span></div>
+                <svg class="spark mt-3" viewBox="0 0 100 30" fill="none" aria-hidden="true"><polyline class="series series--accent" points="0,8 14,12 28,10 42,16 56,14 70,20 84,18 100,24"/></svg>
+              </div>
+              <div class="metric">
+                <div class="metric__label">Deploy freq <span class="delta delta--up"><span class="delta__arrow">▴</span>12%</span></div>
+                <div class="metric__value">9.3<span class="unit">/d</span></div>
+                <svg class="spark mt-3" viewBox="0 0 100 30" fill="none" aria-hidden="true"><polyline class="series series--accent" points="0,18 14,16 28,20 42,14 56,16 70,10 84,12 100,6"/></svg>
+              </div>
+              <div class="metric">
+                <div class="metric__label">PR throughput <span class="delta delta--up"><span class="delta__arrow">▴</span>6%</span></div>
+                <div class="metric__value">47<span class="unit">/wk</span></div>
+                <svg class="spark mt-3" viewBox="0 0 100 30" fill="none" aria-hidden="true"><polyline class="series series--accent" points="0,20 14,22 28,16 42,18 56,14 70,16 84,10 100,12"/></svg>
+              </div>
+              <div class="metric">
+                <div class="metric__label">Lead time <span class="delta delta--up"><span class="delta__arrow">▾</span>9%</span></div>
+                <div class="metric__value">1.8<span class="unit">d</span></div>
+                <svg class="spark mt-3" viewBox="0 0 100 30" fill="none" aria-hidden="true"><polyline class="series series--accent" points="0,10 14,8 28,14 42,12 56,18 70,16 84,22 100,20"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="split split--reverse stack-lg reveal" style="margin-bottom:var(--s9);">
+          <div class="stack">
+            <span class="feature-index mono">02 / Bottlenecks</span>
+            <h3>Find the stage that's actually costing you</h3>
+            <p class="muted">Throughline breaks every change into stages — coding, review wait, CI, deploy — and surfaces the p50 and p95 for each. The slowest stage gets flagged, so you fix the bottleneck instead of pushing everyone to "go faster."</p>
+            <ul class="stack" style="--s4:var(--s3);">
+              <li class="cluster cluster--tight"><span class="mono" style="color:var(--accent)">→</span> <span class="muted">p50 and p95 per stage, not just averages</span></li>
+              <li class="cluster cluster--tight"><span class="mono" style="color:var(--accent)">→</span> <span class="muted">Automatic flagging when a stage dominates</span></li>
+              <li class="cluster cluster--tight"><span class="mono" style="color:var(--accent)">→</span> <span class="muted">Drill into the exact PRs behind the number</span></li>
+            </ul>
+          </div>
+          <div>
+            <div class="table-wrap">
+              <table class="table">
+                <thead><tr><th>Stage</th><th class="num">p50</th><th class="num">p95</th></tr></thead>
+                <tbody>
+                  <tr><td class="cell-strong">Coding</td><td class="num">2.1h</td><td class="num">6.4h</td></tr>
+                  <tr><td class="cell-strong">Review wait <span class="badge badge--accent" style="margin-left:6px;">Flagged</span></td><td class="num">3.1h</td><td class="num" style="color:var(--accent)">14.2h</td></tr>
+                  <tr><td class="cell-strong">CI &amp; checks</td><td class="num">11m</td><td class="num">24m</td></tr>
+                  <tr><td class="cell-strong">Deploy to prod</td><td class="num">18m</td><td class="num">1.2h</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="split stack-lg reveal">
+          <div class="stack">
+            <span class="feature-index mono">03 / Trends</span>
+            <h3>Trends that survive a board review</h3>
+            <p class="muted">Every chart compares the current window to your rolling baseline and to the team average — so a number is never just a number. Export any view to a slide, or pipe it straight into your weekly delivery report.</p>
+            <ul class="stack" style="--s4:var(--s3);">
+              <li class="cluster cluster--tight"><span class="mono" style="color:var(--accent)">→</span> <span class="muted">Baseline + team-average comparison on every chart</span></li>
+              <li class="cluster cluster--tight"><span class="mono" style="color:var(--accent)">→</span> <span class="muted">Annotations for incidents, freezes, and releases</span></li>
+              <li class="cluster cluster--tight"><span class="mono" style="color:var(--accent)">→</span> <span class="muted">One-click export to slides and Slack</span></li>
+            </ul>
+          </div>
+          <div>
+            <div class="card">
+              <div class="cluster" style="justify-content:space-between;margin-bottom:var(--s4);">
+                <span class="metric__label">Cycle time · 12 weeks</span>
+                <span class="cluster cluster--tight" style="font-size:.74rem;"><span class="badge"><span class="dot" style="background:var(--accent)"></span>This team</span><span class="badge"><span class="dot" style="background:var(--steel)"></span>Org avg</span></span>
+              </div>
+              <figure class="chart" role="img" aria-label="Twelve-week cycle time, this team improving below the org average.">
+                <svg viewBox="0 0 320 150" width="100%" preserveAspectRatio="none" aria-hidden="true">
+                  <g class="chart-grid"><line x1="0" y1="38" x2="320" y2="38"/><line x1="0" y1="75" x2="320" y2="75"/><line x1="0" y1="112" x2="320" y2="112"/></g>
+                  <path class="series series--steel" d="M6,50 L34,52 L62,48 L90,54 L118,50 L146,56 L174,52 L202,58 L230,54 L258,60 L286,56 L314,58"/>
+                  <path class="series series--accent" d="M6,54 L34,60 L62,50 L90,72 L118,66 L146,84 L174,78 L202,98 L230,92 L258,108 L286,114 L314,120"/>
+                  <circle class="dot-ink" cx="314" cy="120" r="4"/>
+                </svg>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== DASHBOARD PREVIEW ===================== -->
+    <section class="section">
+      <div class="container">
+        <div class="section__head section__head--center reveal">
+          <span class="eyebrow eyebrow--plain">Inside Throughline</span>
+          <h2 style="margin-top:var(--s3);">The dashboard your staff engineers keep open</h2>
+          <p class="muted center-x">Drawn from real delivery data — no screenshots, no mockups. This is the view your leads see every morning.</p>
+        </div>
+
+        <div class="reveal" data-delay="1">
+          <div class="window">
+            <div class="window__bar">
+              <span class="window__dots"><i></i><i></i><i></i></span>
+              <span class="window__title">app.throughline.dev / overview</span>
+            </div>
+            <div class="window__chrome">
+              <!-- left rail -->
+              <aside class="app-rail" aria-label="App navigation (illustrative)">
+                <div class="brand" style="font-size:1rem;margin-bottom:var(--s5);">
+                  <svg class="brand__mark" width="22" height="22" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M3 18 L9 12 L15 15 L23 5" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Throughline
+                </div>
+                <div class="app-rail__item app-rail__item--active"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>Overview</div>
+                <div class="app-rail__item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg>Cycle time</div>
+                <div class="app-rail__item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v6"/><path d="M3 12h18l-2 7H5z"/></svg>Deployments</div>
+                <div class="app-rail__item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M6 9v6"/><circle cx="18" cy="6" r="3"/><path d="M18 9c0 6-12 3-12 9"/></svg>Pull requests</div>
+                <div class="app-rail__item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg>Teams</div>
+                <div class="app-rail__item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1l2-1.6-2-3.4-2.4 1a7 7 0 0 0-1.7-1L16.5 2h-4l-.4 2.6a7 7 0 0 0-1.7 1l-2.4-1-2 3.4 2 1.6a7 7 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7 7 0 0 0 1.7 1l.4 2.8h4l.4-2.6a7 7 0 0 0 1.7-1l2.4 1 2-3.4-2-1.6a7 7 0 0 0 .1-1z"/></svg>Settings</div>
+              </aside>
+
+              <!-- main -->
+              <div class="app-main">
+                <div class="app-topbar">
+                  <div class="cluster">
+                    <span class="badge"><span class="dot" style="background:var(--accent)"></span>Platform team</span>
+                    <span class="badge">Last 30 days</span>
+                  </div>
+                  <span class="avatar avatar--steel" aria-hidden="true">DK</span>
+                </div>
+
+                <div class="grid grid--4" style="gap:var(--s3);">
+                  <div class="metric">
+                    <div class="metric__label">Cycle time <span class="delta delta--up"><span class="delta__arrow">▾</span>18%</span></div>
+                    <div class="metric__value">4.2<span class="unit">h</span></div>
+                    <svg class="spark mt-3" viewBox="0 0 100 30" fill="none" aria-hidden="true"><polyline class="series series--accent" points="0,8 14,12 28,10 42,16 56,14 70,20 84,18 100,24"/></svg>
+                  </div>
+                  <div class="metric">
+                    <div class="metric__label">Deploy freq <span class="delta delta--up"><span class="delta__arrow">▴</span>12%</span></div>
+                    <div class="metric__value">9.3<span class="unit">/d</span></div>
+                    <svg class="spark mt-3" viewBox="0 0 100 30" fill="none" aria-hidden="true"><polyline class="series series--accent" points="0,18 14,16 28,20 42,14 56,16 70,10 84,12 100,6"/></svg>
+                  </div>
+                  <div class="metric">
+                    <div class="metric__label">PR throughput <span class="delta delta--up"><span class="delta__arrow">▴</span>6%</span></div>
+                    <div class="metric__value">47<span class="unit">/wk</span></div>
+                    <svg class="spark mt-3" viewBox="0 0 100 30" fill="none" aria-hidden="true"><polyline class="series series--accent" points="0,20 14,22 28,16 42,18 56,14 70,16 84,10 100,12"/></svg>
+                  </div>
+                  <div class="metric">
+                    <div class="metric__label">Lead time <span class="delta delta--up"><span class="delta__arrow">▾</span>9%</span></div>
+                    <div class="metric__value">1.8<span class="unit">d</span></div>
+                    <svg class="spark mt-3" viewBox="0 0 100 30" fill="none" aria-hidden="true"><polyline class="series series--accent" points="0,10 14,8 28,14 42,12 56,18 70,16 84,22 100,20"/></svg>
+                  </div>
+                </div>
+
+                <div class="grid grid--2 mt-5" style="gap:var(--s3);">
+                  <div class="card" style="padding:var(--s5);">
+                    <div class="metric__label" style="margin-bottom:var(--s4);">Cycle time trend</div>
+                    <figure class="chart" role="img" aria-label="Cycle time trending down across the last 30 days versus org average.">
+                      <svg viewBox="0 0 280 130" width="100%" preserveAspectRatio="none" aria-hidden="true">
+                        <g class="chart-grid"><line x1="0" y1="32" x2="280" y2="32"/><line x1="0" y1="64" x2="280" y2="64"/><line x1="0" y1="96" x2="280" y2="96"/></g>
+                        <path class="area--accent" d="M6,46 L40,52 L74,44 L108,64 L142,58 L176,76 L210,70 L244,88 L274,96 L274,118 L6,118 Z"/>
+                        <path class="series series--steel" d="M6,42 L40,44 L74,40 L108,46 L142,42 L176,48 L210,44 L244,50 L274,46"/>
+                        <path class="series series--accent" d="M6,46 L40,52 L74,44 L108,64 L142,58 L176,76 L210,70 L244,88 L274,96"/>
+                        <circle class="dot-ink" cx="274" cy="96" r="4"/>
+                      </svg>
+                    </figure>
+                  </div>
+                  <div class="card" style="padding:var(--s5);">
+                    <div class="metric__label" style="margin-bottom:var(--s4);">Deploys per day</div>
+                    <div class="bars" aria-hidden="true">
+                      <span class="bar" style="--h:40%"></span><span class="bar" style="--h:55%"></span><span class="bar" style="--h:30%"></span>
+                      <span class="bar" style="--h:65%"></span><span class="bar" style="--h:50%"></span><span class="bar" style="--h:72%"></span>
+                      <span class="bar" style="--h:45%"></span><span class="bar" style="--h:80%"></span><span class="bar" style="--h:60%"></span>
+                      <span class="bar bar--accent" style="--h:90%"></span><span class="bar bar--accent" style="--h:74%"></span><span class="bar bar--accent" style="--h:95%"></span>
+                    </div>
+                    <p class="dim mono" style="font-size:.72rem;margin-top:var(--s3);">Mon → Fri, trailing 12 days</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================== TESTIMONIAL ======================== -->
+    <section class="section section--alt">
+      <div class="container container--narrow reveal" style="text-align:center;">
+        <span class="eyebrow eyebrow--plain center-x" style="display:inline-flex;">Why teams switch</span>
+        <blockquote class="quote mt-5">
+          <span class="quote__mark">“</span>We cut review wait from two days to four hours — because Throughline showed us review was the bottleneck, not coding speed. It paid for itself in a quarter.<span class="quote__mark">”</span>
+        </blockquote>
+        <div class="cite" style="justify-content:center;">
+          <span class="avatar" aria-hidden="true">DO</span>
+          <div style="text-align:left;">
+            <div class="cite__name">Dana Okafor</div>
+            <div class="cite__role">VP of Engineering, Parabola</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== PRICING TEASER ===================== -->
+    <section class="section">
+      <div class="container">
+        <div class="split">
+          <div class="stack reveal">
+            <span class="eyebrow">Pricing</span>
+            <h2>Start free. Upgrade when it earns its place.</h2>
+            <p class="muted">Connect a repo and see your metrics today — no card, no sales call. Move to Team when you want history, comparisons, and unlimited seats.</p>
+            <div class="cluster">
+              <a class="btn btn--primary" href="pricing.html">Compare plans</a>
+              <a class="link link--arrow" href="contact.html">Talk to sales</a>
+            </div>
+          </div>
+          <div class="grid reveal" data-delay="1" style="gap:var(--s3);">
+            <div class="card" style="padding:var(--s5);display:flex;align-items:baseline;justify-content:space-between;gap:var(--s4);">
+              <div><div class="tier__name">Free</div><div class="muted mt-3" style="font-size:.9rem;">1 team, 14-day history</div></div>
+              <div class="metric__value" style="font-size:1.8rem;">$0</div>
+            </div>
+            <div class="card card--accent" style="padding:var(--s5);display:flex;align-items:baseline;justify-content:space-between;gap:var(--s4);">
+              <div><div class="tier__name">Team</div><div class="muted mt-3" style="font-size:.9rem;">Unlimited seats, full history</div></div>
+              <div class="metric__value" style="font-size:1.8rem;">$49<span class="unit" style="font-size:.5em;">/mo</span></div>
+            </div>
+            <div class="card" style="padding:var(--s5);display:flex;align-items:baseline;justify-content:space-between;gap:var(--s4);">
+              <div><div class="tier__name">Enterprise</div><div class="muted mt-3" style="font-size:.9rem;">SSO, SLA, self-hosting</div></div>
+              <div class="metric__value" style="font-size:1.4rem;">Custom</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================== FINAL CTA ======================== -->
+    <section class="section section--alt">
+      <div class="container reveal">
+        <div class="cta-band">
+          <span class="eyebrow eyebrow--plain center-x" style="display:inline-flex;">Get started</span>
+          <h2 class="mt-4">Stop guessing how your team ships.</h2>
+          <p class="muted">Book a 30-minute demo. We'll connect a repo live and show you your real cycle time before the call ends.</p>
+          <div class="cluster">
+            <a class="btn btn--primary btn--lg" href="contact.html">Book a demo</a>
+            <a class="btn btn--ghost btn--lg" href="features.html">Explore features</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================ FOOTER ============================ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a class="brand" href="index.html" aria-label="Throughline home">
+            <svg class="brand__mark" width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M3 18 L9 12 L15 15 L23 5" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="3" cy="18" r="2.3" fill="var(--accent)"/><circle cx="23" cy="5" r="2.3" fill="var(--accent)"/></svg>
+            Throughline
+          </a>
+          <p>Delivery metrics from the data your engineering org already produces. Built for the people accountable for how software ships.</p>
+        </div>
+        <div class="footer__col">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="features.html">Features</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="customers.html">Customers</a></li>
+            <li><a href="#">Changelog</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="#">Docs</a></li>
+            <li><a href="#">Security</a></li>
+            <li><a href="#">API</a></li>
+            <li><a href="#">Status</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© <span data-year>2026</span> Throughline, Inc. All rights reserved.</span>
+        <span class="footer__status"><span class="dot"></span> All systems operational</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reservations — VERMILION · Springfield, Illinois</title>
+  <meta name="description" content="Reserve your table at VERMILION — Prime Steaks & Cellar in Springfield, Illinois. Evening seatings five nights a week; parties of eight or more, please call our maître d' directly." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    /* Page-only tweaks — Reservations */
+    .media--empty { background: linear-gradient(135deg, var(--paper-deep), var(--gold) 320%); }
+    .media--empty::after { content: "VERMILION"; position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--font-display); letter-spacing: .3em; color: var(--gold-deep); opacity: .5; }
+
+    /* Map placeholder — bordered, gracious */
+    .map-block {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      border: 1px solid var(--line);
+      background: var(--ivory);
+      padding: 10px;
+    }
+    .map-frame {
+      position: relative;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      background:
+        repeating-linear-gradient(0deg, var(--line-soft) 0 1px, transparent 1px 46px),
+        repeating-linear-gradient(90deg, var(--line-soft) 0 1px, transparent 1px 46px),
+        var(--paper);
+    }
+    .map-frame__inner { position: relative; z-index: 2; padding: 1.5rem; }
+    .map-frame__pin {
+      width: 11px; height: 11px;
+      margin: 0 auto 1rem;
+      transform: rotate(45deg);
+      border: 1px solid var(--gold-deep);
+      background: var(--gold);
+    }
+    .map-frame__name {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--ink);
+      letter-spacing: .08em;
+    }
+    .map-frame__addr { font-size: .95rem; color: var(--ink-soft); margin-top: .35rem; }
+  </style>
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <nav class="nav" aria-label="Primary">
+      <ul class="nav__links nav__links--left">
+        <li><a class="nav__link" href="menu.html">Menu</a></li>
+        <li><a class="nav__link" href="about.html">Our Story</a></li>
+        <li><a class="nav__link" href="private-dining.html">Private Dining</a></li>
+      </ul>
+      <a class="nav__brand" href="index.html">VERMILION<small>Est. 1924</small></a>
+      <ul class="nav__links nav__links--right">
+        <li><a class="nav__link is-active" href="reservations.html">Reservations</a></li>
+        <li><a class="nav__link" href="tel:+12175551924">(217) 555-1924</a></li>
+      </ul>
+      <button class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+</header>
+<div class="nav__mobile" id="mobileNav">
+  <a href="index.html">Home</a>
+  <a href="menu.html">Menu</a>
+  <a href="about.html">Our Story</a>
+  <a href="private-dining.html">Private Dining</a>
+  <a class="is-active" href="reservations.html">Reservations</a>
+</div>
+
+<!-- 1 · Page banner -->
+<section class="page-banner">
+  <span class="eyebrow reveal">Reservations</span>
+  <h1 class="reveal" data-delay="1">Reserve Your Table</h1>
+  <p class="lead measure--center reveal" data-delay="2">An evening at Vermilion is best begun by candlelight. Tell us when you would care to dine, and our maître d' will see to the rest.</p>
+</section>
+
+<!-- 2 · Reservation form + details -->
+<section class="section">
+  <div class="container">
+    <div class="split">
+      <!-- LEFT — the form -->
+      <div class="split__text reveal">
+        <span class="eyebrow">Request a Table</span>
+        <h2 class="mt-1">An Invitation to Dine</h2>
+        <div class="rule rule--center" style="justify-content:flex-start;"><span class="rule__mark"></span></div>
+
+        <form class="form" data-confirm novalidate>
+          <div class="field">
+            <label for="res-name">Full Name</label>
+            <input type="text" id="res-name" name="name" autocomplete="name" placeholder="Your name" required />
+          </div>
+
+          <div class="form__row">
+            <div class="field">
+              <label for="res-email">Email</label>
+              <input type="email" id="res-email" name="email" autocomplete="email" placeholder="you@example.com" required />
+            </div>
+            <div class="field">
+              <label for="res-phone">Phone</label>
+              <input type="tel" id="res-phone" name="phone" autocomplete="tel" placeholder="(217) 555-0100" required />
+            </div>
+          </div>
+
+          <div class="form__row">
+            <div class="field">
+              <label for="res-date">Date</label>
+              <input type="date" id="res-date" name="date" required />
+            </div>
+            <div class="field">
+              <label for="res-time">Time</label>
+              <select id="res-time" name="time" required>
+                <option value="" selected disabled>Select a seating</option>
+                <option value="17:00">5:00 pm</option>
+                <option value="17:30">5:30 pm</option>
+                <option value="18:00">6:00 pm</option>
+                <option value="18:30">6:30 pm</option>
+                <option value="19:00">7:00 pm</option>
+                <option value="19:30">7:30 pm</option>
+                <option value="20:00">8:00 pm</option>
+                <option value="20:30">8:30 pm</option>
+                <option value="21:00">9:00 pm</option>
+                <option value="21:30">9:30 pm</option>
+                <option value="22:00">10:00 pm</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form__row">
+            <div class="field">
+              <label for="res-party">Party Size</label>
+              <select id="res-party" name="party" required>
+                <option value="" selected disabled>Number of guests</option>
+                <option value="1">1 guest</option>
+                <option value="2">2 guests</option>
+                <option value="3">3 guests</option>
+                <option value="4">4 guests</option>
+                <option value="5">5 guests</option>
+                <option value="6">6 guests</option>
+                <option value="7">7 guests</option>
+                <option value="8">8 guests</option>
+                <option value="9">9 guests</option>
+                <option value="10">10 guests</option>
+                <option value="10+">10 or more</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="res-occasion">Occasion</label>
+              <select id="res-occasion" name="occasion">
+                <option value="none" selected>None</option>
+                <option value="birthday">Birthday</option>
+                <option value="anniversary">Anniversary</option>
+                <option value="business">Business</option>
+                <option value="celebration">Celebration</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="res-requests">Special Requests</label>
+            <textarea id="res-requests" name="requests" placeholder="Dietary needs, a quiet corner, a particular vintage — we are happy to oblige."></textarea>
+          </div>
+
+          <p class="form__note">Parties of 8 or more, please call us directly at (217) 555-1924.</p>
+
+          <div class="form__success">Thank you. Your request has been received — our maître d' will confirm by telephone within the hour.</div>
+
+          <button type="submit" class="btn btn--solid">Request Reservation</button>
+        </form>
+      </div>
+
+      <!-- RIGHT — practical details -->
+      <div class="split__media reveal" data-delay="1">
+        <div class="media media--wide media--frame mb-2">
+          <img
+            src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80"
+            alt="A candlelit table set for dinner at Vermilion"
+            loading="lazy" width="1200" height="750"
+            onerror="this.style.display='none';this.closest('.media').classList.add('media--empty')" />
+        </div>
+
+        <ul class="info-list">
+          <li class="info-list__item">
+            <span class="eyebrow">Hours</span>
+            <p>Tue – Thu · 5 – 10 pm<br />Fri – Sat · 5 – 11 pm<br />Sunday · 4 – 9 pm<br />Closed Mondays</p>
+          </li>
+          <li class="info-list__item">
+            <span class="eyebrow">Address</span>
+            <p>114 South Sixth Street<br />Springfield, Illinois 62701</p>
+          </li>
+          <li class="info-list__item">
+            <span class="eyebrow">Telephone</span>
+            <p><a class="link" href="tel:+12175551924">(217) 555-1924</a></p>
+          </li>
+          <li class="info-list__item">
+            <span class="eyebrow">Dress Code</span>
+            <p>Business elegant. Jackets are welcomed; we ask that gentlemen forgo athletic wear.</p>
+          </li>
+          <li class="info-list__item">
+            <span class="eyebrow">Valet</span>
+            <p>Complimentary valet parking nightly at the Sixth Street entrance.</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 · Find Us -->
+<section class="section section--paper">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow eyebrow--center">Find Us</span>
+      <h2>In the Heart of Springfield</h2>
+      <div class="rule rule--center"><span class="rule__mark"></span></div>
+    </div>
+
+    <div class="split">
+      <div class="split__media reveal">
+        <div class="map-block">
+          <div class="map-frame">
+            <div class="map-frame__inner">
+              <span class="map-frame__pin" aria-hidden="true"></span>
+              <div class="map-frame__name">VERMILION</div>
+              <div class="map-frame__addr">114 South Sixth Street · Springfield, Illinois 62701</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="split__text reveal" data-delay="1">
+        <h3>Arriving &amp; Parking</h3>
+        <p>Vermilion sits on South Sixth Street in downtown Springfield, two blocks from the Old State Capitol and within easy reach of the city's principal hotels.</p>
+        <p>Complimentary valet parking is offered every evening at our Sixth Street entrance — simply present your vehicle to the attendant on arrival. Metered street parking and the adjacent public garage are also available for those who prefer to park themselves.</p>
+        <p>Should you require directions or wish to arrange a particular arrival, our team is glad to assist by telephone at <a class="link" href="tel:+12175551924">(217) 555-1924</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 · Private events note -->
+<section class="section">
+  <div class="container container--narrow center reveal">
+    <span class="eyebrow eyebrow--center">Gatherings &amp; Celebrations</span>
+    <h2 class="mt-1">Dining for a Larger Party</h2>
+    <div class="rule rule--center"><span class="rule__mark"></span></div>
+    <p class="measure--center">For rehearsal dinners, corporate evenings, and milestone celebrations, our private rooms accommodate parties from ten to forty guests with bespoke menus and dedicated service.</p>
+    <p class="measure--center">Explore the rooms, then write to us and we will tailor the evening to your occasion.</p>
+    <div class="flex-center mt-2">
+      <a class="btn" href="private-dining.html">View Private Dining</a>
+      <a class="link" href="mailto:events@vermilionspringfield.com">events@vermilionspringfield.com</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <span class="monogram">V</span>
+        <div class="footer__wordmark">VERMILION</div>
+        <div class="footer__tag">Prime Steaks &amp; Cellar</div>
+        <p style="margin-top:1.25rem;max-width:24ch;">A Springfield institution since 1924. Prime, dry-aged, and served by candlelight.</p>
+      </div>
+      <div class="footer__col">
+        <h4>Visit</h4>
+        <ul>
+          <li>114 South Sixth Street</li>
+          <li>Springfield, Illinois 62701</li>
+          <li><a href="tel:+12175551924">(217) 555-1924</a></li>
+          <li><a href="reservations.html">Reserve a table</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Hours</h4>
+        <ul>
+          <li>Tue – Thu · 5 – 10 pm</li>
+          <li>Fri – Sat · 5 – 11 pm</li>
+          <li>Sunday · 4 – 9 pm</li>
+          <li>Closed Mondays</li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="menu.html">The Menu</a></li>
+          <li><a href="about.html">Our Story</a></li>
+          <li><a href="private-dining.html">Private Dining</a></li>
+          <li><a href="reservations.html">Reservations</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>&copy; <span data-year>2024</span> Vermilion Steakhouse · Springfield, Illinois. All rights reserved.</span>
+      <div class="footer__social">
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">OpenTable</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>

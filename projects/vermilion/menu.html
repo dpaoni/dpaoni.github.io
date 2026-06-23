@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Menu — VERMILION · Springfield, Illinois</title>
+  <meta name="description" content="The VERMILION menu — USDA Prime beef dry-aged in-house, raw bar, seasonal first courses, and a reserve cellar. A Springfield steakhouse since 1924." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    /* Page-only tweaks for menu.html */
+    .menu-banner__sub {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(1.2rem, 2.4vw, 1.65rem);
+      color: var(--oxblood);
+    }
+    .menu-sheet { max-width: var(--container-narrow); margin-inline: auto; }
+    .menu-closing { text-align: center; }
+    .menu-closing .menu-group__note { margin-bottom: 1.75rem; }
+  </style>
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <nav class="nav" aria-label="Primary">
+      <ul class="nav__links nav__links--left">
+        <li><a class="nav__link is-active" href="menu.html">Menu</a></li>
+        <li><a class="nav__link" href="about.html">Our Story</a></li>
+        <li><a class="nav__link" href="private-dining.html">Private Dining</a></li>
+      </ul>
+      <a class="nav__brand" href="index.html">VERMILION<small>Est. 1924</small></a>
+      <ul class="nav__links nav__links--right">
+        <li><a class="nav__link" href="reservations.html">Reservations</a></li>
+        <li><a class="nav__link" href="tel:+12175551924">(217) 555-1924</a></li>
+      </ul>
+      <button class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+</header>
+<div class="nav__mobile" id="mobileNav">
+  <a href="index.html">Home</a>
+  <a class="is-active" href="menu.html">Menu</a>
+  <a href="about.html">Our Story</a>
+  <a href="private-dining.html">Private Dining</a>
+  <a href="reservations.html">Reservations</a>
+</div>
+
+<!-- ============================ Page banner ============================ -->
+<section class="page-banner">
+  <div class="container">
+    <span class="eyebrow eyebrow--center reveal">Carte du Jour</span>
+    <h1 class="reveal" data-delay="1">The Menu</h1>
+    <p class="menu-banner__sub reveal" data-delay="2">Prime beef, dry-aged in-house, and served by candlelight.</p>
+  </div>
+</section>
+
+<!-- ============================== Intro note =========================== -->
+<section class="section">
+  <div class="container">
+    <div class="measure--center center reveal">
+      <p>Every cut we serve is USDA Prime — the top two percent of American beef — selected by hand and dry-aged in our own cellar for depth and tenderness. Our kitchen sources from the season first: produce at its peak, seafood landed daily, and a cellar built across a century. What follows is offered simply, and changes as the market does.</p>
+      <div class="rule rule--center" aria-hidden="true"><span class="rule__mark"></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== The menu ============================= -->
+<section class="section section--paper">
+  <div class="container menu-sheet">
+
+    <!-- Raw Bar & Oysters -->
+    <div class="menu-group reveal">
+      <div class="menu-group__head">
+        <h3>Raw Bar &amp; Oysters</h3>
+        <p class="menu-group__note">Shucked to order · accompanied by mignonette and cocktail sauce</p>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item__name">East Coast Oysters <span class="menu-item__tag">Half Dozen</span></div>
+        <div class="menu-item__price">$24</div>
+        <div class="menu-item__desc">Cold-water selection, briny and crisp, on crushed ice.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item__name">West Coast Oysters <span class="menu-item__tag">Half Dozen</span></div>
+        <div class="menu-item__price">$26</div>
+        <div class="menu-item__desc">Plump and sweet, with a clean cucumber finish.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item__name">Jumbo Shrimp Cocktail</div>
+        <div class="menu-item__price">$28</div>
+        <div class="menu-item__desc">Poached Gulf shrimp, horseradish, charred lemon.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item__name">Tuna Tartare</div>
+        <div class="menu-item__price">$26</div>
+        <div class="menu-item__desc">Hand-cut bluefin, avocado, sesame, soy-lime.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item__name">Ossetra Caviar Service <span class="menu-item__tag">Market</span></div>
+        <div class="menu-item__price">Market</div>
+        <div class="menu-item__desc">Thirty grams, blini, crème fraîche, traditional accompaniments.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item__name">Chilled Seafood Tower <span class="menu-item__tag">For Two</span></div>
+        <div class="menu-item__price">$98</div>
+        <div class="menu-item__desc">Oysters, shrimp, lobster, and crab over a tiered glacier of ice.</div>
+      </div>
+    </div>
+
+    <!-- First Courses -->
+    <div class="menu-group reveal">
+      <div class="menu-group__head">
+        <h3>First Courses</h3>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item__name">French Onion Gratinée</div>
+        <div class="menu-item__price">$16</div>
+        <div class="menu-item__desc">Slow-caramelized onions, beef broth, Gruyère crust.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item__name">Caesar <span class="menu-item__tag">Tableside</span></div>
+        <div class="menu-item__price">$18</div>
+        <div class="menu-item__desc">Prepared at your table — crisp romaine, anchovy, aged Parmesan.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item__name">Burrata</div>
+        <div class="menu-item__price">$19</div>
+        <div class="menu-item__desc">Creamy mozzarella, heirloom tomato, basil, aged balsamic.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item__name">Lobster Bisque</div>
+        <div class="menu-item__price">$17</div>
+        <div class="menu-item__desc">Velvet-rich, finished with sherry and a touch of cream.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item__name">Steak Tartare</div>
+        <div class="menu-item__price">$22</div>
+        <div class="menu-item__desc">Hand-chopped Prime tenderloin, capers, shallot, quail yolk.</div>
+      </div>
+    </div>
+
+    <!-- The Dry-Aged Prime Cuts -->
+    <div class="menu-group reveal">
+      <div class="menu-group__head">
+        <h3>The Dry-Aged Prime Cuts</h3>
+        <p class="menu-group__note">Aged in our cellar 28 to 45 days · USDA Prime · finished over hardwood and served with maître d'hôtel butter</p>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item__name">28-Day Dry-Aged Ribeye <span class="menu-item__tag">Dry-Aged</span></div>
+        <div class="menu-item__price">$74</div>
+        <div class="menu-item__desc">Sixteen ounces, richly marbled, with a deep mineral edge.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item__name">Bone-In Filet Mignon</div>
+        <div class="menu-item__price">$68</div>
+        <div class="menu-item__desc">Ten ounces, tender and clean, the most refined of cuts.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item__name">New York Strip <span class="menu-item__tag">Dry-Aged</span></div>
+        <div class="menu-item__price">$66</div>
+        <div class="menu-item__desc">Fourteen ounces, firm and beefy with a fine char.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item__name">Porterhouse <span class="menu-item__tag">For Two</span></div>
+        <div class="menu-item__price">$148</div>
+        <div class="menu-item__desc">Forty ounces, carved tableside — strip and filet on the bone.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item__name">Tomahawk Ribeye <span class="menu-item__tag">For Two</span></div>
+        <div class="menu-item__price">$138</div>
+        <div class="menu-item__desc">Thirty-two ounces, long-bone, presented and sliced at the table.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item__name">A5 Japanese Wagyu <span class="menu-item__tag">Market · Per Ounce</span></div>
+        <div class="menu-item__price">$38</div>
+        <div class="menu-item__desc">Miyazaki prefecture, exquisitely marbled, seared simply. Four-ounce minimum.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item__name">Châteaubriand <span class="menu-item__tag">For Two</span></div>
+        <div class="menu-item__price">$132</div>
+        <div class="menu-item__desc">Center-cut tenderloin roasted whole, bordelaise, carved before you.</div>
+      </div>
+    </div>
+
+    <!-- From the Sea -->
+    <div class="menu-group reveal">
+      <div class="menu-group__head">
+        <h3>From the Sea</h3>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item__name">Maine Lobster Tail</div>
+        <div class="menu-item__price">$62</div>
+        <div class="menu-item__desc">Cold-water, butter-poached, with drawn lemon butter.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item__name">Chilean Sea Bass</div>
+        <div class="menu-item__price">$54</div>
+        <div class="menu-item__desc">Miso-glazed, silken, roasted to a delicate flake.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item__name">Day-Boat Scallops</div>
+        <div class="menu-item__price">$48</div>
+        <div class="menu-item__desc">Seared golden, brown butter, lemon, capers.</div>
+      </div>
+    </div>
+
+    <!-- Sides -->
+    <div class="menu-group reveal">
+      <div class="menu-group__head">
+        <h3>Sides</h3>
+        <p class="menu-group__note">Served family style</p>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item__name">Creamed Spinach</div>
+        <div class="menu-item__price">$14</div>
+        <div class="menu-item__desc">Slow-cooked, nutmeg, a whisper of Parmesan.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item__name">Truffle Pommes Purée</div>
+        <div class="menu-item__price">$16</div>
+        <div class="menu-item__desc">Whipped potato, black truffle, cultured butter.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item__name">Lobster Mac &amp; Cheese</div>
+        <div class="menu-item__price">$22</div>
+        <div class="menu-item__desc">Aged cheddar, knuckle meat, golden crumb.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item__name">Charred Asparagus</div>
+        <div class="menu-item__price">$14</div>
+        <div class="menu-item__desc">Wood-grilled, lemon, flaked sea salt.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item__name">Wild Mushrooms</div>
+        <div class="menu-item__price">$15</div>
+        <div class="menu-item__desc">Sautéed in herb butter with shallot and thyme.</div>
+      </div>
+    </div>
+
+    <!-- Desserts -->
+    <div class="menu-group reveal">
+      <div class="menu-group__head">
+        <h3>Desserts</h3>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item__name">Baked Alaska <span class="menu-item__tag">For Two</span></div>
+        <div class="menu-item__price">$24</div>
+        <div class="menu-item__desc">Flambéed tableside — sponge, ice cream, torched meringue.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item__name">Crème Brûlée</div>
+        <div class="menu-item__price">$14</div>
+        <div class="menu-item__desc">Tahitian vanilla custard beneath a brittle caramel veil.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item__name">Flourless Chocolate</div>
+        <div class="menu-item__price">$15</div>
+        <div class="menu-item__desc">Dark Valrhona, salted crème anglaise.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item__name">Seasonal Tart</div>
+        <div class="menu-item__price">$14</div>
+        <div class="menu-item__desc">The orchard at its peak, in a butter crust.</div>
+      </div>
+    </div>
+
+    <!-- From the Cellar -->
+    <div class="menu-group reveal">
+      <div class="menu-group__head">
+        <h3>From the Cellar</h3>
+        <p class="menu-group__note">A brief pour · our 600-label reserve list is available tableside</p>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item__name">Champagne, Grower Cuvée <span class="menu-item__tag">By the Glass</span></div>
+        <div class="menu-item__price">$22</div>
+        <div class="menu-item__desc">Brut, fine bead, citrus and warm brioche.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item__name">Chardonnay, Sonoma Coast <span class="menu-item__tag">By the Glass</span></div>
+        <div class="menu-item__price">$19</div>
+        <div class="menu-item__desc">Barrel-fermented, stone fruit, a clean mineral line.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item__name">Cabernet Sauvignon, Napa Valley <span class="menu-item__tag">By the Glass</span></div>
+        <div class="menu-item__price">$26</div>
+        <div class="menu-item__desc">Cassis, cedar, fine-grained tannin — our cut's natural companion.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item__name">Barolo, Piedmont <span class="menu-item__tag">Bottle</span></div>
+        <div class="menu-item__price">$165</div>
+        <div class="menu-item__desc">Nebbiolo, rose and tar, structured and long.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item__name">Vermilion Reserve Cabernet <span class="menu-item__tag">Bottle</span></div>
+        <div class="menu-item__price">$240</div>
+        <div class="menu-item__desc">Our house cuvée, cellared a decade for the table.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========================== Closing note + CTA ======================= -->
+<section class="section">
+  <div class="container">
+    <div class="measure--center menu-closing reveal">
+      <div class="rule rule--center" aria-hidden="true"><span class="rule__mark"></span></div>
+      <p class="menu-group__note">Executive Chef's tasting menu available · $145 per guest</p>
+      <a class="btn btn--solid" href="reservations.html">Reserve a Table</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <span class="monogram">V</span>
+        <div class="footer__wordmark">VERMILION</div>
+        <div class="footer__tag">Prime Steaks &amp; Cellar</div>
+        <p style="margin-top:1.25rem;max-width:24ch;">A Springfield institution since 1924. Prime, dry-aged, and served by candlelight.</p>
+      </div>
+      <div class="footer__col">
+        <h4>Visit</h4>
+        <ul>
+          <li>114 South Sixth Street</li>
+          <li>Springfield, Illinois 62701</li>
+          <li><a href="tel:+12175551924">(217) 555-1924</a></li>
+          <li><a href="reservations.html">Reserve a table</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Hours</h4>
+        <ul>
+          <li>Tue – Thu · 5 – 10 pm</li>
+          <li>Fri – Sat · 5 – 11 pm</li>
+          <li>Sunday · 4 – 9 pm</li>
+          <li>Closed Mondays</li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="menu.html">The Menu</a></li>
+          <li><a href="about.html">Our Story</a></li>
+          <li><a href="private-dining.html">Private Dining</a></li>
+          <li><a href="reservations.html">Reservations</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>&copy; <span data-year>2024</span> Vermilion Steakhouse · Springfield, Illinois. All rights reserved.</span>
+      <div class="footer__social">
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">OpenTable</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>

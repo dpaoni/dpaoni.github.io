@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VERMILION — Prime Steaks & Cellar · Springfield, Illinois</title>
+  <meta name="description" content="A Springfield institution since 1924. Candlelight, white tablecloths, 28-day dry-aged prime beef, and a cellar of old-world wines. Reserve your evening at VERMILION." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    /* Page-only fallback for failed image loads */
+    .media--empty { background: linear-gradient(135deg, var(--paper-deep), var(--gold) 320%); }
+    .media--empty::after { content: "VERMILION"; position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--font-display); letter-spacing: .3em; color: var(--gold-deep); opacity: .5; }
+
+    /* Page-only tweaks */
+    .cut__desc { font-size: 1rem; color: var(--ink-soft); }
+    .gallery--bleed { margin-inline: calc(50% - 50vw); }
+  </style>
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <nav class="nav" aria-label="Primary">
+      <ul class="nav__links nav__links--left">
+        <li><a class="nav__link" href="menu.html">Menu</a></li>
+        <li><a class="nav__link" href="about.html">Our Story</a></li>
+        <li><a class="nav__link" href="private-dining.html">Private Dining</a></li>
+      </ul>
+      <a class="nav__brand" href="index.html">VERMILION<small>Est. 1924</small></a>
+      <ul class="nav__links nav__links--right">
+        <li><a class="nav__link" href="reservations.html">Reservations</a></li>
+        <li><a class="nav__link" href="tel:+12175551924">(217) 555-1924</a></li>
+      </ul>
+      <button class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+</header>
+<div class="nav__mobile" id="mobileNav">
+  <a class="is-active" href="index.html">Home</a>
+  <a href="menu.html">Menu</a>
+  <a href="about.html">Our Story</a>
+  <a href="private-dining.html">Private Dining</a>
+  <a href="reservations.html">Reservations</a>
+</div>
+
+<main>
+  <!-- 1. Hero -->
+  <section class="hero">
+    <div class="hero__frame"></div>
+    <div class="hero__inner">
+      <span class="eyebrow reveal">Prime Steaks &amp; Cellar · Springfield, Illinois</span>
+      <h1 class="display hero__title reveal" data-delay="1">Fire, Patience &amp; the Perfect Cut</h1>
+      <p class="hero__sub reveal" data-delay="2">Est. 1924</p>
+      <div class="hero__actions reveal" data-delay="3">
+        <a class="btn btn--solid" href="reservations.html">Reserve a Table</a>
+        <a class="btn" href="menu.html">View the Menu</a>
+      </div>
+    </div>
+    <a class="hero__scroll" href="#welcome" aria-label="Scroll to content">Discover</a>
+  </section>
+
+  <!-- 2. Welcome / intro -->
+  <section class="section" id="welcome">
+    <div class="container container--narrow center measure--center">
+      <span class="eyebrow eyebrow--center reveal">Welcome</span>
+      <h2 class="reveal" data-delay="1">An Evening Worth the Candlelight</h2>
+      <div class="rule rule--center reveal" data-delay="1"><span class="rule__mark"></span></div>
+      <p class="lead reveal" data-delay="2">For a century, Vermilion has set its tables in white linen and quiet gold light along South Sixth Street — a Springfield institution where dinner is unhurried and every detail is considered.</p>
+      <p class="lead reveal" data-delay="3">We carve our prime beef dry-aged in-house, pour from a cellar of old-world wines, and keep faith with the rituals that have welcomed guests since 1924.</p>
+    </div>
+  </section>
+
+  <!-- 3. Signature Cuts teaser -->
+  <section class="section section--paper">
+    <div class="container">
+      <div class="section-head center reveal">
+        <span class="eyebrow eyebrow--center">From the Grill</span>
+        <h2>Signature Cuts</h2>
+        <div class="rule rule--center"><span class="rule__mark"></span></div>
+      </div>
+      <div class="grid grid--4">
+        <article class="cut reveal" data-delay="1">
+          <div class="cut__no">No. 01</div>
+          <h3>28-Day Dry-Aged Ribeye</h3>
+          <p class="cut__desc">Marbled and mineral, aged four weeks for depth and tender char.</p>
+          <div class="cut__price">$72</div>
+        </article>
+        <article class="cut reveal" data-delay="2">
+          <div class="cut__no">No. 02</div>
+          <h3>Bone-In Filet Mignon</h3>
+          <p class="cut__desc">The center cut, left on the bone for a richer, more honest flavor.</p>
+          <div class="cut__price">$68</div>
+        </article>
+        <article class="cut reveal" data-delay="3">
+          <div class="cut__no">No. 03</div>
+          <h3>Châteaubriand for Two</h3>
+          <p class="cut__desc">A ceremonial tenderloin roast, carved tableside in the old manner.</p>
+          <div class="cut__price">$145</div>
+        </article>
+        <article class="cut reveal" data-delay="4">
+          <div class="cut__no">No. 04</div>
+          <h3>A5 Japanese Wagyu</h3>
+          <p class="cut__desc">Seared on cast iron, served in measured ounces to be savored.</p>
+          <div class="cut__price">$46 per oz</div>
+        </article>
+      </div>
+      <div class="center mt-3 reveal">
+        <a class="btn" href="menu.html">Explore the Full Menu</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Ambiance gallery -->
+  <section class="gallery reveal" aria-label="Ambiance at Vermilion">
+    <figure class="media">
+      <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80" alt="The candlelit Vermilion dining room set with white tablecloths" loading="lazy" width="1600" height="2133" onerror="this.style.display='none';this.closest('.media').classList.add('media--empty')" />
+    </figure>
+    <figure class="media">
+      <img src="https://images.unsplash.com/photo-1546964124-0cce460f38ef?auto=format&fit=crop&w=1200&q=80" alt="A plated prime steak dinner finished with herbs" loading="lazy" width="1200" height="1600" onerror="this.style.display='none';this.closest('.media').classList.add('media--empty')" />
+    </figure>
+    <figure class="media">
+      <img src="https://images.unsplash.com/photo-1474722883778-792e7990302f?auto=format&fit=crop&w=1200&q=80" alt="Rows of old-world wine bottles along the cellar wall" loading="lazy" width="1200" height="1600" onerror="this.style.display='none';this.closest('.media').classList.add('media--empty')" />
+    </figure>
+    <figure class="media">
+      <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80" alt="A candlelit table setting awaiting guests" loading="lazy" width="1200" height="1600" onerror="this.style.display='none';this.closest('.media').classList.add('media--empty')" />
+    </figure>
+  </section>
+
+  <!-- 5. The Cellar split feature -->
+  <section class="section">
+    <div class="container">
+      <div class="split">
+        <div class="split__media reveal">
+          <div class="media media--tall media--frame">
+            <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=1200&q=80" alt="Wine poured by candlelight beside the Vermilion cellar" loading="lazy" width="1200" height="1600" onerror="this.style.display='none';this.closest('.media').classList.add('media--empty')" />
+          </div>
+        </div>
+        <div class="split__text reveal" data-delay="1">
+          <span class="eyebrow">The Cellar</span>
+          <h3>Aged in House, Poured from the Vault</h3>
+          <div class="rule"><span class="rule__mark"></span></div>
+          <p>Our beef is dry-aged on the premises for up to forty-five days, drawing out a concentration of flavor that no shortcut can imitate. The result is the cornerstone of every plate we send to the table.</p>
+          <p>Below the dining room rests a cellar of more than six hundred labels — old-world estates and rare verticals chosen to meet the steak as an equal. Our sommelier is glad to find the right bottle for your evening.</p>
+          <p class="mt-2"><a class="link" href="about.html">Our Story</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Press / accolades -->
+  <section class="section section--ink">
+    <div class="container">
+      <div class="section-head center reveal">
+        <span class="eyebrow eyebrow--center">Earned Over Time</span>
+        <h2>Accolades</h2>
+        <div class="rule rule--center"><span class="rule__mark"></span></div>
+      </div>
+      <div class="grid grid--3">
+        <div class="stat reveal" data-delay="1">
+          <div class="stat__num">Four Stars</div>
+          <div class="stat__label">Illinois Times</div>
+        </div>
+        <div class="stat reveal" data-delay="2">
+          <div class="stat__num">Award of Excellence</div>
+          <div class="stat__label">Wine Spectator</div>
+        </div>
+        <div class="stat reveal" data-delay="3">
+          <div class="stat__num">12 Years Running</div>
+          <div class="stat__label">Springfield's Best Steak</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Reservation CTA band -->
+  <section class="section">
+    <div class="container container--narrow center measure--center">
+      <span class="eyebrow eyebrow--center reveal">Join Us</span>
+      <h2 class="reveal" data-delay="1">Reserve Your Evening</h2>
+      <div class="rule rule--center reveal" data-delay="1"><span class="rule__mark"></span></div>
+      <p class="lead reveal" data-delay="2">Tables fill quickly on weekend evenings. Secure yours, and let us tend to the rest — by candlelight, as we have since 1924.</p>
+      <div class="mt-2 reveal" data-delay="3">
+        <a class="btn btn--solid" href="reservations.html">Reserve a Table</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <span class="monogram">V</span>
+        <div class="footer__wordmark">VERMILION</div>
+        <div class="footer__tag">Prime Steaks &amp; Cellar</div>
+        <p style="margin-top:1.25rem;max-width:24ch;">A Springfield institution since 1924. Prime, dry-aged, and served by candlelight.</p>
+      </div>
+      <div class="footer__col">
+        <h4>Visit</h4>
+        <ul>
+          <li>114 South Sixth Street</li>
+          <li>Springfield, Illinois 62701</li>
+          <li><a href="tel:+12175551924">(217) 555-1924</a></li>
+          <li><a href="reservations.html">Reserve a table</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Hours</h4>
+        <ul>
+          <li>Tue – Thu · 5 – 10 pm</li>
+          <li>Fri – Sat · 5 – 11 pm</li>
+          <li>Sunday · 4 – 9 pm</li>
+          <li>Closed Mondays</li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="menu.html">The Menu</a></li>
+          <li><a href="about.html">Our Story</a></li>
+          <li><a href="private-dining.html">Private Dining</a></li>
+          <li><a href="reservations.html">Reservations</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>&copy; <span data-year>2024</span> Vermilion Steakhouse · Springfield, Illinois. All rights reserved.</span>
+      <div class="footer__social">
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">OpenTable</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pricing — Throughline</title>
+  <meta name="description" content="Throughline pricing: start free with 14-day history, upgrade to Team at $49/mo for full history and unlimited seats, or contact us for Enterprise with SSO, SLA, and self-hosting." />
+  <meta name="theme-color" content="#0A0E17" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Cpath d='M3 18 L9 12 L15 15 L23 5' stroke='%23FFB224' stroke-width='2.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ============================ HEADER ============================ -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html" aria-label="Throughline home">
+        <svg class="brand__mark" width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+          <path d="M3 18 L9 12 L15 15 L23 5" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle class="tl-node" cx="3" cy="18" r="2.3" fill="var(--accent)"/>
+          <circle class="tl-node" cx="23" cy="5" r="2.3" fill="var(--accent)"/>
+        </svg>
+        Throughline
+      </a>
+      <button class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+        <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+      </button>
+      <nav class="nav" id="site-nav" aria-label="Primary">
+        <ul class="nav__links">
+          <li><a class="nav__link" href="features.html">Features</a></li>
+          <li><a class="nav__link" href="pricing.html" aria-current="page">Pricing</a></li>
+          <li><a class="nav__link" href="customers.html">Customers</a></li>
+        </ul>
+        <div class="nav__actions">
+          <a class="nav__link" href="#">Sign in</a>
+          <a class="btn btn--primary btn--sm" href="contact.html">Book a demo</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============================ INTRO ============================ -->
+    <section class="section">
+      <div class="container container--narrow reveal" style="text-align:center;">
+        <span class="eyebrow">Pricing</span>
+        <h1 class="display mt-4">Start free. Scale when it earns its place.</h1>
+        <p class="lead muted" style="max-width:52ch;margin-left:auto;margin-right:auto;">Connect a repo and see your real cycle time today — no card, no sales call. Move to Team when you want full history, unlimited seats, and cross-team comparisons. Bring in Enterprise when compliance or scale demands it.</p>
+        <p class="mono" style="font-size:.8rem;color:var(--dim);margin-top:var(--s4);">Annual billing saves ~2 months · Read-only access · SOC&nbsp;2 Type&nbsp;II</p>
+      </div>
+    </section>
+
+    <!-- ============================ TIERS ============================ -->
+    <section class="section section--alt">
+      <div class="container">
+        <div class="tiers reveal">
+
+          <!-- Free -->
+          <div class="tier">
+            <span class="tier__name">Free</span>
+            <div class="tier__price">$0<span class="per">/mo</span></div>
+            <p class="tier__desc">For individual engineers and small teams that want to see their metrics before committing to anything.</p>
+            <ul class="tier__list">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                1 team, up to 5 seats
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                14-day rolling history
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Cycle time, deploy freq, PR throughput, lead time
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                GitHub and GitLab integration
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Community support
+              </li>
+            </ul>
+            <a class="btn btn--soft btn--block" href="contact.html">Get started free</a>
+          </div>
+
+          <!-- Team (featured) -->
+          <div class="tier tier--featured">
+            <span class="tier__name">Team</span>
+            <div class="tier__price">$49<span class="per">/mo</span></div>
+            <p class="tier__desc">The right plan for a growing engineering org that wants the full picture — history, comparisons, and every team on one dashboard.</p>
+            <ul class="tier__list">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Everything in Free
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Unlimited teams and seats
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Full history — no rolling cutoff
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Cross-team and org-wide comparisons
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Slack and webhook alerts for bottlenecks
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Email support with 1-business-day response
+              </li>
+            </ul>
+            <a class="btn btn--primary btn--block" href="contact.html">Start with Team</a>
+          </div>
+
+          <!-- Enterprise -->
+          <div class="tier">
+            <span class="tier__name">Enterprise</span>
+            <div class="tier__price">Custom<span class="per"></span></div>
+            <p class="tier__desc">For larger orgs with compliance requirements, dedicated infrastructure needs, or a procurement process that needs a contract.</p>
+            <ul class="tier__list">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Everything in Team
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                SSO / SAML and SCIM provisioning
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Self-hosting option (your VPC or on-prem)
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Data residency and audit log
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Uptime SLA with dedicated Slack channel
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Custom contract and invoicing
+              </li>
+            </ul>
+            <a class="btn btn--soft btn--block" href="contact.html">Talk to sales</a>
+          </div>
+
+        </div>
+
+        <p class="muted" style="text-align:center;font-size:.875rem;margin-top:var(--s5);">Annual billing saves the equivalent of ~2 months. All plans connect in minutes — no agent to install, no schema changes.</p>
+      </div>
+    </section>
+
+    <!-- ======================== COMPARISON TABLE ======================== -->
+    <section class="section">
+      <div class="container">
+        <div class="section__head section__head--center reveal">
+          <span class="eyebrow eyebrow--plain">Compare plans</span>
+          <h2 style="margin-top:var(--s3);">Everything side by side</h2>
+          <p class="muted">Full feature breakdown across all three tiers.</p>
+        </div>
+
+        <div class="table-wrap reveal" data-delay="1">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th class="num">Free</th>
+                <th class="num" style="color:var(--accent);">Team</th>
+                <th class="num">Enterprise</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <!-- Metrics -->
+              <tr>
+                <td class="cell-strong" colspan="4" style="color:var(--muted);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;padding-top:var(--s5);">Metrics</td>
+              </tr>
+              <tr>
+                <td>Cycle time</td>
+                <td class="yes num">✓</td>
+                <td class="yes num">✓</td>
+                <td class="yes num">✓</td>
+              </tr>
+              <tr>
+                <td>Deploy frequency</td>
+                <td class="yes num">✓</td>
+                <td class="yes num">✓</td>
+                <td class="yes num">✓</td>
+              </tr>
+              <tr>
+                <td>PR throughput</td>
+                <td class="yes num">✓</td>
+                <td class="yes num">✓</td>
+                <td class="yes num">✓</td>
+              </tr>
+              <tr>
+                <td>Lead time for changes</td>
+                <td class="yes num">✓</td>
+                <td class="yes num">✓</td>
+                <td class="yes num">✓</td>
+              </tr>
+              <tr>
+                <td>Stage breakdown (coding / review / CI / deploy)</td>
+                <td class="yes num">✓</td>
+                <td class="yes num">✓</td>
+                <td class="yes num">✓</td>
+              </tr>
+              <tr>
+                <td>p50 and p95 per stage</td>
+                <td class="no num">—</td>
+                <td class="yes num">✓</td>
+                <td class="yes num">✓</td>
+              </tr>
+              <tr>
+                <td>Automatic bottleneck flagging</td>
+                <td class="no num">—</td>
+                <td class="yes num">✓</td>
+                <td class="yes num">✓</td>
+              </tr>
+
+              <!-- History & comparisons -->
+              <tr>
+                <td class="cell-strong" colspan="4" style="color:var(--muted);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;padding-top:var(--s5);">History &amp; comparisons</td>
+              </tr>
+              <tr>
+                <td>Data history</td>
+                <td class="num">14 days</td>
+                <td class="num">Unlimited</td>
+                <td class="num">Unlimited</td>
+              </tr>
+              <tr>
+                <td>Teams</td>
+                <td class="num">1</td>
+                <td class="num">Unlimited</td>
+                <td class="num">Unlimited</td>
+              </tr>
+              <tr>
+                <td>Seats</td>
+                <td class="num">5</td>
+                <td class="num">Unlimited</td>
+                <td class="num">Unlimited</td>
+              </tr>
+              <tr>
+                <td>Cross-team comparisons</td>
+                <td class="no num">—</td>
+                <td class="yes num">✓</td>
+                <td class="yes num">✓</td>
+              </tr>
+              <tr>
+                <td>90-day rolling baseline</td>
+                <td class="no num">—</td>
+                <td class="yes num">✓</td>
+                <td class="yes num">✓</td>
+              </tr>
+              <tr>
+                <td>Org-wide rollup dashboard</td>
+                <td class="no num">—</td>
+                <td class="yes num">✓</td>
+                <td class="yes num">✓</td>
+              </tr>
+
+              <!-- Collaboration -->
+              <tr>
+                <td class="cell-strong" colspan="4" style="color:var(--muted);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;padding-top:var(--s5);">Collaboration</td>
+              </tr>
+              <tr>
+                <td>Slack alerts for bottlenecks</td>
+                <td class="no num">—</td>
+                <td class="yes num">✓</td>
+                <td class="yes num">✓</td>
+              </tr>
+              <tr>
+                <td>Webhook notifications</td>
+                <td class="no num">—</td>
+                <td class="yes num">✓</td>
+                <td class="yes num">✓</td>
+              </tr>
+              <tr>
+                <td>Export to slides and CSV</td>
+                <td class="no num">—</td>
+                <td class="yes num">✓</td>
+                <td class="yes num">✓</td>
+              </tr>
+              <tr>
+                <td>Chart annotations (incidents, freezes)</td>
+                <td class="no num">—</td>
+                <td class="yes num">✓</td>
+                <td class="yes num">✓</td>
+              </tr>
+              <tr>
+                <td>Read-only share links</td>
+                <td class="yes num">✓</td>
+                <td class="yes num">✓</td>
+                <td class="yes num">✓</td>
+              </tr>
+
+              <!-- Security & admin -->
+              <tr>
+                <td class="cell-strong" colspan="4" style="color:var(--muted);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;padding-top:var(--s5);">Security &amp; admin</td>
+              </tr>
+              <tr>
+                <td>SOC 2 Type II</td>
+                <td class="yes num">✓</td>
+                <td class="yes num">✓</td>
+                <td class="yes num">✓</td>
+              </tr>
+              <tr>
+                <td>Read-only OAuth scopes</td>
+                <td class="yes num">✓</td>
+                <td class="yes num">✓</td>
+                <td class="yes num">✓</td>
+              </tr>
+              <tr>
+                <td>SSO / SAML</td>
+                <td class="no num">—</td>
+                <td class="no num">—</td>
+                <td class="yes num">✓</td>
+              </tr>
+              <tr>
+                <td>SCIM user provisioning</td>
+                <td class="no num">—</td>
+                <td class="no num">—</td>
+                <td class="yes num">✓</td>
+              </tr>
+              <tr>
+                <td>Audit log</td>
+                <td class="no num">—</td>
+                <td class="no num">—</td>
+                <td class="yes num">✓</td>
+              </tr>
+              <tr>
+                <td>Data residency (US or EU)</td>
+                <td class="no num">—</td>
+                <td class="no num">—</td>
+                <td class="yes num">✓</td>
+              </tr>
+              <tr>
+                <td>Self-hosting (your VPC or on-prem)</td>
+                <td class="no num">—</td>
+                <td class="no num">—</td>
+                <td class="yes num">✓</td>
+              </tr>
+
+              <!-- Support -->
+              <tr>
+                <td class="cell-strong" colspan="4" style="color:var(--muted);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;padding-top:var(--s5);">Support</td>
+              </tr>
+              <tr>
+                <td>Community (Slack &amp; docs)</td>
+                <td class="yes num">✓</td>
+                <td class="yes num">✓</td>
+                <td class="yes num">✓</td>
+              </tr>
+              <tr>
+                <td>Email support</td>
+                <td class="no num">—</td>
+                <td class="num">1 business day</td>
+                <td class="num">4 hours</td>
+              </tr>
+              <tr>
+                <td>Dedicated Slack channel</td>
+                <td class="no num">—</td>
+                <td class="no num">—</td>
+                <td class="yes num">✓</td>
+              </tr>
+              <tr>
+                <td>Uptime SLA</td>
+                <td class="no num">—</td>
+                <td class="no num">—</td>
+                <td class="num">99.9%</td>
+              </tr>
+              <tr>
+                <td>Onboarding call</td>
+                <td class="no num">—</td>
+                <td class="no num">—</td>
+                <td class="yes num">✓</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ FAQ ============================ -->
+    <section class="section section--alt">
+      <div class="container container--narrow">
+        <div class="section__head reveal">
+          <span class="eyebrow">FAQ</span>
+          <h2>Common questions</h2>
+          <p class="muted">If something is not covered here, <a class="link" href="contact.html">contact us</a> and we will get back to you the same day.</p>
+        </div>
+
+        <div class="reveal" data-delay="1">
+
+          <details class="faq__item">
+            <summary>How does Throughline compute each metric?<span class="faq__plus"></span></summary>
+            <div class="faq__body">
+              <p>Throughline derives all four metrics from events your tools already emit — no agents, no manual logging. Cycle time is the wall-clock duration from first commit on a branch to deploy. Lead time for changes is the duration from first commit to when the change reaches production. Deploy frequency counts successful production deploys per day across all connected pipelines. PR throughput counts merged pull requests per week per team.</p>
+              <p>Stage breakdowns (coding, review wait, CI and checks, deploy to production) are derived by timestamping each state transition: branch creation, PR open, first review, last approval, merge, and deploy event. The p50 and p95 for each stage are computed over the selected window — defaulting to the trailing 30 days — and benchmarked against your own 90-day baseline.</p>
+            </div>
+          </details>
+
+          <details class="faq__item">
+            <summary>What access does Throughline need to my repositories?<span class="faq__plus"></span></summary>
+            <div class="faq__body">
+              <p>Throughline connects via read-only OAuth scopes — it never writes to your repositories, opens pull requests, or modifies any code. For GitHub, it requests <code>repo:read</code>, <code>pull_requests:read</code>, and <code>actions:read</code>. For GitLab, the equivalent read-only project and pipeline scopes.</p>
+              <p>No SSH keys, no deploy keys, and no webhook secrets are stored. Connection takes under five minutes: authorize the OAuth app, select the repos you want to track, and your first metrics appear within minutes as Throughline backfills available history. SOC 2 Type II documentation is available on request.</p>
+            </div>
+          </details>
+
+          <details class="faq__item">
+            <summary>What counts as a "seat"?<span class="faq__plus"></span></summary>
+            <div class="faq__body">
+              <p>A seat is any user who can log in to your Throughline workspace and view data. Read-only share links — public URLs you can paste into a doc or Slack — do not consume a seat. The Free plan allows up to 5 seats. Team and Enterprise plans have no seat limit.</p>
+              <p>Service accounts and bot users used only for the OAuth integration are never counted as seats. You can also create read-only member roles for stakeholders who need to view dashboards but should not change settings or connect new repos.</p>
+            </div>
+          </details>
+
+          <details class="faq__item">
+            <summary>Can we self-host Throughline?<span class="faq__plus"></span></summary>
+            <div class="faq__body">
+              <p>Yes — self-hosting is available on the Enterprise plan. You deploy Throughline inside your own VPC (AWS, GCP, or Azure) or on-prem, and all Git and CI data stays within your network boundary. We provide a Docker Compose reference configuration and a Helm chart for Kubernetes clusters, plus a dedicated Slack channel during initial rollout.</p>
+              <p>Self-hosted instances receive the same version cadence as the cloud product. Security patches are delivered as container image updates; your team controls the upgrade schedule. Data residency guarantees — US or EU — are available whether you are on cloud or self-hosted.</p>
+            </div>
+          </details>
+
+          <details class="faq__item">
+            <summary>Can I switch plans or cancel at any time?<span class="faq__plus"></span></summary>
+            <div class="faq__body">
+              <p>Yes. You can upgrade from Free to Team immediately from your workspace settings — the change takes effect the same day and you are billed a prorated amount for the remainder of your billing cycle. Downgrading from Team to Free takes effect at the end of your current billing period; history beyond 14 days is retained for 30 days in case you change your mind.</p>
+              <p>There are no long-term commitments on monthly billing. Annual billing carries a ~2-month discount and renews automatically unless cancelled at least 14 days before the renewal date. Enterprise contracts are negotiated separately and can include custom terms, purchase orders, and invoicing.</p>
+            </div>
+          </details>
+
+          <details class="faq__item">
+            <summary>What happens to my data if I downgrade or cancel?<span class="faq__plus"></span></summary>
+            <div class="faq__body">
+              <p>If you downgrade from Team to Free, your workspace immediately reverts to a 14-day rolling window. Historical data beyond 14 days is not deleted — it is retained for 30 days while you decide whether to reactivate. After 30 days, data older than 14 days is permanently deleted from our systems.</p>
+              <p>If you cancel your account entirely, all data is deleted within 30 days of cancellation. You can request an export of your metrics in JSON or CSV format at any time before deletion. Enterprise customers can negotiate custom data retention and deletion terms in their contract.</p>
+            </div>
+          </details>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ CTA BAND ============================ -->
+    <section class="section">
+      <div class="container reveal">
+        <div class="cta-band">
+          <span class="eyebrow eyebrow--plain center-x" style="display:inline-flex;">Get started</span>
+          <h2 class="mt-4">See your real cycle time before the call ends.</h2>
+          <p class="muted">Book a 30-minute demo and we'll connect a repo live. You will leave with your own metrics — not a slide deck. Or talk to sales if you have questions about Team or Enterprise.</p>
+          <div class="cluster">
+            <a class="btn btn--primary btn--lg" href="contact.html">Book a demo</a>
+            <a class="btn btn--ghost btn--lg" href="contact.html">Talk to sales</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================ FOOTER ============================ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a class="brand" href="index.html" aria-label="Throughline home">
+            <svg class="brand__mark" width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M3 18 L9 12 L15 15 L23 5" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="3" cy="18" r="2.3" fill="var(--accent)"/><circle cx="23" cy="5" r="2.3" fill="var(--accent)"/></svg>
+            Throughline
+          </a>
+          <p>Delivery metrics from the data your engineering org already produces. Built for the people accountable for how software ships.</p>
+        </div>
+        <div class="footer__col"><h4>Product</h4><ul>
+          <li><a href="features.html">Features</a></li><li><a href="pricing.html">Pricing</a></li>
+          <li><a href="customers.html">Customers</a></li><li><a href="#">Changelog</a></li></ul></div>
+        <div class="footer__col"><h4>Company</h4><ul>
+          <li><a href="#">About</a></li><li><a href="#">Careers</a></li>
+          <li><a href="contact.html">Contact</a></li><li><a href="#">Blog</a></li></ul></div>
+        <div class="footer__col"><h4>Resources</h4><ul>
+          <li><a href="#">Docs</a></li><li><a href="#">Security</a></li>
+          <li><a href="#">API</a></li><li><a href="#">Status</a></li></ul></div>
+      </div>
+      <div class="footer__bottom">
+        <span>© <span data-year>2026</span> Throughline, Inc. All rights reserved.</span>
+        <span class="footer__status"><span class="dot"></span> All systems operational</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>

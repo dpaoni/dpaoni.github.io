@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>About — Vortex Property Services | Springfield, IL</title>
+  <meta name="description" content="Vortex Property Services is a locally-owned property care company in Springfield, IL: lawn care, power washing, and snow removal built on showing up, clear pricing, and quality work."/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://vortexpropertyservices.com/about.html"/>
+
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://vortexpropertyservices.com/about.html"/>
+  <meta property="og:title" content="About — Vortex Property Services"/>
+  <meta property="og:description" content="A locally-owned Springfield, IL property care company built on showing up, clear pricing, and quality work."/>
+  <meta property="og:site_name" content="Vortex Property Services"/>
+  <meta name="theme-color" content="#d4eeff"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+
+  <!-- Icons -->
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <link rel="icon" type="image/png" href="favicon-48.png"/>
+  <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+
+  <!-- Social share image -->
+  <meta property="og:image" content="https://vortexpropertyservices.com/images/og-image.jpg"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:image:alt" content="Vortex Property Services — lawn care, power washing and snow removal in Springfield, IL"/>
+  <meta name="twitter:image" content="https://vortexpropertyservices.com/images/og-image.jpg"/>
+
+  <!-- Shared styles + behaviour -->
+  <link rel="stylesheet" href="css/site.css"/>
+  <script>(function(){var d=document.documentElement;d.classList.add('js-loaded');try{if(localStorage.getItem('vpsBannerDismissed'))d.classList.add('banner-hidden');}catch(e){}})();</script>
+  <script src="js/site.js" defer></script>
+
+  <!-- LocalBusiness structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HomeAndConstructionBusiness",
+    "@id": "https://vortexpropertyservices.com/#business",
+    "name": "Vortex Property Services",
+    "url": "https://vortexpropertyservices.com/",
+    "image": "https://vortexpropertyservices.com/images/og-image.jpg",
+    "logo": "https://vortexpropertyservices.com/icon-512.png",
+    "telephone": "+1-217-799-7940",
+    "priceRange": "$$",
+    "currenciesAccepted": "USD",
+    "paymentAccepted": "Cash, Check, Venmo, Zelle",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Springfield",
+      "addressRegion": "IL",
+      "addressCountry": "US"
+    },
+    "geo": { "@type": "GeoCoordinates", "latitude": 39.7817, "longitude": -89.6501 },
+    "areaServed": [
+      { "@type": "City", "name": "Springfield, IL" },
+      { "@type": "City", "name": "Chatham, IL" },
+      { "@type": "City", "name": "Sherman, IL" },
+      { "@type": "City", "name": "Rochester, IL" },
+      { "@type": "City", "name": "Auburn, IL" }
+    ],
+    "openingHoursSpecification": [{
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+      "opens": "07:00",
+      "closes": "19:00"
+    }],
+    "sameAs": ["https://www.instagram.com/vortexpropertyservice/"],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Property care services",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Lawn Care" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Power Washing" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Snow Removal" } }
+      ]
+    }
+  }
+  </script>
+  <style>
+    .about-hero {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: clamp(40px, 7vw, 76px) clamp(16px, 4vw, 32px) 4px;
+    }
+    .about-hero h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: clamp(44px, 8vw, 74px);
+      line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      color: var(--offwhite);
+      margin-top: 14px;
+    }
+    .about-hero h1 span { color: var(--sky); }
+
+    /* Crew photo — hidden until images/about-crew.jpg loads (site.js handles it). */
+    .about-photo {
+      display: none;
+      width: 100%;
+      max-width: 760px;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid var(--card-border);
+      margin-top: 24px;
+    }
+    .about-photo.is-loaded { display: block; }
+
+    .about-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 clamp(16px, 4vw, 32px) 80px;
+    }
+    .about-body {
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--gray);
+      margin-top: 20px;
+      max-width: 68ch;
+    }
+    .about-divider { border: none; border-top: 1px solid var(--border); margin: 44px 0; }
+
+    .about-values {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 24px;
+    }
+    .about-value {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 24px;
+    }
+    .about-value-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 19px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--offwhite);
+      margin-bottom: 8px;
+    }
+    .about-value p { font-size: 14px; line-height: 1.6; color: var(--gray); }
+
+    .about-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 40px;
+      background: var(--blue);
+      color: #fff;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 17px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 15px 32px;
+      border-radius: 4px;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .about-cta:hover { background: var(--sky); transform: translateY(-1px); }
+    .about-cta:focus-visible { outline: 2px solid var(--sky); outline-offset: 3px; }
+  </style>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- SEASONAL BANNER -->
+  <div class="seasonal-banner" id="seasonalBanner" role="region" aria-label="Announcement">
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg>Now booking Summer 2026 &mdash; bundle lawn care + power washing and <strong>save 10%</strong>.</span>
+    <button class="banner-close" id="bannerClose" aria-label="Dismiss announcement">&times;</button>
+  </div>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <a class="site-brand" href="index.html" aria-label="Vortex Property Services — home">
+      <img src="images/logo-navy.png" alt="" width="38" height="38"/>
+      <span class="site-brand-name">Vortex <span>Property Services</span></span>
+    </a>
+
+    <nav class="primary-nav" aria-label="Primary">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <!-- Gallery hidden for now (page is thin). Re-enable by uncommenting.
+        <li><a href="gallery.html">Gallery</a></li>
+        -->
+        <li><a href="service-area.html">Service Area</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+
+    <span class="header-spacer"></span>
+
+    <a class="nav-phone" href="tel:+12177997940"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>(217) 799-7940</a>
+
+    <a class="nav-cta" href="quote.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>Get Estimate</a>
+
+    <a class="nav-call" href="tel:+12177997940" aria-label="Call or text (217) 799-7940"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="sideMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- MOBILE DRAWER -->
+  <div class="side-overlay" id="sideOverlay"></div>
+  <nav class="side-menu" id="sideMenu" aria-hidden="true" aria-label="Site menu">
+    <div class="side-menu-head">
+      <div class="side-menu-brand">
+        <p>Vortex <span>Property Services</span></p>
+        <small>Springfield, IL</small>
+      </div>
+      <button class="side-menu-close" id="sideMenuClose" aria-label="Close menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <ul class="side-nav">
+      <li style="--d:0.05s"><a href="index.html"><span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>Home</a></li>
+      <li style="--d:0.09s"><a href="services.html"><span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg></span>Services</a></li>
+      <!-- Gallery hidden for now (page is thin). Re-enable by uncommenting (optionally restore the stagger delay on the li).
+      <li><a href="gallery.html"><span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></span>Gallery</a></li>
+      -->
+      <li style="--d:0.17s"><a href="service-area.html"><span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg></span>Service Area</a></li>
+      <li style="--d:0.21s"><a href="about.html"><span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>About</a></li>
+    </ul>
+    <a class="side-menu-phone" href="tel:+12177997940">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <span class="chip-inner"><span class="lbl">Call or text</span><span class="num">(217) 799-7940</span></span>
+    </a>
+    <a href="quote.html" class="side-menu-cta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>Get a Free Estimate</a>
+  </nav>
+
+  <main id="main" tabindex="-1">
+
+  <section class="about-hero">
+    <p class="section-label">About Us</p>
+    <h1>Built on <span>showing up.</span></h1>
+    <!-- CREW PHOTO — drop a real photo at images/about-crew.jpg to activate.
+         TODO: add public/images/about-crew.jpg (a real shot of you and/or the crew,
+         or a truck on a Springfield job; landscape ~1200px, optimized to 200KB or less).
+         It stays hidden until the file exists — no broken image (graceful fallback). -->
+    <img class="about-photo" data-optional src="images/about-crew.jpg" alt="The Vortex Property Services crew on a job in the Springfield, IL area" width="1200" height="675"/>
+  </section>
+
+  <div class="about-content">
+    <p class="about-body">Vortex Property Services is a locally-owned residential and commercial property care company serving Springfield, IL and the surrounding area. We handle lawn care, power washing, and snow removal — all year, one crew.</p>
+    <p class="about-body">We started Vortex because we kept hearing the same story: contractors who don't show up, estimates that change at the invoice, and service that stops the moment you stop following up. We built this company to be the opposite of that.</p>
+    <p class="about-body">Every job gets a straight estimate upfront, consistent communication throughout, and a crew that takes pride in the finished result. We're not a franchise or a platform — we're a local business that depends on word of mouth, which means your experience matters to us every single time.</p>
+
+    <hr class="about-divider"/>
+
+    <p class="section-label">What we stand for</p>
+    <div class="about-values">
+      <div class="about-value">
+        <p class="about-value-title">Reliability</p>
+        <p>We show up when we say we will. If anything changes, you hear from us first, not after the fact.</p>
+      </div>
+      <div class="about-value">
+        <p class="about-value-title">Transparency</p>
+        <p>Flat estimates, no hidden fees. You know the price before we start and it doesn't change at the end.</p>
+      </div>
+      <div class="about-value">
+        <p class="about-value-title">Quality</p>
+        <p>We don't rush through jobs to move on to the next one. The standard is simple: leave it better than we found it.</p>
+      </div>
+      <div class="about-value">
+        <p class="about-value-title">Local</p>
+        <p>Springfield-based, Springfield-focused. We live and work in the same community we serve.</p>
+      </div>
+    </div>
+
+    <a href="quote.html" class="about-cta">Get a Free Estimate →</a>
+  </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <span>© 2026 Vortex Property Services · Springfield, IL · <a class="footer-phone" href="tel:+12177997940">(217) 799-7940</a></span>
+    <span>Designed by <a href="https://dpaoni.github.io" target="_blank" rel="noopener noreferrer">Dominic Paoni</a></span>
+  </footer>
+
+</body>
+</html>

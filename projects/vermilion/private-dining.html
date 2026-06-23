@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Private Dining — VERMILION · Springfield, Illinois</title>
+  <meta name="description" content="Private rooms and full buyouts at VERMILION in Springfield, Illinois — rehearsal dinners, corporate gatherings, and milestone celebrations hosted by candlelight since 1924." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    /* Page-only tweaks — Private Dining */
+    .media--empty { background: linear-gradient(135deg, var(--paper-deep), var(--gold) 320%); }
+    .media--empty::after { content: "VERMILION"; position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--font-display); letter-spacing: .3em; color: var(--gold-deep); opacity: .5; }
+
+    /* Numbered steps for the inquiry section */
+    .steps { display: grid; gap: 1.5rem; counter-reset: step; }
+    .steps__item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.25rem;
+      align-items: baseline;
+      border-top: 1px solid rgba(250, 246, 236, 0.16);
+      padding-top: 1.25rem;
+    }
+    .steps__no {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      line-height: 1;
+      color: var(--gold-bright);
+    }
+    .steps__item h4 { margin-bottom: .3rem; }
+  </style>
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <nav class="nav" aria-label="Primary">
+      <ul class="nav__links nav__links--left">
+        <li><a class="nav__link" href="menu.html">Menu</a></li>
+        <li><a class="nav__link" href="about.html">Our Story</a></li>
+        <li><a class="nav__link is-active" href="private-dining.html">Private Dining</a></li>
+      </ul>
+      <a class="nav__brand" href="index.html">VERMILION<small>Est. 1924</small></a>
+      <ul class="nav__links nav__links--right">
+        <li><a class="nav__link" href="reservations.html">Reservations</a></li>
+        <li><a class="nav__link" href="tel:+12175551924">(217) 555-1924</a></li>
+      </ul>
+      <button class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+</header>
+<div class="nav__mobile" id="mobileNav">
+  <a href="index.html">Home</a>
+  <a href="menu.html">Menu</a>
+  <a href="about.html">Our Story</a>
+  <a class="is-active" href="private-dining.html">Private Dining</a>
+  <a href="reservations.html">Reservations</a>
+</div>
+
+<!-- 1. Page banner -->
+<section class="page-banner">
+  <div class="container container--narrow">
+    <span class="eyebrow reveal">Private Dining</span>
+    <h1 class="reveal" data-delay="1">Private Rooms &amp; Celebrations</h1>
+    <p class="lead reveal" data-delay="2">Hosting the occasions that deserve a room of their own.</p>
+  </div>
+</section>
+
+<!-- 2. Intro -->
+<section class="section">
+  <div class="container">
+    <div class="measure--center center reveal">
+      <span class="eyebrow eyebrow--center">An Occasion Apart</span>
+      <p class="mt-1">For a century, the most consequential evenings in Springfield have unfolded beneath our candlelight. Rehearsal dinners and silver-anniversary toasts, board retreats and quiet homecomings — VERMILION has set the table for them all since 1924, with the same discretion that once welcomed senators through its doors.</p>
+      <p>Our private rooms carry the warmth of the main dining room and the privacy your gathering deserves. Tell us the occasion; we will tend to the rest.</p>
+      <div class="rule rule--center"><span class="rule__mark"></span></div>
+    </div>
+
+    <div class="split mt-3 reveal" data-delay="1">
+      <div class="split__media">
+        <div class="media media--wide media--frame">
+          <img
+            src="https://images.unsplash.com/photo-1592861956120-e524fc739696?auto=format&fit=crop&w=1600&q=80"
+            alt="A candlelit private dining room set for an intimate celebration at VERMILION"
+            loading="lazy" width="1600" height="1000"
+            onerror="this.style.display='none';this.closest('.media').classList.add('media--empty')" />
+        </div>
+      </div>
+      <div class="split__body">
+        <span class="eyebrow">Hosted With Care</span>
+        <h2 class="mt-1">A century of gracious hosting</h2>
+        <p class="mt-1">From the first pour to the final toast, a dedicated maître d' attends to your evening. Menus are printed with your occasion at the header; wines are chosen to suit the room and the company. Nothing is left to chance, and nothing feels rehearsed.</p>
+        <p>Whether you are ten or one hundred and twenty, the standard is unchanged: prime, dry-aged, and served by candlelight.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. The Spaces -->
+<section class="section section--paper">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow eyebrow--center">Our Rooms</span>
+      <h2>The Spaces</h2>
+      <p class="measure--center">Four settings, each with its own character — chosen to match the size and spirit of your occasion.</p>
+    </div>
+
+    <div class="grid grid--2">
+      <article class="card reveal">
+        <span class="eyebrow">Up to 40 Seated</span>
+        <h3>The Cellar Room</h3>
+        <p>Surrounded by the reserve wine collection, the Cellar Room is our most atmospheric setting — stone, candlelight, and bottles that span generations. Ideal for celebratory dinners that linger long past the last course.</p>
+      </article>
+
+      <article class="card reveal" data-delay="1">
+        <span class="eyebrow">Up to 16 Guests</span>
+        <h3>The Lincoln Salon</h3>
+        <p>Intimate and panelled, the Lincoln Salon opens onto its own private entrance off Sixth Street. A discreet choice for milestone birthdays, anniversaries, and the conversations meant for fewer ears.</p>
+      </article>
+
+      <article class="card reveal" data-delay="2">
+        <span class="eyebrow">Up to 10 Guests</span>
+        <h3>The Boardroom</h3>
+        <p>Fully AV-equipped and shielded from the dining room, the Boardroom is built for working dinners — presentations and negotiations conducted over prime steak rather than catered trays.</p>
+      </article>
+
+      <article class="card reveal" data-delay="3">
+        <span class="eyebrow">Up to 120 Guests</span>
+        <h3>Full Buyout</h3>
+        <p>For grand occasions, the entire dining room becomes yours alone. The full kitchen, the cellar, and our complete staff at your service for an evening of unhurried splendor.</p>
+      </article>
+    </div>
+
+    <div class="split split--reverse mt-3 reveal">
+      <div class="split__media">
+        <div class="media media--wide media--frame">
+          <img
+            src="https://images.unsplash.com/photo-1474722883778-792e7990302f?auto=format&fit=crop&w=1200&q=80"
+            alt="The reserve wine cellar wall surrounding the Cellar Room at VERMILION"
+            loading="lazy" width="1200" height="750"
+            onerror="this.style.display='none';this.closest('.media').classList.add('media--empty')" />
+        </div>
+      </div>
+      <div class="split__body">
+        <span class="eyebrow">The Setting</span>
+        <h2 class="mt-1">Rooms shaped by their wine</h2>
+        <p class="mt-1">Our cellar holds more than four thousand selections, and the rooms that border it inherit its calm. Bottles can be brought to the table for your party, decanted at your pace, and paired course by course with our sommelier in attendance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Experiences / menus -->
+<section class="section">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow eyebrow--center">Curated for the Table</span>
+      <h2>Group Menus &amp; Pairings</h2>
+      <p class="measure--center">Three ways to dine together — each prepared in advance so your guests are served as one.</p>
+    </div>
+
+    <div class="grid grid--3">
+      <article class="card reveal">
+        <span class="eyebrow">Prix Fixe</span>
+        <h3>The Founder's Menu</h3>
+        <p>A four-course progression of our signatures — from the chilled tower to a dry-aged centerpiece — composed by the kitchen and finished tableside. The simplest path to a flawless evening.</p>
+      </article>
+
+      <article class="card reveal" data-delay="1">
+        <span class="eyebrow">Family Style</span>
+        <h3>The Vermilion Table</h3>
+        <p>Platters of prime cuts, seasonal sides, and shared starters passed among the company. Generous, convivial, and well suited to celebrations where conversation matters most.</p>
+      </article>
+
+      <article class="card reveal" data-delay="2">
+        <span class="eyebrow">Sommelier Led</span>
+        <h3>Bespoke Wine Pairings</h3>
+        <p>Drawn from our reserve cellar, a flight composed for your party and your menu. Verticals, library vintages, and large-format bottles arranged in advance with our wine director.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 5. How it works / inquire -->
+<section class="section section--ink">
+  <div class="container">
+    <div class="split">
+      <div class="split__body reveal">
+        <span class="eyebrow">How It Works</span>
+        <h2 class="mt-1">Three steps to a flawless evening</h2>
+        <div class="steps mt-2">
+          <div class="steps__item">
+            <span class="steps__no">01</span>
+            <div>
+              <h4>Tell us about your event</h4>
+              <p>Share the occasion, the date, and your party size. We will recommend the room that suits it best.</p>
+            </div>
+          </div>
+          <div class="steps__item">
+            <span class="steps__no">02</span>
+            <div>
+              <h4>We craft the menu</h4>
+              <p>Our chef and sommelier compose courses and pairings around your guests, your budget, and the spirit of the night.</p>
+            </div>
+          </div>
+          <div class="steps__item">
+            <span class="steps__no">03</span>
+            <div>
+              <h4>You arrive to a flawless evening</h4>
+              <p>The room is set, the wine is decanted, and your only task is to be a gracious host.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="split__body reveal" data-delay="1">
+        <span class="eyebrow">Events &amp; Inquiries</span>
+        <h2 class="mt-1">Speak with our events team</h2>
+        <div class="info-list mt-2">
+          <div class="info-list__item">
+            <span class="eyebrow">By Email</span>
+            <p><a class="link" href="mailto:events@vermilionspringfield.com">events@vermilionspringfield.com</a></p>
+          </div>
+          <div class="info-list__item">
+            <span class="eyebrow">By Telephone</span>
+            <p><a href="tel:+12175551924">(217) 555-1924</a></p>
+          </div>
+          <div class="info-list__item">
+            <span class="eyebrow">In Person</span>
+            <p>114 South Sixth Street<br />Springfield, Illinois 62701</p>
+          </div>
+          <div class="info-list__item">
+            <span class="eyebrow">Planning Lead Time</span>
+            <p>We recommend reaching out at least three weeks ahead for private rooms, and earlier still for a full buyout.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. CTA -->
+<section class="section section--paper">
+  <div class="container center reveal">
+    <span class="eyebrow eyebrow--center">At Your Service</span>
+    <h2 class="mt-1">Begin Your Inquiry</h2>
+    <p class="measure--center">Reserve a room, request a buyout, or simply ask a question. We would be honored to host your occasion.</p>
+    <div class="rule rule--center"><span class="rule__mark"></span></div>
+    <div class="flex-center mt-2">
+      <a class="btn btn--solid" href="reservations.html">Begin Your Inquiry</a>
+      <a class="link" href="menu.html">View the Menu</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <span class="monogram">V</span>
+        <div class="footer__wordmark">VERMILION</div>
+        <div class="footer__tag">Prime Steaks &amp; Cellar</div>
+        <p style="margin-top:1.25rem;max-width:24ch;">A Springfield institution since 1924. Prime, dry-aged, and served by candlelight.</p>
+      </div>
+      <div class="footer__col">
+        <h4>Visit</h4>
+        <ul>
+          <li>114 South Sixth Street</li>
+          <li>Springfield, Illinois 62701</li>
+          <li><a href="tel:+12175551924">(217) 555-1924</a></li>
+          <li><a href="reservations.html">Reserve a table</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Hours</h4>
+        <ul>
+          <li>Tue – Thu · 5 – 10 pm</li>
+          <li>Fri – Sat · 5 – 11 pm</li>
+          <li>Sunday · 4 – 9 pm</li>
+          <li>Closed Mondays</li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="menu.html">The Menu</a></li>
+          <li><a href="about.html">Our Story</a></li>
+          <li><a href="private-dining.html">Private Dining</a></li>
+          <li><a href="reservations.html">Reservations</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>&copy; <span data-year>2024</span> Vermilion Steakhouse · Springfield, Illinois. All rights reserved.</span>
+      <div class="footer__social">
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">OpenTable</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>
