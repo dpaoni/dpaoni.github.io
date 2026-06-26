@@ -1180,9 +1180,17 @@ html.js .fade-in.visible { opacity: 1; transform: translateY(0); }
   text-align: center;
   padding: 0 1rem;
 }
+.pricing-grid-3 { grid-template-columns: repeat(3, 1fr); }
+.pricing-per {
+  font-size: 1.5rem;
+  color: var(--text-dim);
+  font-weight: 400;
+  letter-spacing: 0;
+}
 
 @media (max-width: 860px) {
-  .pricing-grid { grid-template-columns: 1fr; }
+  .pricing-grid,
+  .pricing-grid-3 { grid-template-columns: 1fr; }
   .process-strip {
     grid-template-columns: 1fr;
     padding: 2rem 1.5rem;
