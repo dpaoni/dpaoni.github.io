@@ -1,7 +1,14 @@
-// Fade-in observer
+// Stagger fade-in children inside grid containers
+document.querySelectorAll('.skills-grid, .certs-grid, .pricing-grid, .beyond-grid, .gallery-grid').forEach(grid => {
+  Array.from(grid.querySelectorAll(':scope > .fade-in')).forEach((el, i) => {
+    el.style.setProperty('--reveal-delay', `${i * 75}ms`);
+  });
+});
+
+// Scroll reveal observer
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1 });
+}, { threshold: 0.08 });
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
 // Mobile nav toggle

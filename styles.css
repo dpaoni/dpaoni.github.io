@@ -958,14 +958,28 @@ footer .footer-links a:hover { color: var(--accent); }
   to { opacity: 1; transform: translateY(0); }
 }
 .fade-in {
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
 }
 /* Only pre-hide when JS is present to reveal it; without JS content stays visible */
 html.js .fade-in {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(32px);
 }
-html.js .fade-in.visible { opacity: 1; transform: translateY(0); }
+/* Headings and CTAs: fade without vertical movement */
+html.js .section-header.fade-in,
+html.js .contact-card.fade-in,
+html.js .pricing-note.fade-in,
+html.js .wd-intro.fade-in {
+  transform: none;
+}
+/* Featured pricing card: scale in from slightly smaller */
+html.js .pricing-card-featured.fade-in {
+  transform: translateY(20px) scale(0.96);
+}
+/* Reveal state — comes last so it wins over variant overrides */
+html.js .fade-in.visible { opacity: 1; transform: none; }
 
 /* RESPONSIVE */
 @media (max-width: 900px) {
