@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Studio — Dominic Paoni Web Design</title>
+<meta name="description" content="Hand-built websites for Springfield businesses. No agency markup, no lock-in. Starter from $299.">
+<meta name="author" content="Dominic Paoni">
+<meta name="theme-color" content="#0000f2">
+<meta name="color-scheme" content="light">
+<link rel="canonical" href="https://dpaoni.github.io/studio.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Dominic Paoni">
+<meta property="og:title" content="Studio — Dominic Paoni">
+<meta property="og:description" content="Hand-built websites for Springfield businesses. No agency markup, no lock-in. Starter from $299.">
+<meta property="og:url" content="https://dpaoni.github.io/studio.html">
+<meta property="og:image" content="https://dpaoni.github.io/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+/* =============================================
+   RESET
+   ============================================= */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { background: #0000f2; overflow-x: clip; scroll-behavior: smooth; }
+
+body {
+  background: #0000f2;
+  color: #f5f5f5;
+  font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+  text-transform: uppercase;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* =============================================
+   ROOT WRAPPER — container-query fluid units
+   ============================================= */
+.dp {
+  background: #0000f2;
+  color: #f5f5f5;
+  min-height: 100dvh;
+  width: 100dvw;
+  margin-inline: calc(50% - 50dvw);
+  container-type: inline-size;
+  /* All sizing uses --u: 1/2360th of container width */
+  --u: calc(100cqw / 2360);
+  --vsq: calc(0.5vw + 0.5vh);
+  --gutter: calc(210 * var(--u));
+  --gap: calc(30 * var(--u));
+  --frame: calc(2.5 * var(--vsq));
+  --eyebrow: clamp(0.62rem, calc(18 * var(--u)), 1.05rem);
+  --body-sz: clamp(0.7rem, calc(21 * var(--u)), 1.2rem);
+  --serif: 'Cormorant Garamond', 'Times New Roman', serif;
+  --mono: 'DM Mono', 'Courier New', monospace;
+  overflow-x: clip;
+}
+
+@media (max-width: 767px) {
+  .dp {
+    --u: calc(100cqw / 760);
+    --gutter: calc(48 * var(--u));
+  }
+}
+
+/* =============================================
+   UTILITIES
+   ============================================= */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  margin: -1px; overflow: hidden; clip: rect(0,0,0,0);
+  white-space: nowrap; border: 0;
+}
+
+.mono {
+  font-family: var(--mono);
+  font-size: var(--eyebrow);
+  letter-spacing: 0.18em;
+  font-weight: 400;
+}
+
+/* Scroll-in animation */
+.fade {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+.fade.in { opacity: 1; transform: none; }
+.fade.d1 { transition-delay: 0.1s; }
+.fade.d2 { transition-delay: 0.2s; }
+.fade.d3 { transition-delay: 0.35s; }
+
+/* Noise texture via SVG filter */
+.noise::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  opacity: 0.045;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  z-index: 3;
+}
+
+/* =============================================
+   FIXED BORDER FRAME
+   ============================================= */
+.dp-frame {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  border: var(--frame) solid #0000f2;
+}
+
+/* =============================================
+   NAV
+   ============================================= */
+.dp-nav {
+  position: absolute;
+  inset-inline: 0;
+  top: var(--frame);
+  z-index: 20;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-inline: var(--gutter);
+  padding-top: calc(50 * var(--u));
+}
+
+.dp-nav a {
+  color: inherit;
+  text-decoration: none;
+  font-family: var(--mono);
+  font-size: clamp(0.75rem, calc(22 * var(--u)), 1.3rem);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  opacity: 0.88;
+  padding: calc(14 * var(--u)) 0;
+  margin: calc(-14 * var(--u)) 0;
+  transition: opacity 0.2s ease;
+}
+.dp-nav a:hover { opacity: 1; text-decoration: underline; text-underline-offset: 0.3em; }
+
+.dp-nav-logo-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(16 * var(--u));
+  line-height: 1;
+}
+
+.dp-nav-logo {
+  font-family: var(--serif) !important;
+  font-size: clamp(1.1rem, calc(40 * var(--u)), 2.4rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.03em;
+  text-align: center;
+  opacity: 1 !important;
+}
+
+.dp-nav-right {
+  display: flex;
+  align-items: center;
+  gap: calc(22 * var(--u));
+}
+
+.dp-nav-left { display: block; }
+
+@media (max-width: 767px) {
+  .dp-nav-left { display: none; }
+  .dp-nav-logo { font-size: 1.4rem !important; }
+}
+
+/* =============================================
+   HERO
+   ============================================= */
+.dp-hero {
+  position: relative;
+  display: flex;
+  min-height: calc(1360 * var(--u));
+  overflow: hidden;
+  align-items: flex-start;
+  padding-top: calc(442 * var(--u));
+}
+
+@media (max-width: 767px) {
+  .dp-hero {
+    align-items: flex-end;
+    min-height: 88dvh;
+    padding-top: 0;
+    padding-bottom: 8dvh;
+  }
+}
+
+.dp-hero-content {
+  position: relative;
+  z-index: 3;
+  margin-inline: var(--gutter);
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: calc(30 * var(--u));
+  width: calc(980 * var(--u));
+}
+
+@media (min-width: 768px) {
+  .dp-hero-content {
+    margin-left: calc(var(--gutter) - var(--frame));
+  }
+}
+
+.dp-hero-title {
+  display: flex;
+  flex-direction: column;
+  font-size: calc(132 * var(--u));
+  line-height: 0.88;
+  font-weight: 300;
+  letter-spacing: 0.03em;
+  max-width: 100%;
+  min-width: 0;
+}
+
+@media (max-width: 767px) {
+  .dp-hero-title { font-size: 13.75vw; }
+}
+
+.dp-hero-actions {
+  margin-top: calc(20 * var(--u));
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: calc(48 * var(--u));
+  width: 100%;
+  max-width: 100%;
+}
+
+.dp-hero-cta-set {
+  display: flex;
+  flex-direction: column;
+  gap: calc(15 * var(--u));
+  width: 100%;
+}
+
+.dp-hero-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(16 * var(--u));
+}
+
+/* Price badge */
+.dp-price-badge {
+  background: white;
+  padding: calc(13 * var(--u)) calc(18 * var(--u));
+  border-radius: 2px;
+  font-family: var(--mono);
+  font-size: clamp(0.68rem, calc(17 * var(--u)), 0.95rem);
+  color: #0000f2;
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+.dp-price-badge .dim { opacity: 0.45; }
+.dp-price-badge strong { color: #0000f2; font-weight: 700; }
+
+/* Vignette over hero */
+.dp-hero-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 55% 80% at 25% 60%, transparent 30%, rgba(0,0,242,0.6) 75%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Hero art */
+.dp-hero-art {
+  position: absolute;
+  top: calc(180 * var(--u));
+  right: calc(80 * var(--u));
+  width: calc(1080 * var(--u));
+  max-width: none;
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+  mix-blend-mode: screen;
+  opacity: 0.88;
+}
+
+@media (max-width: 767px) {
+  .dp-hero-art { display: none; }
+}
+
+/* =============================================
+   BUTTONS
+   ============================================= */
+.dp-btn {
+  display: inline-flex;
+  align-items: center;
+  background: #f5f5f5;
+  color: #0000f2;
+  padding: calc(20 * var(--u)) calc(30 * var(--u));
+  padding-left: calc(68 * var(--u));
+  position: relative;
+  font-family: var(--mono);
+  font-size: var(--body-sz);
+  line-height: 1;
+  text-decoration: none;
+  transition: background 0.2s ease;
+  white-space: nowrap;
+  max-width: 100%;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+}
+.dp-btn:hover { background: white; }
+
+.dp-btn svg {
+  position: absolute;
+  top: 50%;
+  left: calc(30 * var(--u));
+  transform: translateY(-50%);
+  width: clamp(1.2rem, calc(26 * var(--u)), 1.55rem);
+  height: clamp(1.2rem, calc(26 * var(--u)), 1.55rem);
+  flex-shrink: 0;
+  color: #0000f2;
+}
+
+.dp-btn-price {
+  position: absolute;
+  top: 50%;
+  left: calc(30 * var(--u));
+  transform: translateY(-50%);
+  font-size: clamp(0.75rem, calc(22 * var(--u)), 1.1rem);
+  font-weight: 700;
+  color: #0000f2;
+  line-height: 1;
+}
+
+.dp-btn-outline {
+  background: transparent;
+  color: #f5f5f5;
+  border: 1.5px solid rgba(245,245,245,0.45);
+  padding-left: calc(30 * var(--u));
+  box-shadow: none;
+}
+.dp-btn-outline:hover { background: rgba(245,245,245,0.08); }
+
+/* =============================================
+   TIER CARDS (Starter / Business / Pro)
+   ============================================= */
+.dp-tiers {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap);
+  padding: calc(60 * var(--u)) var(--gutter) calc(120 * var(--u));
+}
+
+@media (max-width: 767px) {
+  .dp-tiers { grid-template-columns: 1fr; }
+}
+
+.dp-tier {
+  position: relative;
+  aspect-ratio: 627 / 547;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: #0000f2;
+}
+
+@media (max-width: 767px) {
+  .dp-tier { aspect-ratio: 2 / 1; }
+}
+
+/* Noise on tier cards */
+.dp-tier::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  opacity: 0.055;
+  z-index: 2;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* Arc decoration */
+.dp-tier::after {
+  content: '';
+  position: absolute;
+  bottom: -50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140%;
+  padding-bottom: 140%;
+  border-radius: 50%;
+  border: 1px solid rgba(245,245,245,0.13);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.dp-tier-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.dp-tier-inner {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(28 * var(--u));
+}
+
+.dp-tier-sub {
+  font-family: var(--mono);
+  font-size: clamp(0.6rem, calc(23 * var(--u)), 0.95rem);
+  letter-spacing: 0.1em;
+  opacity: 0.68;
+}
+
+.dp-tier-name {
+  font-size: clamp(1.8rem, calc(64 * var(--u)), 4rem);
+  line-height: 1;
+  font-weight: 300;
+  text-transform: none;
+}
+
+/* =============================================
+   FEATURE PANEL (white paper)
+   ============================================= */
+.dp-features {
+  background: #f0eeea;
+  color: #0000f2;
+  position: relative;
+  z-index: 1;
+  padding-top: calc(30 * var(--u));
+  overflow: hidden;
+}
+
+.dp-features-badge {
+  display: flex;
+  position: absolute;
+  top: calc(30 * var(--u));
+  right: calc(30 * var(--u));
+  z-index: 2;
+}
+
+.dp-features-badge span {
+  font-family: var(--mono);
+  border: 1px solid currentColor;
+  padding: calc(10 * var(--u)) calc(15 * var(--u));
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  opacity: 0.85;
+}
+.dp-features-badge span + span { border-left: none; }
+
+.dp-features-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: calc(30 * var(--u));
+  row-gap: calc(150 * var(--u));
+  padding-top: calc(80 * var(--u));
+  padding-bottom: calc(60 * var(--u));
+  padding-right: calc(30 * var(--u));
+  padding-left: calc(150 * var(--u));
+}
+
+@media (max-width: 767px) {
+  .dp-features-grid {
+    grid-template-columns: 1fr;
+    row-gap: calc(90 * var(--u));
+    padding-inline: var(--gutter);
+    padding-left: var(--gutter);
+  }
+}
+
+.dp-feat {
+  display: flex;
+  flex-direction: column;
+  gap: calc(55 * var(--u));
+  text-align: left;
+}
+
+.dp-feat-header {
+  display: flex;
+  flex-direction: column;
+  gap: calc(46 * var(--u));
+  padding-right: calc(160 * var(--u));
+}
+
+@media (max-width: 767px) {
+  .dp-feat-header { padding-right: 0; }
+}
+
+.dp-feat-num {
+  font-family: var(--mono);
+  font-size: var(--eyebrow);
+  letter-spacing: 0.18em;
+  opacity: 0.78;
+}
+
+.dp-feat-title {
+  font-size: clamp(1.6rem, calc(64 * var(--u)), 3.8rem);
+  line-height: 1;
+  font-weight: 300;
+  width: clamp(160px, calc(486 * var(--u)), 90%);
+  max-width: 100%;
+}
+
+.dp-feat-art {
+  position: relative;
+  aspect-ratio: 666 / 574;
+  overflow: hidden;
+  background: #0000f2;
+}
+
+.dp-feat-art svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.dp-feat-desc {
+  font-family: var(--mono);
+  font-size: var(--body-sz);
+  line-height: 1.4;
+  opacity: 0.88;
+  padding-right: calc(160 * var(--u));
+}
+
+@media (max-width: 767px) {
+  .dp-feat-desc { padding-right: 0; }
+}
+
+/* Features section wordmark */
+.dp-feat-wordmark {
+  font-family: var(--serif);
+  font-size: clamp(4rem, calc(260 * var(--u)), 16rem);
+  line-height: 0.85;
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  color: #0000f2;
+  width: 100%;
+  text-align: center;
+  margin-top: clamp(4rem, 10vw, 10rem);
+  user-select: none;
+  pointer-events: none;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* =============================================
+   FOOTER / CTA
+   ============================================= */
+.dp-footer {
+  background: #0000f2;
+  color: #f5f5f5;
+  position: relative;
+  overflow: hidden;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.dp-footer-cta {
+  position: absolute;
+  inset-x: 0;
+  top: 7dvh;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1.2rem, calc(36 * var(--u)), 3.5rem);
+  text-align: center;
+  padding-inline: var(--gutter);
+}
+
+.dp-footer-eyebrow {
+  font-family: var(--mono);
+  font-size: var(--eyebrow);
+  letter-spacing: 0.18em;
+}
+
+.dp-footer-title {
+  font-size: clamp(2.2rem, min(calc(112 * var(--u)), 8dvh), 6.5rem);
+  line-height: 1;
+  font-weight: 300;
+  letter-spacing: 0.03em;
+}
+
+.dp-footer-sub {
+  font-family: var(--mono);
+  font-size: var(--body-sz);
+  line-height: 1.4;
+  opacity: 0.9;
+  width: clamp(280px, calc(800 * var(--u)), 90%);
+  max-width: 100%;
+}
+
+/* Ghost wordmark */
+.dp-ghost {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-family: var(--serif);
+  font-size: clamp(5rem, 21vw, 18rem);
+  line-height: 0.8;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  color: rgba(245,245,245,0.055);
+  text-align: center;
+  user-select: none;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  padding-bottom: 0;
+}
+
+/* Footer bar */
+.dp-footer-bar {
+  position: absolute;
+  bottom: 7dvh;
+  left: var(--gutter);
+  right: var(--gutter);
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-family: var(--mono);
+  font-size: var(--eyebrow);
+  line-height: 1.3;
+}
+
+@media (max-width: 767px) {
+  .dp-footer-bar {
+    bottom: 3dvh;
+    font-size: 0.6rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+}
+
+.dp-footer-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: calc(7 * var(--u));
+  text-align: right;
+}
+
+.dp-footer-bar a, .dp-footer-links a {
+  color: inherit;
+  text-decoration: none;
+  opacity: 0.65;
+  transition: opacity 0.2s;
+}
+.dp-footer-bar a:hover, .dp-footer-links a:hover { opacity: 1; }
+
+.dp-footer-bar p { opacity: 0.55; }
+</style>
+</head>
+<body>
+<div class="dp" id="top">
+
+  <!-- Fixed border frame -->
+  <div class="dp-frame" aria-hidden="true"></div>
+
+  <!-- ============================================================
+    NAV
+    ============================================================ -->
+  <nav class="dp-nav" aria-label="Primary">
+    <a href="index.html" class="dp-nav-left">← Home</a>
+
+    <div class="dp-nav-logo-wrap">
+      <a href="studio.html" class="dp-nav-logo">Dominic<br>Paoni</a>
+    </div>
+
+    <div class="dp-nav-right">
+      <a href="services.html">Pricing</a>
+      <a href="contact.html" style="display:inline-flex;align-items:center;gap:calc(8*var(--u));">
+        Hire me
+        <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="18" style="flex-shrink:0;max-width:1.1rem;max-height:1.1rem;"><path d="M5 12h14m0 0-6-6m6 6-6 6"/></svg>
+      </a>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+    HERO
+    ============================================================ -->
+  <header class="dp-hero noise" id="hero">
+
+    <!-- SVG hero art: globe + radial burst -->
+    <svg class="dp-hero-art" viewBox="0 0 1080 1320" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <!-- Radial rays from globe center -->
+      <g stroke="#f5f5f5" stroke-width="0.55" opacity="0.6">
+        <line x1="540" y1="660" x2="540" y2="0"/>
+        <line x1="540" y1="660" x2="540" y2="1320"/>
+        <line x1="540" y1="660" x2="0" y2="660"/>
+        <line x1="540" y1="660" x2="1080" y2="660"/>
+        <line x1="540" y1="660" x2="126" y2="246"/>
+        <line x1="540" y1="660" x2="954" y2="1074"/>
+        <line x1="540" y1="660" x2="954" y2="246"/>
+        <line x1="540" y1="660" x2="126" y2="1074"/>
+        <line x1="540" y1="660" x2="318" y2="18"/>
+        <line x1="540" y1="660" x2="762" y2="1302"/>
+        <line x1="540" y1="660" x2="762" y2="18"/>
+        <line x1="540" y1="660" x2="318" y2="1302"/>
+        <line x1="540" y1="660" x2="48" y2="432"/>
+        <line x1="540" y1="660" x2="1032" y2="888"/>
+        <line x1="540" y1="660" x2="48" y2="888"/>
+        <line x1="540" y1="660" x2="1032" y2="432"/>
+        <line x1="540" y1="660" x2="420" y2="6"/>
+        <line x1="540" y1="660" x2="660" y2="1314"/>
+        <line x1="540" y1="660" x2="660" y2="6"/>
+        <line x1="540" y1="660" x2="420" y2="1314"/>
+        <line x1="540" y1="660" x2="198" y2="90"/>
+        <line x1="540" y1="660" x2="882" y2="1230"/>
+        <line x1="540" y1="660" x2="882" y2="90"/>
+        <line x1="540" y1="660" x2="198" y2="1230"/>
+        <line x1="540" y1="660" x2="18" y2="294"/>
+        <line x1="540" y1="660" x2="1062" y2="1026"/>
+        <line x1="540" y1="660" x2="18" y2="1026"/>
+        <line x1="540" y1="660" x2="1062" y2="294"/>
+        <line x1="540" y1="660" x2="72" y2="144"/>
+        <line x1="540" y1="660" x2="1008" y2="1176"/>
+        <line x1="540" y1="660" x2="1008" y2="144"/>
+        <line x1="540" y1="660" x2="72" y2="1176"/>
+        <line x1="540" y1="660" x2="474" y2="3"/>
+        <line x1="540" y1="660" x2="606" y2="1317"/>
+        <line x1="540" y1="660" x2="606" y2="3"/>
+        <line x1="540" y1="660" x2="474" y2="1317"/>
+        <line x1="540" y1="660" x2="258" y2="48"/>
+        <line x1="540" y1="660" x2="822" y2="1272"/>
+        <line x1="540" y1="660" x2="822" y2="48"/>
+        <line x1="540" y1="660" x2="258" y2="1272"/>
+        <line x1="540" y1="660" x2="30" y2="216"/>
+        <line x1="540" y1="660" x2="1050" y2="1104"/>
+        <line x1="540" y1="660" x2="30" y2="1104"/>
+        <line x1="540" y1="660" x2="1050" y2="216"/>
+        <line x1="540" y1="660" x2="6" y2="510"/>
+        <line x1="540" y1="660" x2="1074" y2="810"/>
+        <line x1="540" y1="660" x2="6" y2="810"/>
+        <line x1="540" y1="660" x2="1074" y2="510"/>
+      </g>
+
+      <!-- Globe: outer circle -->
+      <circle cx="540" cy="660" r="390" stroke="#f5f5f5" stroke-width="1.3" fill="none" opacity="0.92"/>
+
+      <!-- Globe: latitude ellipses -->
+      <ellipse cx="540" cy="530" rx="390" ry="40" stroke="#f5f5f5" stroke-width="0.8" fill="none" opacity="0.65"/>
+      <ellipse cx="540" cy="600" rx="390" ry="68" stroke="#f5f5f5" stroke-width="0.8" fill="none" opacity="0.65"/>
+      <ellipse cx="540" cy="660" rx="390" ry="82" stroke="#f5f5f5" stroke-width="0.9" fill="none" opacity="0.72"/>
+      <ellipse cx="540" cy="720" rx="390" ry="68" stroke="#f5f5f5" stroke-width="0.8" fill="none" opacity="0.65"/>
+      <ellipse cx="540" cy="790" rx="390" ry="40" stroke="#f5f5f5" stroke-width="0.8" fill="none" opacity="0.65"/>
+
+      <!-- Globe: longitude ellipses -->
+      <ellipse cx="540" cy="660" rx="82" ry="390" stroke="#f5f5f5" stroke-width="0.8" fill="none" opacity="0.65"/>
+      <ellipse cx="540" cy="660" rx="195" ry="390" stroke="#f5f5f5" stroke-width="0.7" fill="none" opacity="0.5"/>
+      <ellipse cx="540" cy="660" rx="300" ry="390" stroke="#f5f5f5" stroke-width="0.55" fill="none" opacity="0.38"/>
+
+      <!-- Vertical axis -->
+      <line x1="540" y1="270" x2="540" y2="1050" stroke="#f5f5f5" stroke-width="0.8" opacity="0.65"/>
+
+      <!-- Location dots (clients on the globe) -->
+      <circle cx="540" cy="595" r="5.5" fill="#f5f5f5" opacity="0.92"/>
+      <circle cx="638" cy="648" r="4" fill="#f5f5f5" opacity="0.78"/>
+      <circle cx="454" cy="710" r="3.5" fill="#f5f5f5" opacity="0.68"/>
+      <circle cx="584" cy="728" r="4.5" fill="#f5f5f5" opacity="0.85"/>
+      <circle cx="492" cy="624" r="3" fill="#f5f5f5" opacity="0.62"/>
+      <circle cx="600" cy="590" r="3" fill="#f5f5f5" opacity="0.55"/>
+
+      <!-- Connection lines -->
+      <line x1="540" y1="595" x2="638" y2="648" stroke="#f5f5f5" stroke-width="0.9" opacity="0.5"/>
+      <line x1="638" y1="648" x2="584" y2="728" stroke="#f5f5f5" stroke-width="0.9" opacity="0.5"/>
+      <line x1="540" y1="595" x2="492" y2="624" stroke="#f5f5f5" stroke-width="0.9" opacity="0.45"/>
+      <line x1="492" y1="624" x2="454" y2="710" stroke="#f5f5f5" stroke-width="0.9" opacity="0.45"/>
+      <line x1="540" y1="595" x2="600" y2="590" stroke="#f5f5f5" stroke-width="0.7" opacity="0.35"/>
+
+      <!-- Center badge -->
+      <circle cx="540" cy="660" r="52" stroke="#f5f5f5" stroke-width="1.6" fill="none" opacity="0.88"/>
+      <circle cx="540" cy="660" r="22" fill="#f5f5f5" opacity="0.92"/>
+      <text x="540" y="667" text-anchor="middle" dominant-baseline="middle" fill="#0000f2" font-family="'Cormorant Garamond',serif" font-size="19" font-weight="700" letter-spacing="2">DP</text>
+    </svg>
+
+    <!-- Vignette -->
+    <div class="dp-hero-vignette" aria-hidden="true"></div>
+
+    <!-- Content -->
+    <div class="dp-hero-content">
+      <p class="mono fade">Springfield, IL • Freelance Web Design</p>
+
+      <h1 class="dp-hero-title fade d1">
+        <span>The Site</span>
+        <span>Your Business</span>
+        <span>Deserves.</span>
+      </h1>
+
+      <div class="dp-hero-actions">
+
+        <div class="dp-hero-cta-set fade d2">
+          <p class="mono" style="letter-spacing:0.14em;opacity:0.9;">Start a project</p>
+          <div class="dp-hero-btns">
+            <a href="services.html#pricing" class="dp-btn">
+              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14m0 0-6-6m6 6-6 6"/></svg>
+              View Pricing
+            </a>
+            <a href="contact.html" class="dp-btn dp-btn-outline">Get in touch</a>
+          </div>
+        </div>
+
+        <div class="fade d3">
+          <p class="mono" style="letter-spacing:0.14em;opacity:0.9;margin-bottom:calc(15*var(--u));">Starts at</p>
+          <div class="dp-price-badge">
+            <span class="dim">$</span><strong>299</strong><span class="dim"> one-page site · </span><strong>$75</strong><span class="dim"> deposit to lock your slot</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================
+    TIER CARDS — Starter / Business / Pro
+    ============================================================ -->
+  <section class="dp-tiers" id="tiers" aria-labelledby="tiers-h">
+    <h2 id="tiers-h" class="sr-only">Service tiers</h2>
+
+    <!-- Starter -->
+    <div class="dp-tier fade" aria-label="Starter — $299">
+      <svg class="dp-tier-art" viewBox="0 0 600 520" aria-hidden="true">
+        <defs>
+          <radialGradient id="rg-s" cx="50%" cy="50%"><stop offset="20%" stop-color="#f5f5f5" stop-opacity="1"/><stop offset="100%" stop-color="#f5f5f5" stop-opacity="0"/></radialGradient>
+          <mask id="m-s"><rect width="600" height="520" fill="url(#rg-s)"/></mask>
+          <pattern id="dot-s" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="16" cy="16" r="2.2" fill="#f5f5f5"/></pattern>
+        </defs>
+        <rect width="600" height="520" fill="url(#dot-s)" mask="url(#m-s)" opacity="0.4"/>
+        <!-- Single page wireframe -->
+        <rect x="185" y="90" width="230" height="310" rx="4" stroke="#f5f5f5" stroke-width="2" fill="none" opacity="0.85"/>
+        <rect x="185" y="90" width="230" height="38" fill="#f5f5f5" opacity="0.6"/>
+        <line x1="208" y1="162" x2="393" y2="162" stroke="#f5f5f5" stroke-width="2" opacity="0.5"/>
+        <line x1="208" y1="188" x2="365" y2="188" stroke="#f5f5f5" stroke-width="2" opacity="0.4"/>
+        <line x1="208" y1="212" x2="378" y2="212" stroke="#f5f5f5" stroke-width="2" opacity="0.35"/>
+        <rect x="208" y="252" width="88" height="28" rx="3" fill="#f5f5f5" opacity="0.75"/>
+        <line x1="208" y1="318" x2="393" y2="318" stroke="#f5f5f5" stroke-width="1.5" opacity="0.3"/>
+        <line x1="208" y1="338" x2="355" y2="338" stroke="#f5f5f5" stroke-width="1.5" opacity="0.25"/>
+        <line x1="208" y1="358" x2="372" y2="358" stroke="#f5f5f5" stroke-width="1.5" opacity="0.25"/>
+      </svg>
+      <div class="dp-tier-inner">
+        <p class="dp-tier-sub">1 Page · 5–7 Days</p>
+        <h2 class="dp-tier-name">Starter</h2>
+        <a href="https://buy.stripe.com/00w14m6UxdB2dyw6Mzgfu00" class="dp-btn" target="_blank" rel="noopener noreferrer">
+          <span class="dp-btn-price">$299</span>
+          Deposit $75
+        </a>
+      </div>
+    </div>
+
+    <!-- Business -->
+    <div class="dp-tier fade d1" aria-label="Business — $599">
+      <svg class="dp-tier-art" viewBox="0 0 600 520" aria-hidden="true">
+        <defs>
+          <radialGradient id="rg-b" cx="50%" cy="50%"><stop offset="0%" stop-color="#f5f5f5" stop-opacity="0.8"/><stop offset="100%" stop-color="#f5f5f5" stop-opacity="0"/></radialGradient>
+          <mask id="m-b"><ellipse cx="300" cy="260" rx="270" ry="230" fill="url(#rg-b)"/></mask>
+        </defs>
+        <!-- Speed lines -->
+        <g stroke="#f5f5f5" stroke-width="1.2" mask="url(#m-b)" opacity="0.55">
+          <line x1="-60" y1="70" x2="610" y2="125"/>
+          <line x1="-60" y1="105" x2="610" y2="155"/>
+          <line x1="-60" y1="140" x2="610" y2="185"/>
+          <line x1="-60" y1="175" x2="610" y2="215"/>
+          <line x1="-60" y1="210" x2="610" y2="235"/>
+          <line x1="-60" y1="245" x2="610" y2="255"/>
+          <line x1="-60" y1="260" x2="610" y2="260"/>
+          <line x1="-60" y1="275" x2="610" y2="265"/>
+          <line x1="-60" y1="310" x2="610" y2="285"/>
+          <line x1="-60" y1="345" x2="610" y2="315"/>
+          <line x1="-60" y1="380" x2="610" y2="345"/>
+          <line x1="-60" y1="415" x2="610" y2="375"/>
+          <line x1="-60" y1="450" x2="610" y2="405"/>
+        </g>
+        <!-- Page stack -->
+        <rect x="192" y="132" width="186" height="214" rx="3" stroke="#f5f5f5" stroke-width="2" fill="rgba(0,0,242,0.55)" opacity="0.55"/>
+        <rect x="207" y="118" width="186" height="214" rx="3" stroke="#f5f5f5" stroke-width="2" fill="rgba(0,0,242,0.65)" opacity="0.75"/>
+        <rect x="222" y="104" width="186" height="214" rx="3" stroke="#f5f5f5" stroke-width="2" fill="rgba(0,0,242,0.75)" opacity="0.9"/>
+        <line x1="242" y1="148" x2="390" y2="148" stroke="#f5f5f5" stroke-width="1.5" opacity="0.55"/>
+        <line x1="242" y1="170" x2="368" y2="170" stroke="#f5f5f5" stroke-width="1.5" opacity="0.45"/>
+        <rect x="242" y="198" width="76" height="22" rx="2" fill="#f5f5f5" opacity="0.75"/>
+        <line x1="242" y1="248" x2="390" y2="248" stroke="#f5f5f5" stroke-width="1" opacity="0.35"/>
+        <line x1="242" y1="266" x2="372" y2="266" stroke="#f5f5f5" stroke-width="1" opacity="0.28"/>
+      </svg>
+      <div class="dp-tier-inner">
+        <p class="dp-tier-sub">5 Pages · 10–14 Days</p>
+        <h2 class="dp-tier-name">Business</h2>
+        <a href="https://buy.stripe.com/8x2cN47YB40s2TSc6Tgfu01" class="dp-btn" target="_blank" rel="noopener noreferrer">
+          <span class="dp-btn-price">$599</span>
+          Deposit $150
+        </a>
+      </div>
+    </div>
+
+    <!-- Pro -->
+    <div class="dp-tier fade d2" aria-label="Pro — $1,099">
+      <svg class="dp-tier-art" viewBox="0 0 600 520" aria-hidden="true">
+        <defs>
+          <radialGradient id="rg-p" cx="50%" cy="50%"><stop offset="5%" stop-color="#f5f5f5" stop-opacity="0.95"/><stop offset="100%" stop-color="#f5f5f5" stop-opacity="0"/></radialGradient>
+          <mask id="m-p"><ellipse cx="300" cy="260" rx="285" ry="245" fill="url(#rg-p)"/></mask>
+        </defs>
+        <g stroke="#f5f5f5" fill="none" mask="url(#m-p)">
+          <circle cx="300" cy="260" r="50" stroke-width="1.5" opacity="0.9"/>
+          <circle cx="300" cy="260" r="100" stroke-width="1" opacity="0.7"/>
+          <circle cx="300" cy="260" r="152" stroke-width="0.8" opacity="0.55"/>
+          <circle cx="300" cy="260" r="205" stroke-width="0.6" opacity="0.4"/>
+          <circle cx="300" cy="260" r="258" stroke-width="0.4" opacity="0.28"/>
+          <line x1="300" y1="0" x2="300" y2="520" stroke-width="0.8" opacity="0.65"/>
+          <line x1="40" y1="260" x2="560" y2="260" stroke-width="0.8" opacity="0.65"/>
+          <line x1="92" y1="52" x2="508" y2="468" stroke-width="0.5" opacity="0.45"/>
+          <line x1="508" y1="52" x2="92" y2="468" stroke-width="0.5" opacity="0.45"/>
+          <!-- Tick marks -->
+          <line x1="300" y1="208" x2="300" y2="196" stroke-width="2.5" opacity="0.9"/>
+          <line x1="352" y1="260" x2="364" y2="260" stroke-width="2.5" opacity="0.9"/>
+          <line x1="300" y1="312" x2="300" y2="324" stroke-width="2.5" opacity="0.9"/>
+          <line x1="248" y1="260" x2="236" y2="260" stroke-width="2.5" opacity="0.9"/>
+        </g>
+        <circle cx="300" cy="260" r="14" fill="#f5f5f5" opacity="0.95"/>
+        <circle cx="300" cy="260" r="6" fill="#0000f2"/>
+      </svg>
+      <div class="dp-tier-inner">
+        <p class="dp-tier-sub">Full Custom · 2–3 Weeks</p>
+        <h2 class="dp-tier-name">Pro</h2>
+        <a href="https://buy.stripe.com/28E8wO92F54w8ecef1gfu02" class="dp-btn" target="_blank" rel="noopener noreferrer">
+          <span class="dp-btn-price">$1,099</span>
+          Deposit $275
+        </a>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============================================================
+    FEATURE PANEL — white paper section
+    ============================================================ -->
+  <section class="dp-features" id="features" aria-labelledby="feat-h">
+    <h2 id="feat-h" class="sr-only">What you get</h2>
+
+    <div class="dp-features-badge" aria-hidden="true">
+      <span>What</span><span>You Get</span>
+    </div>
+
+    <div class="dp-features-grid">
+
+      <!-- #1 Design -->
+      <article class="dp-feat fade">
+        <div class="dp-feat-header">
+          <p class="dp-feat-num">#1 Design</p>
+          <h3 class="dp-feat-title">Built From<br>Scratch</h3>
+        </div>
+        <div class="dp-feat-art">
+          <svg viewBox="0 0 666 574" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="666" height="574" fill="#0000f2"/>
+            <defs>
+              <radialGradient id="f1rg" cx="18%" cy="78%"><stop offset="0%" stop-color="#f5f5f5" stop-opacity="1"/><stop offset="65%" stop-color="#f5f5f5" stop-opacity="0.3"/><stop offset="100%" stop-color="#f5f5f5" stop-opacity="0"/></radialGradient>
+              <mask id="f1m"><rect width="666" height="574" fill="url(#f1rg)"/></mask>
+            </defs>
+            <!-- Halftone dot field -->
+            <g fill="#f5f5f5" mask="url(#f1m)">
+              <circle cx="55" cy="510" r="16"/><circle cx="115" cy="510" r="13.5"/><circle cx="175" cy="510" r="11"/><circle cx="235" cy="510" r="9"/><circle cx="295" cy="510" r="7"/><circle cx="355" cy="510" r="5"/><circle cx="415" cy="510" r="3.5"/><circle cx="475" cy="510" r="2.5"/><circle cx="535" cy="510" r="1.5"/>
+              <circle cx="55" cy="450" r="14"/><circle cx="115" cy="450" r="11.5"/><circle cx="175" cy="450" r="9.5"/><circle cx="235" cy="450" r="7.5"/><circle cx="295" cy="450" r="6"/><circle cx="355" cy="450" r="4.5"/><circle cx="415" cy="450" r="3"/><circle cx="475" cy="450" r="2"/><circle cx="535" cy="450" r="1"/>
+              <circle cx="55" cy="390" r="12"/><circle cx="115" cy="390" r="10"/><circle cx="175" cy="390" r="8.5"/><circle cx="235" cy="390" r="6.5"/><circle cx="295" cy="390" r="5"/><circle cx="355" cy="390" r="3.8"/><circle cx="415" cy="390" r="2.5"/><circle cx="475" cy="390" r="1.5"/>
+              <circle cx="55" cy="330" r="10"/><circle cx="115" cy="330" r="8.5"/><circle cx="175" cy="330" r="7"/><circle cx="235" cy="330" r="5.5"/><circle cx="295" cy="330" r="4"/><circle cx="355" cy="330" r="3"/><circle cx="415" cy="330" r="2"/>
+              <circle cx="55" cy="270" r="8"/><circle cx="115" cy="270" r="6.5"/><circle cx="175" cy="270" r="5.5"/><circle cx="235" cy="270" r="4"/><circle cx="295" cy="270" r="3"/>
+              <circle cx="55" cy="210" r="6"/><circle cx="115" cy="210" r="4.5"/><circle cx="175" cy="210" r="3.5"/><circle cx="235" cy="210" r="2.5"/>
+              <circle cx="55" cy="150" r="4"/><circle cx="115" cy="150" r="3"/><circle cx="175" cy="150" r="2"/>
+            </g>
+            <!-- Page layout wireframe on right -->
+            <rect x="330" y="72" width="290" height="400" rx="4" stroke="#f5f5f5" stroke-width="1.8" fill="rgba(0,0,242,0.6)" opacity="0.9"/>
+            <rect x="330" y="72" width="290" height="42" fill="#f5f5f5" opacity="0.22"/>
+            <line x1="352" y1="150" x2="598" y2="150" stroke="#f5f5f5" stroke-width="1.5" opacity="0.55"/>
+            <line x1="352" y1="178" x2="570" y2="178" stroke="#f5f5f5" stroke-width="1.5" opacity="0.42"/>
+            <line x1="352" y1="204" x2="582" y2="204" stroke="#f5f5f5" stroke-width="1.5" opacity="0.38"/>
+            <rect x="352" y="240" width="108" height="26" rx="3" fill="#f5f5f5" opacity="0.8"/>
+            <line x1="352" y1="298" x2="598" y2="298" stroke="#f5f5f5" stroke-width="1.2" opacity="0.35"/>
+            <line x1="352" y1="322" x2="562" y2="322" stroke="#f5f5f5" stroke-width="1.2" opacity="0.28"/>
+            <line x1="352" y1="346" x2="578" y2="346" stroke="#f5f5f5" stroke-width="1.2" opacity="0.28"/>
+            <line x1="352" y1="394" x2="598" y2="394" stroke="#f5f5f5" stroke-width="1.2" opacity="0.35"/>
+            <line x1="352" y1="418" x2="560" y2="418" stroke="#f5f5f5" stroke-width="1.2" opacity="0.28"/>
+          </svg>
+        </div>
+        <p class="dp-feat-desc">No templates. No Wix. No page builders. Every site starts with a blank CSS file and ends with code I can explain, line by line.</p>
+      </article>
+
+      <!-- #2 Speed -->
+      <article class="dp-feat fade d1">
+        <div class="dp-feat-header">
+          <p class="dp-feat-num">#2 Speed</p>
+          <h3 class="dp-feat-title">Ships in<br>Days</h3>
+        </div>
+        <div class="dp-feat-art">
+          <svg viewBox="0 0 666 574" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="666" height="574" fill="#0000f2"/>
+            <defs>
+              <radialGradient id="f2rg" cx="62%" cy="50%"><stop offset="0%" stop-color="#f5f5f5" stop-opacity="0.85"/><stop offset="100%" stop-color="#f5f5f5" stop-opacity="0"/></radialGradient>
+              <mask id="f2m"><ellipse cx="420" cy="287" rx="260" ry="240" fill="url(#f2rg)"/></mask>
+            </defs>
+            <!-- Speed rays from right -->
+            <g stroke="#f5f5f5" stroke-width="1.1" mask="url(#f2m)">
+              <line x1="420" y1="287" x2="-60" y2="40" opacity="0.7"/>
+              <line x1="420" y1="287" x2="-60" y2="100" opacity="0.7"/>
+              <line x1="420" y1="287" x2="-60" y2="160" opacity="0.72"/>
+              <line x1="420" y1="287" x2="-60" y2="220" opacity="0.78"/>
+              <line x1="420" y1="287" x2="-60" y2="255" opacity="0.85"/>
+              <line x1="420" y1="287" x2="-60" y2="287" opacity="0.92"/>
+              <line x1="420" y1="287" x2="-60" y2="319" opacity="0.85"/>
+              <line x1="420" y1="287" x2="-60" y2="354" opacity="0.78"/>
+              <line x1="420" y1="287" x2="-60" y2="414" opacity="0.7"/>
+              <line x1="420" y1="287" x2="-60" y2="474" opacity="0.65"/>
+              <line x1="420" y1="287" x2="-60" y2="534" opacity="0.55"/>
+              <line x1="420" y1="287" x2="160" y2="-60" opacity="0.45"/>
+              <line x1="420" y1="287" x2="260" y2="-60" opacity="0.4"/>
+              <line x1="420" y1="287" x2="160" y2="634" opacity="0.45"/>
+              <line x1="420" y1="287" x2="260" y2="634" opacity="0.4"/>
+            </g>
+            <!-- Calendar block -->
+            <rect x="390" y="98" width="238" height="308" rx="5" stroke="#f5f5f5" stroke-width="2" fill="rgba(0,0,242,0.65)" opacity="0.92"/>
+            <rect x="390" y="98" width="238" height="46" fill="#f5f5f5" opacity="0.18"/>
+            <text x="509" y="127" text-anchor="middle" fill="#f5f5f5" font-family="'DM Mono','Courier New',monospace" font-size="14" font-weight="500" letter-spacing="3" opacity="0.9">5–7 DAYS</text>
+            <!-- Calendar grid lines -->
+            <g stroke="#f5f5f5" stroke-width="0.7" opacity="0.3">
+              <line x1="390" y1="184" x2="628" y2="184"/>
+              <line x1="390" y1="224" x2="628" y2="224"/>
+              <line x1="390" y1="264" x2="628" y2="264"/>
+              <line x1="390" y1="304" x2="628" y2="304"/>
+              <line x1="390" y1="344" x2="628" y2="344"/>
+              <line x1="424" y1="144" x2="424" y2="406"/>
+              <line x1="458" y1="144" x2="458" y2="406"/>
+              <line x1="492" y1="144" x2="492" y2="406"/>
+              <line x1="526" y1="144" x2="526" y2="406"/>
+              <line x1="560" y1="144" x2="560" y2="406"/>
+              <line x1="594" y1="144" x2="594" y2="406"/>
+            </g>
+            <!-- Filled calendar cells (days worked) -->
+            <rect x="393" y="187" width="28" height="34" fill="#f5f5f5" opacity="0.68" rx="1"/>
+            <rect x="427" y="187" width="28" height="34" fill="#f5f5f5" opacity="0.68" rx="1"/>
+            <rect x="461" y="187" width="28" height="34" fill="#f5f5f5" opacity="0.68" rx="1"/>
+            <rect x="495" y="187" width="28" height="34" fill="#f5f5f5" opacity="0.68" rx="1"/>
+            <rect x="529" y="187" width="28" height="34" fill="#f5f5f5" opacity="0.9" rx="1"/>
+            <!-- Checkmark on last day -->
+            <polyline points="531,205 537,213 547,195" stroke="#0000f2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <!-- Launch indicator -->
+            <circle cx="509" cy="445" r="30" fill="#f5f5f5" opacity="0.88"/>
+            <text x="509" y="454" text-anchor="middle" fill="#0000f2" font-family="'DM Mono','Courier New',monospace" font-size="24" font-weight="500">↑</text>
+          </svg>
+        </div>
+        <p class="dp-feat-desc">Starter sites ship in 5–7 days. Business in two weeks. Pro in three. Booked, built, and delivered — not sitting in a queue for months.</p>
+      </article>
+
+      <!-- #3 Ownership -->
+      <article class="dp-feat fade d2">
+        <div class="dp-feat-header">
+          <p class="dp-feat-num">#3 Yours</p>
+          <h3 class="dp-feat-title">Zero<br>Lock-In</h3>
+        </div>
+        <div class="dp-feat-art">
+          <svg viewBox="0 0 666 574" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="666" height="574" fill="#0000f2"/>
+            <!-- Background dot grid -->
+            <g fill="#f5f5f5" opacity="0.14">
+              <circle cx="80" cy="80" r="3.5"/><circle cx="140" cy="80" r="3.5"/><circle cx="200" cy="80" r="3.5"/>
+              <circle cx="80" cy="140" r="3.5"/><circle cx="140" cy="140" r="3.5"/><circle cx="200" cy="140" r="3.5"/>
+              <circle cx="80" cy="420" r="3.5"/><circle cx="140" cy="420" r="3.5"/><circle cx="200" cy="420" r="3.5"/>
+              <circle cx="80" cy="480" r="3.5"/><circle cx="140" cy="480" r="3.5"/><circle cx="200" cy="480" r="3.5"/>
+              <circle cx="466" cy="80" r="3.5"/><circle cx="526" cy="80" r="3.5"/><circle cx="586" cy="80" r="3.5"/>
+              <circle cx="466" cy="140" r="3.5"/><circle cx="526" cy="140" r="3.5"/><circle cx="586" cy="140" r="3.5"/>
+              <circle cx="466" cy="420" r="3.5"/><circle cx="526" cy="420" r="3.5"/><circle cx="586" cy="420" r="3.5"/>
+              <circle cx="466" cy="480" r="3.5"/><circle cx="526" cy="480" r="3.5"/><circle cx="586" cy="480" r="3.5"/>
+            </g>
+            <!-- Key -->
+            <circle cx="252" cy="232" r="96" stroke="#f5f5f5" stroke-width="18" fill="none" opacity="0.88"/>
+            <circle cx="252" cy="232" r="52" stroke="#f5f5f5" stroke-width="10" fill="none" opacity="0.7"/>
+            <!-- Key shaft -->
+            <rect x="332" y="216" width="284" height="33" rx="4" fill="#f5f5f5" opacity="0.88"/>
+            <!-- Key teeth -->
+            <rect x="432" y="249" width="28" height="46" rx="3" fill="#f5f5f5" opacity="0.88"/>
+            <rect x="494" y="249" width="24" height="35" rx="3" fill="#f5f5f5" opacity="0.88"/>
+            <rect x="550" y="249" width="24" height="54" rx="3" fill="#f5f5f5" opacity="0.88"/>
+            <!-- Label -->
+            <text x="333" y="366" text-anchor="middle" fill="#f5f5f5" font-family="'DM Mono','Courier New',monospace" font-size="17" letter-spacing="5" opacity="0.88">YOU OWN IT</text>
+            <line x1="140" y1="385" x2="528" y2="385" stroke="#f5f5f5" stroke-width="0.8" opacity="0.32"/>
+            <text x="333" y="414" text-anchor="middle" fill="#f5f5f5" font-family="'DM Mono','Courier New',monospace" font-size="11" letter-spacing="3" opacity="0.52">CODE · DOMAIN · HOSTING</text>
+          </svg>
+        </div>
+        <p class="dp-feat-desc">The code is yours. The domain is yours. The hosting account is yours. I'm not a subscription — I'm a builder. You leave with everything and owe me nothing after.</p>
+      </article>
+
+      <!-- #4 SEO -->
+      <article class="dp-feat fade">
+        <div class="dp-feat-header">
+          <p class="dp-feat-num">#4 Found</p>
+          <h3 class="dp-feat-title">Google-<br>Ready</h3>
+        </div>
+        <div class="dp-feat-art">
+          <svg viewBox="0 0 666 574" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="666" height="574" fill="#0000f2"/>
+            <!-- Browser/SERP mockup -->
+            <rect x="72" y="54" width="522" height="466" rx="7" stroke="#f5f5f5" stroke-width="1.8" fill="rgba(0,0,242,0.35)" opacity="0.9"/>
+            <rect x="72" y="54" width="522" height="46" fill="#f5f5f5" opacity="0.12"/>
+            <text x="333" y="83" text-anchor="middle" fill="#f5f5f5" font-family="'DM Mono','Courier New',monospace" font-size="11" letter-spacing="1" opacity="0.88">google.com › search?q=your+business</text>
+            <!-- Result 1 (yours) highlighted -->
+            <rect x="92" y="126" width="482" height="108" rx="4" fill="#f5f5f5" opacity="0.1"/>
+            <rect x="92" y="126" width="5" height="108" rx="2" fill="#f5f5f5" opacity="0.9"/>
+            <text x="110" y="152" fill="#f5f5f5" font-family="'DM Mono','Courier New',monospace" font-size="10.5" opacity="0.45" letter-spacing="0.8">yourbusiness.com</text>
+            <text x="110" y="176" fill="#f5f5f5" font-family="'Cormorant Garamond','Times New Roman',serif" font-size="18" opacity="0.92">Your Business — Springfield, IL</text>
+            <text x="110" y="198" fill="#f5f5f5" font-family="'DM Mono','Courier New',monospace" font-size="10" opacity="0.58" letter-spacing="0.4">Professional services in Springfield since 2024. Contact us today for a free...</text>
+            <text x="110" y="220" fill="#f5f5f5" font-family="'DM Mono','Courier New',monospace" font-size="13" opacity="0.75">★★★★★</text>
+            <!-- Result 2 (competitor, faded) -->
+            <text x="110" y="270" fill="#f5f5f5" font-family="'DM Mono','Courier New',monospace" font-size="10.5" opacity="0.2" letter-spacing="0.8">competitor-site.com</text>
+            <text x="110" y="292" fill="#f5f5f5" font-family="'Cormorant Garamond','Times New Roman',serif" font-size="18" opacity="0.22">Competing Business</text>
+            <line x1="92" y1="318" x2="573" y2="318" stroke="#f5f5f5" stroke-width="0.7" opacity="0.12"/>
+            <!-- Result 3 -->
+            <text x="110" y="352" fill="#f5f5f5" font-family="'DM Mono','Courier New',monospace" font-size="10.5" opacity="0.12" letter-spacing="0.8">another-company.net</text>
+            <text x="110" y="375" fill="#f5f5f5" font-family="'Cormorant Garamond','Times New Roman',serif" font-size="18" opacity="0.14">Someone Else</text>
+            <!-- Magnifying glass overlay -->
+            <circle cx="562" cy="436" r="64" stroke="#f5f5f5" stroke-width="3" fill="none" opacity="0.45"/>
+            <line x1="610" y1="484" x2="644" y2="518" stroke="#f5f5f5" stroke-width="5.5" stroke-linecap="round" opacity="0.45"/>
+          </svg>
+        </div>
+        <p class="dp-feat-desc">Semantic HTML, proper meta tags, sitemap.xml, robots.txt, and Google Search Console setup — baked in from day one, not an afterthought upsell.</p>
+      </article>
+
+      <!-- #5 Mobile -->
+      <article class="dp-feat fade d1">
+        <div class="dp-feat-header">
+          <p class="dp-feat-num">#5 Mobile</p>
+          <h3 class="dp-feat-title">Works<br>Everywhere</h3>
+        </div>
+        <div class="dp-feat-art">
+          <svg viewBox="0 0 666 574" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="666" height="574" fill="#0000f2"/>
+            <!-- Desktop monitor -->
+            <rect x="48" y="76" width="352" height="248" rx="7" stroke="#f5f5f5" stroke-width="2" fill="rgba(0,0,242,0.45)" opacity="0.9"/>
+            <rect x="48" y="76" width="352" height="38" fill="#f5f5f5" opacity="0.16"/>
+            <line x1="72" y1="150" x2="380" y2="150" stroke="#f5f5f5" stroke-width="1.5" opacity="0.48"/>
+            <line x1="72" y1="176" x2="340" y2="176" stroke="#f5f5f5" stroke-width="1.2" opacity="0.38"/>
+            <line x1="72" y1="200" x2="356" y2="200" stroke="#f5f5f5" stroke-width="1.2" opacity="0.32"/>
+            <rect x="72" y="228" width="120" height="28" rx="3" fill="#f5f5f5" opacity="0.72"/>
+            <!-- Monitor stand -->
+            <line x1="224" y1="324" x2="224" y2="368" stroke="#f5f5f5" stroke-width="3" opacity="0.65"/>
+            <line x1="172" y1="368" x2="276" y2="368" stroke="#f5f5f5" stroke-width="3" opacity="0.65"/>
+            <!-- Tablet -->
+            <rect x="392" y="118" width="136" height="192" rx="9" stroke="#f5f5f5" stroke-width="2" fill="rgba(0,0,242,0.45)" opacity="0.9"/>
+            <line x1="408" y1="148" x2="512" y2="148" stroke="#f5f5f5" stroke-width="1.2" opacity="0.48"/>
+            <line x1="408" y1="170" x2="498" y2="170" stroke="#f5f5f5" stroke-width="1" opacity="0.38"/>
+            <line x1="408" y1="190" x2="506" y2="190" stroke="#f5f5f5" stroke-width="1" opacity="0.32"/>
+            <rect x="408" y="214" width="64" height="20" rx="2" fill="#f5f5f5" opacity="0.65"/>
+            <!-- Mobile -->
+            <rect x="540" y="156" width="104" height="198" rx="11" stroke="#f5f5f5" stroke-width="2" fill="rgba(0,0,242,0.45)" opacity="0.9"/>
+            <line x1="556" y1="186" x2="628" y2="186" stroke="#f5f5f5" stroke-width="1.2" opacity="0.48"/>
+            <line x1="556" y1="206" x2="618" y2="206" stroke="#f5f5f5" stroke-width="1" opacity="0.38"/>
+            <line x1="556" y1="225" x2="624" y2="225" stroke="#f5f5f5" stroke-width="1" opacity="0.32"/>
+            <rect x="556" y="248" width="52" height="18" rx="2" fill="#f5f5f5" opacity="0.65"/>
+            <!-- Label -->
+            <text x="333" y="430" text-anchor="middle" fill="#f5f5f5" font-family="'DM Mono','Courier New',monospace" font-size="16" letter-spacing="5" opacity="0.8">RESPONSIVE</text>
+            <line x1="72" y1="448" x2="594" y2="448" stroke="#f5f5f5" stroke-width="0.7" opacity="0.25"/>
+            <text x="333" y="478" text-anchor="middle" fill="#f5f5f5" font-family="'DM Mono','Courier New',monospace" font-size="11" letter-spacing="3" opacity="0.45">DESKTOP · TABLET · MOBILE</text>
+          </svg>
+        </div>
+        <p class="dp-feat-desc">Built mobile-first, tested at 375px, 768px, and 1440px. If it breaks on an iPhone 12, it doesn't ship. Sixty percent of your traffic is on mobile — your site should work there.</p>
+      </article>
+
+      <!-- #6 Support -->
+      <article class="dp-feat fade d2">
+        <div class="dp-feat-header">
+          <p class="dp-feat-num">#6 Care</p>
+          <h3 class="dp-feat-title">I Don't<br>Ghost You</h3>
+        </div>
+        <div class="dp-feat-art">
+          <svg viewBox="0 0 666 574" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="666" height="574" fill="#0000f2"/>
+            <!-- Chat bubble — client (left) -->
+            <rect x="52" y="72" width="336" height="108" rx="14" fill="rgba(245,245,245,0.14)" stroke="#f5f5f5" stroke-width="1.8" opacity="0.9"/>
+            <polygon points="72,180 96,180 72,214" fill="rgba(245,245,245,0.14)" stroke="#f5f5f5" stroke-width="1.8" stroke-linejoin="round"/>
+            <line x1="76" y1="108" x2="368" y2="108" stroke="#f5f5f5" stroke-width="1.5" opacity="0.5"/>
+            <line x1="76" y1="134" x2="324" y2="134" stroke="#f5f5f5" stroke-width="1.5" opacity="0.38"/>
+            <line x1="76" y1="158" x2="298" y2="158" stroke="#f5f5f5" stroke-width="1.5" opacity="0.3"/>
+            <!-- Chat bubble — me (right) -->
+            <rect x="278" y="252" width="336" height="108" rx="14" fill="#f5f5f5" opacity="0.88"/>
+            <polygon points="594,360 618,360 618,394" fill="#f5f5f5" opacity="0.88"/>
+            <line x1="302" y1="288" x2="590" y2="288" stroke="#0000f2" stroke-width="1.5" opacity="0.45"/>
+            <line x1="302" y1="314" x2="560" y2="314" stroke="#0000f2" stroke-width="1.5" opacity="0.35"/>
+            <line x1="302" y1="338" x2="548" y2="338" stroke="#0000f2" stroke-width="1.5" opacity="0.3"/>
+            <!-- Response time pill -->
+            <rect x="188" y="426" width="290" height="58" rx="29" stroke="#f5f5f5" stroke-width="1.8" fill="none" opacity="0.72"/>
+            <circle cx="238" cy="455" r="18" fill="#f5f5f5" opacity="0.9"/>
+            <text x="238" y="462" text-anchor="middle" fill="#0000f2" font-family="'DM Mono','Courier New',monospace" font-size="15" font-weight="700">✓</text>
+            <text x="373" y="462" text-anchor="middle" fill="#f5f5f5" font-family="'DM Mono','Courier New',monospace" font-size="11.5" letter-spacing="1.5" opacity="0.88">SAME-DAY REPLY</text>
+          </svg>
+        </div>
+        <p class="dp-feat-desc">Email me a bug Monday morning, it's fixed Monday night. Questions get real answers, same day — direct line to the person who built your site.</p>
+      </article>
+
+    </div><!-- /features-grid -->
+
+    <!-- Wordmark at bottom of paper section -->
+    <div class="dp-feat-wordmark" aria-hidden="true">Studio</div>
+
+  </section>
+
+  <!-- ============================================================
+    FOOTER / CTA
+    ============================================================ -->
+  <footer class="dp-footer" id="cta" role="contentinfo">
+
+    <div class="dp-footer-cta">
+      <p class="dp-footer-eyebrow">Starter · Business · Pro · Custom</p>
+      <h2 class="dp-footer-title">Ready to Build?</h2>
+      <p class="dp-footer-sub">One email starts the whole thing. Tell me what your business does and what you need the site to accomplish — I'll come back with a plan and a price in 24 hours.</p>
+      <a href="contact.html" class="dp-btn" style="padding-left:calc(30*var(--u));">Let's talk →</a>
+    </div>
+
+    <!-- Ghost wordmark -->
+    <div class="dp-ghost" aria-hidden="true">Dominic<br>Paoni</div>
+
+    <!-- Footer bar -->
+    <div class="dp-footer-bar">
+      <div>
+        <p style="opacity:0.88;margin-bottom:calc(6*var(--u));">Dominic Paoni — Web Design</p>
+        <p>Springfield, IL · 2026</p>
+      </div>
+      <div class="dp-footer-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="work.html">Work</a>
+        <a href="services.html">Services &amp; Pricing</a>
+        <a href="contact.html">Contact</a>
+        <a href="mailto:andrewpaoni@gmail.com" style="margin-top:calc(6*var(--u));opacity:0.45;">andrewpaoni@gmail.com</a>
+      </div>
+    </div>
+
+  </footer>
+
+</div><!-- /.dp -->
+
+<script>
+(function () {
+  // Scroll-in observer
+  var fades = document.querySelectorAll('.fade');
+  if (!fades.length) return;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  fades.forEach(function (el) { io.observe(el); });
+
+  // Trigger hero elements immediately on load
+  setTimeout(function () {
+    document.querySelectorAll('.dp-hero .fade').forEach(function (el) {
+      el.classList.add('in');
+    });
+  }, 80);
+
+  // Btn hover color fix for tier cards
+  document.querySelectorAll('.dp-btn').forEach(function (btn) {
+    btn.addEventListener('mouseenter', function () { this.style.background = '#ffffff'; });
+    btn.addEventListener('mouseleave', function () { this.style.background = ''; });
+  });
+})();
+</script>
+</body>
+</html>
