@@ -1,1290 +1,1114 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Studio — Dominic Paoni Web Design</title>
-<meta name="description" content="Hand-built websites for Springfield businesses. No agency markup, no lock-in. Starter from $299.">
-<meta name="author" content="Dominic Paoni">
-<meta name="theme-color" content="#0000f2">
-<meta name="color-scheme" content="light">
-<link rel="canonical" href="https://dpaoni.github.io/studio.html">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Dominic Paoni">
-<meta property="og:title" content="Studio — Dominic Paoni">
-<meta property="og:description" content="Hand-built websites for Springfield businesses. No agency markup, no lock-in. Starter from $299.">
-<meta property="og:url" content="https://dpaoni.github.io/studio.html">
-<meta property="og:image" content="https://dpaoni.github.io/og-image.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<style>
-/* =============================================
-   RESET
-   ============================================= */
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-html { background: #0000f2; overflow-x: clip; scroll-behavior: smooth; }
-
-body {
-  background: #0000f2;
-  color: #f5f5f5;
-  font-family: 'Cormorant Garamond', 'Times New Roman', serif;
-  text-transform: uppercase;
-  font-synthesis: none;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-}
-
-/* =============================================
-   ROOT WRAPPER — container-query fluid units
-   ============================================= */
-.dp {
-  background: #0000f2;
-  color: #f5f5f5;
-  min-height: 100dvh;
-  width: 100dvw;
-  margin-inline: calc(50% - 50dvw);
-  container-type: inline-size;
-  /* All sizing uses --u: 1/2360th of container width */
-  --u: calc(100cqw / 2360);
-  --vsq: calc(0.5vw + 0.5vh);
-  --gutter: calc(210 * var(--u));
-  --gap: calc(30 * var(--u));
-  --frame: calc(2.5 * var(--vsq));
-  --eyebrow: clamp(0.62rem, calc(18 * var(--u)), 1.05rem);
-  --body-sz: clamp(0.7rem, calc(21 * var(--u)), 1.2rem);
-  --serif: 'Cormorant Garamond', 'Times New Roman', serif;
-  --mono: 'DM Mono', 'Courier New', monospace;
-  overflow-x: clip;
-}
-
-@media (max-width: 767px) {
-  .dp {
-    --u: calc(100cqw / 760);
-    --gutter: calc(48 * var(--u));
-  }
-}
-
-/* =============================================
-   UTILITIES
-   ============================================= */
-.sr-only {
-  position: absolute; width: 1px; height: 1px;
-  margin: -1px; overflow: hidden; clip: rect(0,0,0,0);
-  white-space: nowrap; border: 0;
-}
-
-.mono {
-  font-family: var(--mono);
-  font-size: var(--eyebrow);
-  letter-spacing: 0.18em;
-  font-weight: 400;
-}
-
-/* Scroll-in animation */
-.fade {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.75s ease, transform 0.75s ease;
-}
-.fade.in { opacity: 1; transform: none; }
-.fade.d1 { transition-delay: 0.1s; }
-.fade.d2 { transition-delay: 0.2s; }
-.fade.d3 { transition-delay: 0.35s; }
-
-/* Noise texture via SVG filter */
-.noise::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 200px 200px;
-  opacity: 0.045;
-  pointer-events: none;
-  mix-blend-mode: overlay;
-  z-index: 3;
-}
-
-/* =============================================
-   FIXED BORDER FRAME
-   ============================================= */
-.dp-frame {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 60;
-  border: var(--frame) solid #0000f2;
-}
-
-/* =============================================
-   NAV
-   ============================================= */
-.dp-nav {
-  position: absolute;
-  inset-inline: 0;
-  top: var(--frame);
-  z-index: 20;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  padding-inline: var(--gutter);
-  padding-top: calc(50 * var(--u));
-}
-
-.dp-nav a {
-  color: inherit;
-  text-decoration: none;
-  font-family: var(--mono);
-  font-size: clamp(0.75rem, calc(22 * var(--u)), 1.3rem);
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  opacity: 0.88;
-  padding: calc(14 * var(--u)) 0;
-  margin: calc(-14 * var(--u)) 0;
-  transition: opacity 0.2s ease;
-}
-.dp-nav a:hover { opacity: 1; text-decoration: underline; text-underline-offset: 0.3em; }
-
-.dp-nav-logo-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: calc(16 * var(--u));
-  line-height: 1;
-}
-
-.dp-nav-logo {
-  font-family: var(--serif) !important;
-  font-size: clamp(1.1rem, calc(40 * var(--u)), 2.4rem) !important;
-  font-weight: 700 !important;
-  letter-spacing: 0.03em;
-  text-align: center;
-  opacity: 1 !important;
-}
-
-.dp-nav-right {
-  display: flex;
-  align-items: center;
-  gap: calc(22 * var(--u));
-}
-
-.dp-nav-left { display: block; }
-
-@media (max-width: 767px) {
-  .dp-nav-left { display: none; }
-  .dp-nav-logo { font-size: 1.4rem !important; }
-}
-
-/* =============================================
-   HERO
-   ============================================= */
-.dp-hero {
-  position: relative;
-  display: flex;
-  min-height: calc(1360 * var(--u));
-  overflow: hidden;
-  align-items: flex-start;
-  padding-top: calc(442 * var(--u));
-}
-
-@media (max-width: 767px) {
-  .dp-hero {
-    align-items: flex-end;
-    min-height: 88dvh;
-    padding-top: 0;
-    padding-bottom: 8dvh;
-  }
-}
-
-.dp-hero-content {
-  position: relative;
-  z-index: 3;
-  margin-inline: var(--gutter);
-  max-width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: calc(30 * var(--u));
-  width: calc(980 * var(--u));
-}
-
-@media (min-width: 768px) {
-  .dp-hero-content {
-    margin-left: calc(var(--gutter) - var(--frame));
-  }
-}
-
-.dp-hero-title {
-  display: flex;
-  flex-direction: column;
-  font-size: calc(132 * var(--u));
-  line-height: 0.88;
-  font-weight: 300;
-  letter-spacing: 0.03em;
-  max-width: 100%;
-  min-width: 0;
-}
-
-@media (max-width: 767px) {
-  .dp-hero-title { font-size: 13.75vw; }
-}
-
-.dp-hero-actions {
-  margin-top: calc(20 * var(--u));
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: calc(48 * var(--u));
-  width: 100%;
-  max-width: 100%;
-}
-
-.dp-hero-cta-set {
-  display: flex;
-  flex-direction: column;
-  gap: calc(15 * var(--u));
-  width: 100%;
-}
-
-.dp-hero-btns {
-  display: flex;
-  flex-wrap: wrap;
-  gap: calc(16 * var(--u));
-}
-
-/* Price badge */
-.dp-price-badge {
-  background: white;
-  padding: calc(13 * var(--u)) calc(18 * var(--u));
-  border-radius: 2px;
-  font-family: var(--mono);
-  font-size: clamp(0.68rem, calc(17 * var(--u)), 0.95rem);
-  color: #0000f2;
-  line-height: 1;
-  letter-spacing: 0.04em;
-}
-.dp-price-badge .dim { opacity: 0.45; }
-.dp-price-badge strong { color: #0000f2; font-weight: 700; }
-
-/* Vignette over hero */
-.dp-hero-vignette {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 55% 80% at 25% 60%, transparent 30%, rgba(0,0,242,0.6) 75%);
-  z-index: 2;
-  pointer-events: none;
-}
-
-/* Hero art */
-.dp-hero-art {
-  position: absolute;
-  top: calc(180 * var(--u));
-  right: calc(80 * var(--u));
-  width: calc(1080 * var(--u));
-  max-width: none;
-  z-index: 1;
-  pointer-events: none;
-  user-select: none;
-  mix-blend-mode: screen;
-  opacity: 0.88;
-}
-
-@media (max-width: 767px) {
-  .dp-hero-art { display: none; }
-}
-
-/* =============================================
-   BUTTONS
-   ============================================= */
-.dp-btn {
-  display: inline-flex;
-  align-items: center;
-  background: #f5f5f5;
-  color: #0000f2;
-  padding: calc(20 * var(--u)) calc(30 * var(--u));
-  padding-left: calc(68 * var(--u));
-  position: relative;
-  font-family: var(--mono);
-  font-size: var(--body-sz);
-  line-height: 1;
-  text-decoration: none;
-  transition: background 0.2s ease;
-  white-space: nowrap;
-  max-width: 100%;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.25);
-}
-.dp-btn:hover { background: white; }
-
-.dp-btn svg {
-  position: absolute;
-  top: 50%;
-  left: calc(30 * var(--u));
-  transform: translateY(-50%);
-  width: clamp(1.2rem, calc(26 * var(--u)), 1.55rem);
-  height: clamp(1.2rem, calc(26 * var(--u)), 1.55rem);
-  flex-shrink: 0;
-  color: #0000f2;
-}
-
-.dp-btn-price {
-  position: absolute;
-  top: 50%;
-  left: calc(30 * var(--u));
-  transform: translateY(-50%);
-  font-size: clamp(0.75rem, calc(22 * var(--u)), 1.1rem);
-  font-weight: 700;
-  color: #0000f2;
-  line-height: 1;
-}
-
-.dp-btn-outline {
-  background: transparent;
-  color: #f5f5f5;
-  border: 1.5px solid rgba(245,245,245,0.45);
-  padding-left: calc(30 * var(--u));
-  box-shadow: none;
-}
-.dp-btn-outline:hover { background: rgba(245,245,245,0.08); }
-
-/* =============================================
-   TIER CARDS (Starter / Business / Pro)
-   ============================================= */
-.dp-tiers {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--gap);
-  padding: calc(60 * var(--u)) var(--gutter) calc(120 * var(--u));
-}
-
-@media (max-width: 767px) {
-  .dp-tiers { grid-template-columns: 1fr; }
-}
-
-.dp-tier {
-  position: relative;
-  aspect-ratio: 627 / 547;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background: #0000f2;
-}
-
-@media (max-width: 767px) {
-  .dp-tier { aspect-ratio: 2 / 1; }
-}
-
-/* Noise on tier cards */
-.dp-tier::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 200px 200px;
-  opacity: 0.055;
-  z-index: 2;
-  mix-blend-mode: overlay;
-  pointer-events: none;
-}
-
-/* Arc decoration */
-.dp-tier::after {
-  content: '';
-  position: absolute;
-  bottom: -50%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 140%;
-  padding-bottom: 140%;
-  border-radius: 50%;
-  border: 1px solid rgba(245,245,245,0.13);
-  pointer-events: none;
-  z-index: 1;
-}
-
-.dp-tier-art {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-}
-
-.dp-tier-inner {
-  position: relative;
-  z-index: 3;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: calc(28 * var(--u));
-}
-
-.dp-tier-sub {
-  font-family: var(--mono);
-  font-size: clamp(0.6rem, calc(23 * var(--u)), 0.95rem);
-  letter-spacing: 0.1em;
-  opacity: 0.68;
-}
-
-.dp-tier-name {
-  font-size: clamp(1.8rem, calc(64 * var(--u)), 4rem);
-  line-height: 1;
-  font-weight: 300;
-  text-transform: none;
-}
-
-/* =============================================
-   FEATURE PANEL (white paper)
-   ============================================= */
-.dp-features {
-  background: #f0eeea;
-  color: #0000f2;
-  position: relative;
-  z-index: 1;
-  padding-top: calc(30 * var(--u));
-  overflow: hidden;
-}
-
-.dp-features-badge {
-  display: flex;
-  position: absolute;
-  top: calc(30 * var(--u));
-  right: calc(30 * var(--u));
-  z-index: 2;
-}
-
-.dp-features-badge span {
-  font-family: var(--mono);
-  border: 1px solid currentColor;
-  padding: calc(10 * var(--u)) calc(15 * var(--u));
-  font-size: 0.72rem;
-  letter-spacing: 0.1em;
-  opacity: 0.85;
-}
-.dp-features-badge span + span { border-left: none; }
-
-.dp-features-grid {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  column-gap: calc(30 * var(--u));
-  row-gap: calc(150 * var(--u));
-  padding-top: calc(80 * var(--u));
-  padding-bottom: calc(60 * var(--u));
-  padding-right: calc(30 * var(--u));
-  padding-left: calc(150 * var(--u));
-}
-
-@media (max-width: 767px) {
-  .dp-features-grid {
-    grid-template-columns: 1fr;
-    row-gap: calc(90 * var(--u));
-    padding-inline: var(--gutter);
-    padding-left: var(--gutter);
-  }
-}
-
-.dp-feat {
-  display: flex;
-  flex-direction: column;
-  gap: calc(55 * var(--u));
-  text-align: left;
-}
-
-.dp-feat-header {
-  display: flex;
-  flex-direction: column;
-  gap: calc(46 * var(--u));
-  padding-right: calc(160 * var(--u));
-}
-
-@media (max-width: 767px) {
-  .dp-feat-header { padding-right: 0; }
-}
-
-.dp-feat-num {
-  font-family: var(--mono);
-  font-size: var(--eyebrow);
-  letter-spacing: 0.18em;
-  opacity: 0.78;
-}
-
-.dp-feat-title {
-  font-size: clamp(1.6rem, calc(64 * var(--u)), 3.8rem);
-  line-height: 1;
-  font-weight: 300;
-  width: clamp(160px, calc(486 * var(--u)), 90%);
-  max-width: 100%;
-}
-
-.dp-feat-art {
-  position: relative;
-  aspect-ratio: 666 / 574;
-  overflow: hidden;
-  background: #0000f2;
-}
-
-.dp-feat-art svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.dp-feat-desc {
-  font-family: var(--mono);
-  font-size: var(--body-sz);
-  line-height: 1.4;
-  opacity: 0.88;
-  padding-right: calc(160 * var(--u));
-}
-
-@media (max-width: 767px) {
-  .dp-feat-desc { padding-right: 0; }
-}
-
-/* Features section wordmark */
-.dp-feat-wordmark {
-  font-family: var(--serif);
-  font-size: clamp(4rem, calc(260 * var(--u)), 16rem);
-  line-height: 0.85;
-  font-weight: 300;
-  letter-spacing: -0.01em;
-  color: #0000f2;
-  width: 100%;
-  text-align: center;
-  margin-top: clamp(4rem, 10vw, 10rem);
-  user-select: none;
-  pointer-events: none;
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-/* =============================================
-   FOOTER / CTA
-   ============================================= */
-.dp-footer {
-  background: #0000f2;
-  color: #f5f5f5;
-  position: relative;
-  overflow: hidden;
-  min-height: 100dvh;
-  display: flex;
-  flex-direction: column;
-}
-
-.dp-footer-cta {
-  position: absolute;
-  inset-x: 0;
-  top: 7dvh;
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: clamp(1.2rem, calc(36 * var(--u)), 3.5rem);
-  text-align: center;
-  padding-inline: var(--gutter);
-}
-
-.dp-footer-eyebrow {
-  font-family: var(--mono);
-  font-size: var(--eyebrow);
-  letter-spacing: 0.18em;
-}
-
-.dp-footer-title {
-  font-size: clamp(2.2rem, min(calc(112 * var(--u)), 8dvh), 6.5rem);
-  line-height: 1;
-  font-weight: 300;
-  letter-spacing: 0.03em;
-}
-
-.dp-footer-sub {
-  font-family: var(--mono);
-  font-size: var(--body-sz);
-  line-height: 1.4;
-  opacity: 0.9;
-  width: clamp(280px, calc(800 * var(--u)), 90%);
-  max-width: 100%;
-}
-
-/* Ghost wordmark */
-.dp-ghost {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  font-family: var(--serif);
-  font-size: clamp(5rem, 21vw, 18rem);
-  line-height: 0.8;
-  font-weight: 300;
-  letter-spacing: -0.02em;
-  color: rgba(245,245,245,0.055);
-  text-align: center;
-  user-select: none;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-  padding-bottom: 0;
-}
-
-/* Footer bar */
-.dp-footer-bar {
-  position: absolute;
-  bottom: 7dvh;
-  left: var(--gutter);
-  right: var(--gutter);
-  z-index: 20;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  font-family: var(--mono);
-  font-size: var(--eyebrow);
-  line-height: 1.3;
-}
-
-@media (max-width: 767px) {
-  .dp-footer-bar {
-    bottom: 3dvh;
-    font-size: 0.6rem;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-}
-
-.dp-footer-links {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: calc(7 * var(--u));
-  text-align: right;
-}
-
-.dp-footer-bar a, .dp-footer-links a {
-  color: inherit;
-  text-decoration: none;
-  opacity: 0.65;
-  transition: opacity 0.2s;
-}
-.dp-footer-bar a:hover, .dp-footer-links a:hover { opacity: 1; }
-
-.dp-footer-bar p { opacity: 0.55; }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Studio — Dominic Paoni Web Design</title>
+  <meta name="description" content="Hand-built websites for Springfield businesses. No agency markup, no lock-in. Starter sites from $299.">
+  <meta name="author" content="Dominic Paoni">
+  <meta name="theme-color" content="#0000f2">
+  <meta name="color-scheme" content="light">
+  <link rel="canonical" href="https://dpaoni.github.io/studio.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Dominic Paoni">
+  <meta property="og:title" content="Studio — Dominic Paoni">
+  <meta property="og:description" content="Hand-built websites for Springfield businesses. No agency markup, no lock-in. Starter sites from $299.">
+  <meta property="og:url" content="https://dpaoni.github.io/studio.html">
+  <meta property="og:image" content="https://dpaoni.github.io/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Dominic Paoni Web Design Studio">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Studio — Dominic Paoni">
+  <meta name="twitter:description" content="Hand-built websites for Springfield businesses. No agency markup, no lock-in. Starter sites from $299.">
+  <meta name="twitter:image" content="https://dpaoni.github.io/og-image.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <script>document.documentElement.classList.add("js");</script>
+  <style>
+    :root {
+      --blue: #0000f2;
+      --blue-deep: #0000b8;
+      --ink: #f5f2e8;
+      --paper: #eee9dc;
+      --coral: #ff633d;
+      --copper: #b86f47;
+      --oxblood: #451018;
+      --gold: #efbd38;
+      --teal: #053749;
+      --serif: "Cormorant Garamond", "Times New Roman", serif;
+      --mono: "DM Mono", "Courier New", monospace;
+      --frame: clamp(10px, 1.3vw, 24px);
+      --gutter: clamp(20px, 5vw, 88px);
+      --rule: 1px solid currentColor;
+      --ease: cubic-bezier(.16, 1, .3, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; background: var(--blue); overflow-x: clip; }
+    body {
+      margin: 0;
+      background:
+        linear-gradient(
+          180deg,
+          var(--blue) 0%,
+          #111a9f 24%,
+          var(--teal) 46%,
+          var(--oxblood) 73%,
+          var(--blue) 100%
+        );
+      color: var(--ink);
+      font-family: var(--serif);
+      font-synthesis: none;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: clip;
+    }
+
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    :focus-visible { outline: 3px solid var(--coral); outline-offset: 5px; }
+    ::selection { background: var(--coral); color: var(--oxblood); }
+
+    .skip-link {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      z-index: 200;
+      padding: .8rem 1.2rem;
+      background: var(--ink);
+      color: var(--blue);
+      font: 500 .8rem/1 var(--mono);
+      transform: translate(-50%, -140%);
+      transition: transform .2s var(--ease);
+    }
+    .skip-link:focus { transform: translate(-50%, 16px); }
+
+    .frame {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      pointer-events: none;
+      border: var(--frame) solid var(--blue);
+      box-shadow: inset 0 0 0 1px rgb(245 242 232 / .28);
+    }
+
+    .grain { position: relative; isolation: isolate; }
+    .grain::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 8;
+      opacity: .075;
+      pointer-events: none;
+      mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.65'/%3E%3C/svg%3E");
+      background-size: 180px;
+    }
+
+    .mono {
+      font-family: var(--mono);
+      font-size: clamp(.68rem, .82vw, .83rem);
+      line-height: 1.45;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      margin: 0;
+      font: 400 clamp(.68rem, .8vw, .82rem)/1.3 var(--mono);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      content: "✦";
+      font-size: .7em;
+    }
+
+    .site-nav {
+      position: absolute;
+      inset: var(--frame) var(--frame) auto;
+      z-index: 40;
+      min-height: 88px;
+      padding: 24px calc(var(--gutter) - var(--frame));
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: start;
+      font: 500 clamp(.72rem, .85vw, .9rem)/1 var(--mono);
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+    .site-nav a { text-decoration: none; }
+    .site-nav a:not(.brand):hover { text-decoration: underline; text-underline-offset: .35em; }
+    .nav-home { justify-self: start; }
+    .brand {
+      justify-self: center;
+      text-align: center;
+      font: 600 clamp(1.25rem, 1.8vw, 1.85rem)/.78 var(--serif);
+      letter-spacing: .02em;
+      text-transform: uppercase;
+    }
+    .nav-actions {
+      justify-self: end;
+      display: flex;
+      gap: clamp(16px, 2vw, 34px);
+      align-items: center;
+    }
+    .nav-hire { display: inline-flex; gap: .45rem; align-items: center; }
+    .menu-toggle {
+      display: none;
+      border: 0;
+      padding: .25rem 0;
+      color: inherit;
+      background: none;
+      font: inherit;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .hero {
+      min-height: 100svh;
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: center;
+      gap: 2vw;
+      padding: clamp(140px, 15vh, 190px) var(--gutter) clamp(72px, 9vh, 110px);
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--blue) 0%, #111a9f 62%, var(--teal) 100%);
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      inset: 0;
+      background:
+        linear-gradient(
+          90deg,
+          rgb(0 0 242 / .97) 0%,
+          rgb(0 0 242 / .9) 32%,
+          rgb(17 26 159 / .68) 55%,
+          rgb(5 55 73 / .2) 78%,
+          rgb(5 55 73 / .08) 100%
+        );
+      pointer-events: none;
+    }
+    .hero-copy {
+      position: relative;
+      z-index: 12;
+      padding-left: clamp(0px, 2vw, 30px);
+      min-width: 0;
+    }
+    .hero-title {
+      margin: clamp(34px, 5vh, 70px) 0 0;
+      font-size: clamp(4.2rem, 7.5vw, 9rem);
+      font-weight: 300;
+      line-height: .72;
+      letter-spacing: -.035em;
+      text-transform: uppercase;
+      text-wrap: balance;
+    }
+    .hero-title span { display: block; }
+    .hero-title span:nth-child(2) { margin-left: .45em; font-style: italic; }
+    .hero-title span:nth-child(3) { margin-left: .12em; }
+    .hero-lede {
+      max-width: 52ch;
+      margin: clamp(32px, 5vh, 58px) 0 0;
+      font: 300 clamp(1rem, 1.35vw, 1.3rem)/1.5 var(--mono);
+      text-transform: none;
+      letter-spacing: -.02em;
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .button {
+      min-height: 50px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .65rem;
+      padding: .85rem 1.2rem;
+      border: 1px solid var(--ink);
+      background: var(--ink);
+      color: var(--blue);
+      text-decoration: none;
+      font: 500 .76rem/1 var(--mono);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      transition: transform .25s var(--ease), background-color .25s var(--ease), color .25s var(--ease);
+    }
+    .button:hover { transform: translateY(-3px); background: #fffdf5; }
+    .button-outline { background: transparent; color: var(--ink); }
+    .button-outline:hover { background: var(--ink); color: var(--blue); }
+    .button-dark { border-color: var(--blue); background: var(--blue); color: var(--ink); }
+
+    .price-stamp {
+      display: inline-flex;
+      flex-direction: column;
+      gap: .15rem;
+      padding-left: 1rem;
+      border-left: 1px solid rgb(245 242 232 / .45);
+      font: 400 .68rem/1.3 var(--mono);
+      text-transform: uppercase;
+      letter-spacing: .1em;
+    }
+    .price-stamp strong { font-size: 1rem; letter-spacing: 0; }
+
+    .hero-art {
+      position: absolute;
+      z-index: 0;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      filter: contrast(1.06) saturate(.93);
+      box-shadow: none;
+    }
+    .hero-art img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 46%;
+      mix-blend-mode: screen;
+      opacity: .92;
+    }
+    .hero-art::before,
+    .hero-art::after {
+      display: none;
+    }
+    .hero-art::before { inset: 8%; }
+    .hero-art::after { inset: 15%; }
+    .hero-index {
+      position: absolute;
+      right: var(--gutter);
+      bottom: 28px;
+      z-index: 12;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      font: 400 .68rem/1 var(--mono);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .hero-index::before { content: ""; width: 58px; border-top: 1px solid currentColor; }
+
+    .marquee {
+      overflow: hidden;
+      border-block: 1px solid rgb(245 242 232 / .42);
+      background: linear-gradient(90deg, var(--blue), var(--teal) 50%, var(--oxblood));
+      color: var(--ink);
+    }
+    .marquee-track {
+      width: max-content;
+      display: flex;
+      animation: drift 28s linear infinite;
+      font: 500 .72rem/1 var(--mono);
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+    .marquee-group {
+      min-width: 100vw;
+      flex: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      gap: clamp(1.5rem, 3vw, 4rem);
+      padding: .86rem clamp(1.5rem, 3vw, 4rem);
+    }
+    .marquee-track span::after { content: "✦"; margin-left: 1.1rem; }
+    @keyframes drift { to { transform: translateX(-50%); } }
+
+    .section {
+      padding: clamp(80px, 10vw, 150px) var(--gutter);
+    }
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(130px, .45fr) 1.55fr;
+      gap: 4vw;
+      align-items: end;
+      padding-bottom: clamp(30px, 4vw, 60px);
+      border-bottom: var(--rule);
+    }
+    .section-head > *,
+    .feature > *,
+    .feature-copy,
+    .proof-copy { min-width: 0; }
+    .section-title {
+      margin: 0;
+      max-width: 100%;
+      font-size: clamp(3.2rem, 5.5vw, 6.5rem);
+      font-weight: 300;
+      line-height: .78;
+      letter-spacing: -.035em;
+      text-transform: uppercase;
+      text-wrap: balance;
+    }
+    .section-intro {
+      max-width: 53ch;
+      margin: 0 0 .4rem auto;
+      font: 300 clamp(.88rem, 1.15vw, 1.08rem)/1.6 var(--mono);
+    }
+
+    .tiers {
+      background: linear-gradient(180deg, var(--blue) 0%, #111a9f 42%, var(--teal) 100%);
+      box-shadow: none;
+      padding-bottom: 0;
+    }
+    .tier-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      border-bottom: var(--rule);
+    }
+    .tier {
+      position: relative;
+      min-height: 590px;
+      padding: clamp(26px, 3vw, 44px);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border-right: var(--rule);
+    }
+    .tier:last-child { border-right: 0; }
+    .tier:nth-child(1) { grid-column: span 3; background: var(--blue); color: var(--ink); }
+    .tier:nth-child(2) { grid-column: span 4; background: var(--teal); color: var(--gold); }
+    .tier:nth-child(3) { grid-column: span 5; background: var(--oxblood); color: #ffd8b4; }
+    .tier-top {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      font: 400 .66rem/1.4 var(--mono);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .tier-emblem {
+      position: relative;
+      flex: 1;
+      width: 100%;
+      min-height: 260px;
+      margin: clamp(22px, 3vw, 42px) 0;
+      overflow: hidden;
+      border-block: 1px solid currentColor;
+    }
+    .tier-emblem img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform .8s var(--ease);
+    }
+    .tier:hover .tier-emblem img { transform: scale(1.035); }
+    .tier-name {
+      position: relative;
+      z-index: 3;
+      margin: 0;
+      font-size: clamp(2.1rem, 3.7vw, 4.6rem);
+      font-weight: 300;
+      line-height: .85;
+      text-transform: uppercase;
+    }
+    .tier-price {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 24px;
+      padding-top: 18px;
+      border-top: 1px solid rgb(245 242 232 / .45);
+    }
+    .tier-price strong {
+      font: 300 clamp(2rem, 3vw, 3.7rem)/1 var(--serif);
+    }
+    .tier-price a {
+      font: 500 .7rem/1 var(--mono);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      text-underline-offset: .35em;
+    }
+    .tiers-to-covenant {
+      height: clamp(110px, 10vw, 190px);
+      margin-inline: calc(-1 * var(--gutter));
+      background: linear-gradient(180deg, var(--teal) 0%, #173044 38%, var(--oxblood) 100%);
+    }
+
+    .covenant-surface {
+      position: relative;
+      background-color: var(--oxblood);
+      background-image: url("assets/studio/winged-oracle-continuous.webp");
+      background-position: center top;
+      background-size: 100% auto;
+      background-repeat: no-repeat;
+      overflow: hidden;
+    }
+    .covenant-surface::after {
+      content: "";
+      position: absolute;
+      z-index: 0;
+      inset: 54% 0 0;
+      background: linear-gradient(180deg, transparent 0%, rgb(17 26 159 / .16) 52%, var(--blue) 100%);
+      pointer-events: none;
+    }
+    .art-break {
+      position: relative;
+      z-index: 1;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      padding-inline: var(--gutter);
+      background: transparent;
+      color: #ffd8b4;
+      overflow: hidden;
+    }
+    .art-break::before {
+      display: none;
+    }
+    .art-break-copy {
+      position: relative;
+      z-index: 5;
+      width: min(54%, 820px);
+      min-height: 0;
+      padding: clamp(38px, 5vw, 76px);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: clamp(24px, 3vw, 42px);
+      background:
+        linear-gradient(
+          135deg,
+          rgb(5 55 73 / .86) 0%,
+          rgb(34 72 72 / .8) 46%,
+          rgb(184 111 71 / .74) 100%
+        );
+      border: 1px solid rgb(255 240 220 / .42);
+      box-shadow: 0 22px 70px rgb(0 0 0 / .2);
+    }
+    .art-break-quote {
+      max-width: 9ch;
+      margin: 0;
+      font-size: clamp(3.7rem, 7.4vw, 8.5rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: .78;
+      letter-spacing: -.04em;
+      text-transform: uppercase;
+    }
+    .art-break-note {
+      max-width: 46ch;
+      margin: 0;
+      font: 300 clamp(.8rem, 1vw, .98rem)/1.6 var(--mono);
+    }
+    .features {
+      background: var(--blue);
+      color: var(--ink);
+      padding-bottom: 0;
+      overflow: hidden;
+    }
+    .features-intro {
+      position: relative;
+      z-index: 1;
+      color: var(--ink);
+      background: transparent;
+    }
+    .features-intro .section-head {
+      position: relative;
+      z-index: 2;
+      margin-bottom: 0;
+    }
+    .features-pane {
+      padding: clamp(34px, 4vw, 62px);
+      color: #fff0dc;
+      background:
+        linear-gradient(
+          135deg,
+          rgb(5 55 73 / .82) 0%,
+          rgb(34 72 72 / .76) 46%,
+          rgb(184 111 71 / .7) 100%
+      );
+      border: 1px solid rgb(255 240 220 / .42);
+      box-shadow: 0 22px 70px rgb(0 0 0 / .18);
+    }
+    .feature-stage {
+      position: relative;
+      z-index: 2;
+      display: block;
+      margin-inline: 0;
+      background-color: var(--blue);
+      background-image:
+        linear-gradient(
+          90deg,
+          rgb(17 26 159 / .04) 0%,
+          rgb(5 55 73 / .08) 42%,
+          rgb(17 26 159 / .28) 100%
+        ),
+        linear-gradient(
+          180deg,
+          rgb(17 26 159 / .08) 0%,
+          transparent 12%,
+          transparent 86%,
+          rgb(5 55 73 / .42) 100%
+        ),
+        url("assets/studio/warrior-arsenal-wide.webp");
+      background-position: center, center, left center;
+      background-size: cover, cover, cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      isolation: isolate;
+    }
+    .feature-list {
+      position: relative;
+      z-index: 2;
+      counter-reset: feature;
+      margin: 0;
+      padding: clamp(60px, 7vw, 118px) var(--gutter);
+      display: grid;
+      gap: clamp(28px, 3vw, 52px);
+    }
+    .feature {
+      counter-increment: feature;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: clamp(22px, 3vw, 52px);
+      align-items: center;
+      width: min(53vw, 830px);
+      min-height: clamp(260px, 25vw, 390px);
+      margin-left: auto;
+      padding: clamp(36px, 4.5vw, 70px);
+      border: 1px solid rgb(255 240 220 / .42);
+      background:
+        linear-gradient(
+          135deg,
+          rgb(5 55 73 / .88) 0%,
+          rgb(34 72 72 / .84) 46%,
+          rgb(184 111 71 / .78) 100%
+        );
+      box-shadow: 0 22px 70px rgb(0 0 0 / .22);
+    }
+    .feature:nth-child(3n + 1),
+    .feature:nth-child(3n + 2),
+    .feature:nth-child(3n) {
+      color: var(--ink);
+    }
+    .features-to-proof {
+      height: clamp(110px, 11vw, 210px);
+      margin-inline: 0;
+      background: linear-gradient(180deg, var(--blue) 0%, #111a9f 35%, var(--teal) 100%);
+    }
+    .feature::before {
+      display: none;
+    }
+    .feature h3 {
+      margin: 0;
+      max-width: 100%;
+      font-size: clamp(2.6rem, 3.8vw, 4.6rem);
+      font-weight: 300;
+      line-height: .78;
+      letter-spacing: -.035em;
+      text-transform: uppercase;
+      overflow-wrap: anywhere;
+      text-wrap: balance;
+    }
+    .feature-copy {
+      grid-column: 1;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(24px, 3vw, 42px);
+      align-items: flex-start;
+    }
+    .feature p {
+      max-width: 49ch;
+      margin: 0;
+      font: 300 clamp(.85rem, 1vw, 1rem)/1.65 var(--mono);
+    }
+    .proof {
+      min-height: 92svh;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      background: linear-gradient(180deg, var(--teal) 0%, var(--oxblood) 58%, #111a9f 100%);
+      color: var(--ink);
+      overflow: hidden;
+    }
+    .proof-media {
+      position: relative;
+      min-height: 600px;
+      border-block: 0;
+    }
+    .proof-media img { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: screen; }
+    .proof-copy {
+      padding: clamp(70px, 9vw, 140px) var(--gutter);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-left: 1px solid currentColor;
+      box-shadow: none;
+    }
+    .proof-title {
+      margin: 2rem 0;
+      font-size: clamp(4rem, 8vw, 9rem);
+      font-weight: 300;
+      line-height: .74;
+      letter-spacing: -.04em;
+      text-transform: uppercase;
+    }
+    .proof-copy p:not(.eyebrow) {
+      max-width: 50ch;
+      font: 300 clamp(.86rem, 1vw, 1rem)/1.65 var(--mono);
+    }
+    .proof-facts {
+      margin: 3rem 0 0;
+      padding: 0;
+      list-style: none;
+      border-top: 1px solid currentColor;
+    }
+    .proof-facts li {
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid currentColor;
+      font: 400 .72rem/1.3 var(--mono);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .closing {
+      min-height: 100svh;
+      position: relative;
+      display: grid;
+      place-items: center;
+      padding: 120px var(--gutter);
+      overflow: hidden;
+      text-align: center;
+      background: linear-gradient(180deg, var(--oxblood) 0%, #111a9f 45%, var(--blue) 100%);
+    }
+    .closing::before {
+      content: "";
+      position: absolute;
+      width: min(72vw, 980px);
+      aspect-ratio: 1;
+      border: 1px solid rgb(245 242 232 / .3);
+      border-radius: 50%;
+      box-shadow:
+        0 0 0 6vw rgb(245 242 232 / .035),
+        0 0 0 12vw rgb(245 242 232 / .025),
+        0 0 0 18vw rgb(245 242 232 / .018);
+    }
+    .closing::after {
+      display: none;
+    }
+    .closing-inner { position: relative; z-index: 3; }
+    .closing-title {
+      margin: 2rem auto;
+      max-width: 10ch;
+      font-size: clamp(4rem, 11vw, 12rem);
+      font-weight: 300;
+      line-height: .72;
+      letter-spacing: -.045em;
+      text-transform: uppercase;
+    }
+    .closing-copy {
+      max-width: 57ch;
+      margin: 0 auto 2.2rem;
+      font: 300 clamp(.86rem, 1.1vw, 1rem)/1.65 var(--mono);
+    }
+    .closing .eyebrow { justify-content: center; }
+
+    .site-footer {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 2rem;
+      align-items: end;
+      padding: 32px var(--gutter) calc(32px + var(--frame));
+      border-top: 1px solid rgb(245 242 232 / .45);
+      background: var(--blue);
+      font: 400 .68rem/1.5 var(--mono);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .site-footer p { margin: 0; }
+    .footer-mark {
+      text-align: center;
+      font: 500 1.5rem/.85 var(--serif);
+    }
+    .footer-links {
+      justify-self: end;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: .55rem 1.2rem;
+    }
+    .footer-links a { text-underline-offset: .25em; }
+
+    .reveal {
+      opacity: 1;
+      transform: none;
+    }
+    .js .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity .9s var(--ease), transform .9s var(--ease);
+    }
+    .js .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 980px) {
+      .section-head { grid-template-columns: 1fr; }
+      .section-intro { margin-left: 0; }
+      .hero {
+        min-height: auto;
+        grid-template-columns: 1fr;
+        padding-top: 150px;
+      }
+      .hero-copy { padding-left: 0; }
+      .hero-art {
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+      }
+      .hero-index { display: none; }
+      .tier-grid { display: block; }
+      .tier { min-height: 520px; border-right: 0; border-bottom: var(--rule); }
+      .tier-emblem { min-height: 230px; }
+      .art-break, .proof { grid-template-columns: 1fr; }
+      .art-break-media { min-height: 70vw; }
+      .proof-copy { border-left: 0; border-top: 1px solid currentColor; }
+      .feature {
+        grid-template-columns: minmax(0, 1fr);
+        width: min(72vw, 720px);
+      }
+      .feature-copy { grid-column: 1; }
+    }
+
+    @media (max-width: 700px) {
+      :root { --frame: 8px; --gutter: 22px; }
+      .site-nav {
+        min-height: 78px;
+        grid-template-columns: 1fr auto;
+        align-items: start;
+        padding: 22px var(--gutter);
+      }
+      .nav-home { display: none; }
+      .brand { justify-self: start; }
+      .menu-toggle { display: block; justify-self: end; }
+      .nav-actions {
+        display: none;
+        grid-column: 1 / -1;
+        justify-self: stretch;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        margin: 20px calc(-1 * var(--gutter)) -22px;
+        background: var(--ink);
+        color: var(--blue);
+      }
+      .nav-actions.open { display: flex; }
+      .nav-actions a { padding: 1rem var(--gutter); border-top: 1px solid var(--blue); }
+      .hero { padding-top: 130px; padding-bottom: 65px; }
+      .hero-title { font-size: clamp(3.6rem, 16vw, 5.1rem); }
+      .hero-title span:nth-child(2) { margin-left: .2em; }
+      .hero-art { inset: 0; width: 100%; height: 100%; margin: 0; }
+      .hero-lede { font-size: .88rem; }
+      .hero-actions { align-items: stretch; }
+      .button { width: 100%; }
+      .price-stamp { width: 100%; padding: .9rem 0 0; border-left: 0; border-top: 1px solid rgb(245 242 232 / .45); }
+      .section-head { grid-template-columns: 1fr; }
+      .section-title {
+        max-width: 100%;
+        font-size: clamp(3.2rem, 13.5vw, 5rem);
+        overflow-wrap: anywhere;
+      }
+      .section-intro { margin-left: 0; }
+      .tier { min-height: 470px; }
+      .tier-emblem { min-height: 210px; }
+      .art-break-copy { min-height: 66svh; }
+      .art-break-quote { font-size: 17vw; }
+      .art-break-media { min-height: 100vw; }
+      .features { overflow-x: clip; }
+      .feature {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1rem;
+        width: 100%;
+        min-height: 270px;
+      }
+      .feature h3 {
+        max-width: 100%;
+        font-size: 11.5vw;
+        overflow-wrap: anywhere;
+      }
+      .feature-copy { gap: 1.5rem; }
+      .proof-media { min-height: 100vw; }
+      .proof-title { font-size: 17vw; }
+      .closing { min-height: 86svh; }
+      .closing-title { font-size: 20vw; }
+      .site-footer { grid-template-columns: 1fr; text-align: center; }
+      .footer-mark { grid-row: 1; }
+      .footer-links { justify-self: center; justify-content: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition-duration: .001ms !important; }
+      .js .reveal { opacity: 1; transform: none; }
+    }
+  </style>
 </head>
 <body>
-<div class="dp" id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="frame" aria-hidden="true"></div>
 
-  <!-- Fixed border frame -->
-  <div class="dp-frame" aria-hidden="true"></div>
-
-  <!-- ============================================================
-    NAV
-    ============================================================ -->
-  <nav class="dp-nav" aria-label="Primary">
-    <a href="index.html" class="dp-nav-left">← Home</a>
-
-    <div class="dp-nav-logo-wrap">
-      <a href="studio.html" class="dp-nav-logo">Dominic<br>Paoni</a>
-    </div>
-
-    <div class="dp-nav-right">
+  <nav class="site-nav" aria-label="Primary navigation">
+    <a class="nav-home" href="index.html">← Home</a>
+    <a class="brand" href="studio.html" aria-label="Dominic Paoni Studio">Dominic<br>Paoni</a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-actions">Menu</button>
+    <div class="nav-actions" id="nav-actions">
       <a href="services.html">Pricing</a>
-      <a href="contact.html" style="display:inline-flex;align-items:center;gap:calc(8*var(--u));">
-        Hire me
-        <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="18" style="flex-shrink:0;max-width:1.1rem;max-height:1.1rem;"><path d="M5 12h14m0 0-6-6m6 6-6 6"/></svg>
-      </a>
+      <a class="nav-hire" href="contact.html">Hire me <span aria-hidden="true">→</span></a>
     </div>
   </nav>
 
-  <!-- ============================================================
-    HERO
-    ============================================================ -->
-  <header class="dp-hero noise" id="hero">
+  <main id="main">
+    <header class="hero grain">
+      <div class="hero-copy">
+        <p class="eyebrow reveal">Springfield, IL · Freelance Web Design</p>
+        <h1 class="hero-title reveal">
+          <span>Websites</span>
+          <span>Built</span>
+          <span>Different</span>
+        </h1>
+        <p class="hero-lede reveal">Original websites, written by hand and delivered without agency markup, subscriptions, or lock-in.</p>
+        <div class="hero-actions reveal">
+          <a class="button" href="services.html#pricing">Start a project <span aria-hidden="true">↗</span></a>
+          <a class="button button-outline" href="contact.html">Get in touch</a>
+          <span class="price-stamp"><span>Starts at</span><strong>$299</strong></span>
+        </div>
+      </div>
+      <figure class="hero-art reveal">
+        <img src="assets/studio/celestial-architect.webp" width="1254" height="1254" alt="A celestial architect with many arms constructing a radiant geometric globe">
+      </figure>
+      <p class="hero-index" aria-hidden="true">Studio folio · MMXXVI</p>
+    </header>
 
-    <!-- SVG hero art: globe + radial burst -->
-    <svg class="dp-hero-art" viewBox="0 0 1080 1320" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <!-- Radial rays from globe center -->
-      <g stroke="#f5f5f5" stroke-width="0.55" opacity="0.6">
-        <line x1="540" y1="660" x2="540" y2="0"/>
-        <line x1="540" y1="660" x2="540" y2="1320"/>
-        <line x1="540" y1="660" x2="0" y2="660"/>
-        <line x1="540" y1="660" x2="1080" y2="660"/>
-        <line x1="540" y1="660" x2="126" y2="246"/>
-        <line x1="540" y1="660" x2="954" y2="1074"/>
-        <line x1="540" y1="660" x2="954" y2="246"/>
-        <line x1="540" y1="660" x2="126" y2="1074"/>
-        <line x1="540" y1="660" x2="318" y2="18"/>
-        <line x1="540" y1="660" x2="762" y2="1302"/>
-        <line x1="540" y1="660" x2="762" y2="18"/>
-        <line x1="540" y1="660" x2="318" y2="1302"/>
-        <line x1="540" y1="660" x2="48" y2="432"/>
-        <line x1="540" y1="660" x2="1032" y2="888"/>
-        <line x1="540" y1="660" x2="48" y2="888"/>
-        <line x1="540" y1="660" x2="1032" y2="432"/>
-        <line x1="540" y1="660" x2="420" y2="6"/>
-        <line x1="540" y1="660" x2="660" y2="1314"/>
-        <line x1="540" y1="660" x2="660" y2="6"/>
-        <line x1="540" y1="660" x2="420" y2="1314"/>
-        <line x1="540" y1="660" x2="198" y2="90"/>
-        <line x1="540" y1="660" x2="882" y2="1230"/>
-        <line x1="540" y1="660" x2="882" y2="90"/>
-        <line x1="540" y1="660" x2="198" y2="1230"/>
-        <line x1="540" y1="660" x2="18" y2="294"/>
-        <line x1="540" y1="660" x2="1062" y2="1026"/>
-        <line x1="540" y1="660" x2="18" y2="1026"/>
-        <line x1="540" y1="660" x2="1062" y2="294"/>
-        <line x1="540" y1="660" x2="72" y2="144"/>
-        <line x1="540" y1="660" x2="1008" y2="1176"/>
-        <line x1="540" y1="660" x2="1008" y2="144"/>
-        <line x1="540" y1="660" x2="72" y2="1176"/>
-        <line x1="540" y1="660" x2="474" y2="3"/>
-        <line x1="540" y1="660" x2="606" y2="1317"/>
-        <line x1="540" y1="660" x2="606" y2="3"/>
-        <line x1="540" y1="660" x2="474" y2="1317"/>
-        <line x1="540" y1="660" x2="258" y2="48"/>
-        <line x1="540" y1="660" x2="822" y2="1272"/>
-        <line x1="540" y1="660" x2="822" y2="48"/>
-        <line x1="540" y1="660" x2="258" y2="1272"/>
-        <line x1="540" y1="660" x2="30" y2="216"/>
-        <line x1="540" y1="660" x2="1050" y2="1104"/>
-        <line x1="540" y1="660" x2="30" y2="1104"/>
-        <line x1="540" y1="660" x2="1050" y2="216"/>
-        <line x1="540" y1="660" x2="6" y2="510"/>
-        <line x1="540" y1="660" x2="1074" y2="810"/>
-        <line x1="540" y1="660" x2="6" y2="810"/>
-        <line x1="540" y1="660" x2="1074" y2="510"/>
-      </g>
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <div class="marquee-group">
+          <span>Hand-built</span><span>Fast by default</span><span>Owned by you</span><span>Mobile first</span><span>Google ready</span><span>Direct support</span>
+        </div>
+        <div class="marquee-group">
+          <span>Hand-built</span><span>Fast by default</span><span>Owned by you</span><span>Mobile first</span><span>Google ready</span><span>Direct support</span>
+        </div>
+      </div>
+    </div>
 
-      <!-- Globe: outer circle -->
-      <circle cx="540" cy="660" r="390" stroke="#f5f5f5" stroke-width="1.3" fill="none" opacity="0.92"/>
+    <section class="section tiers grain" id="pricing" aria-labelledby="pricing-title">
+      <div class="section-head reveal">
+        <p class="eyebrow">Three ways in</p>
+        <div>
+          <h2 class="section-title" id="pricing-title">Choose your orbit</h2>
+          <p class="section-intro">Clear scope, clear price, no mysterious agency math. Choose the size that fits now; the foundation is built to grow.</p>
+        </div>
+      </div>
 
-      <!-- Globe: latitude ellipses -->
-      <ellipse cx="540" cy="530" rx="390" ry="40" stroke="#f5f5f5" stroke-width="0.8" fill="none" opacity="0.65"/>
-      <ellipse cx="540" cy="600" rx="390" ry="68" stroke="#f5f5f5" stroke-width="0.8" fill="none" opacity="0.65"/>
-      <ellipse cx="540" cy="660" rx="390" ry="82" stroke="#f5f5f5" stroke-width="0.9" fill="none" opacity="0.72"/>
-      <ellipse cx="540" cy="720" rx="390" ry="68" stroke="#f5f5f5" stroke-width="0.8" fill="none" opacity="0.65"/>
-      <ellipse cx="540" cy="790" rx="390" ry="40" stroke="#f5f5f5" stroke-width="0.8" fill="none" opacity="0.65"/>
+      <div class="tier-grid">
+        <article class="tier reveal">
+          <div class="tier-top"><span>01 · Starter</span><span>5–7 days</span></div>
+          <figure class="tier-emblem">
+            <img src="assets/studio/starter-hero.webp" width="1254" height="1254" loading="lazy" alt="Engraved headshot of a youthful Greek hero statue looking upward">
+          </figure>
+          <h3 class="tier-name">Starter</h3>
+          <div class="tier-price">
+            <strong>$299</strong>
+            <a href="https://buy.stripe.com/00w14m6UxdB2dyw6Mzgfu00" target="_blank" rel="noopener noreferrer">Book now ↗</a>
+          </div>
+        </article>
 
-      <!-- Globe: longitude ellipses -->
-      <ellipse cx="540" cy="660" rx="82" ry="390" stroke="#f5f5f5" stroke-width="0.8" fill="none" opacity="0.65"/>
-      <ellipse cx="540" cy="660" rx="195" ry="390" stroke="#f5f5f5" stroke-width="0.7" fill="none" opacity="0.5"/>
-      <ellipse cx="540" cy="660" rx="300" ry="390" stroke="#f5f5f5" stroke-width="0.55" fill="none" opacity="0.38"/>
+        <article class="tier reveal">
+          <div class="tier-top"><span>02 · Business</span><span>10–14 days</span></div>
+          <figure class="tier-emblem">
+            <img src="assets/studio/business-strategist.webp" width="1254" height="1254" loading="lazy" alt="Engraved headshot of a laureled Greek strategist statue">
+          </figure>
+          <h3 class="tier-name">Business</h3>
+          <div class="tier-price">
+            <strong>$599</strong>
+            <a href="https://buy.stripe.com/8x2cN47YB40s2TSc6Tgfu01" target="_blank" rel="noopener noreferrer">Book now ↗</a>
+          </div>
+        </article>
 
-      <!-- Vertical axis -->
-      <line x1="540" y1="270" x2="540" y2="1050" stroke="#f5f5f5" stroke-width="0.8" opacity="0.65"/>
+        <article class="tier reveal">
+          <div class="tier-top"><span>03 · Pro</span><span>2–3 weeks</span></div>
+          <figure class="tier-emblem">
+            <img src="assets/studio/pro-philosopher.webp" width="1254" height="1254" loading="lazy" alt="Engraved headshot of a bearded laureled Greek philosopher-ruler statue">
+          </figure>
+          <h3 class="tier-name">Pro</h3>
+          <div class="tier-price">
+            <strong>$1,099</strong>
+            <a href="https://buy.stripe.com/28E8wO92F54w8ecef1gfu02" target="_blank" rel="noopener noreferrer">Book now ↗</a>
+          </div>
+        </article>
+      </div>
+      <div class="tiers-to-covenant" id="pricing-transition" aria-hidden="true"></div>
+    </section>
 
-      <!-- Location dots (clients on the globe) -->
-      <circle cx="540" cy="595" r="5.5" fill="#f5f5f5" opacity="0.92"/>
-      <circle cx="638" cy="648" r="4" fill="#f5f5f5" opacity="0.78"/>
-      <circle cx="454" cy="710" r="3.5" fill="#f5f5f5" opacity="0.68"/>
-      <circle cx="584" cy="728" r="4.5" fill="#f5f5f5" opacity="0.85"/>
-      <circle cx="492" cy="624" r="3" fill="#f5f5f5" opacity="0.62"/>
-      <circle cx="600" cy="590" r="3" fill="#f5f5f5" opacity="0.55"/>
+    <div class="covenant-surface grain">
+      <section class="art-break" id="covenant" aria-label="Studio philosophy">
+        <div class="art-break-copy covenant-pane">
+          <p class="eyebrow reveal">The studio covenant</p>
+          <blockquote class="art-break-quote reveal">You should own the thing you paid to build.</blockquote>
+          <p class="art-break-note reveal">No platform prison. No hidden maintenance retainer. No disappearing act after launch. Just a fast, original website and a direct line to the person who made it.</p>
+        </div>
+      </section>
 
-      <!-- Connection lines -->
-      <line x1="540" y1="595" x2="638" y2="648" stroke="#f5f5f5" stroke-width="0.9" opacity="0.5"/>
-      <line x1="638" y1="648" x2="584" y2="728" stroke="#f5f5f5" stroke-width="0.9" opacity="0.5"/>
-      <line x1="540" y1="595" x2="492" y2="624" stroke="#f5f5f5" stroke-width="0.9" opacity="0.45"/>
-      <line x1="492" y1="624" x2="454" y2="710" stroke="#f5f5f5" stroke-width="0.9" opacity="0.45"/>
-      <line x1="540" y1="595" x2="600" y2="590" stroke="#f5f5f5" stroke-width="0.7" opacity="0.35"/>
-
-      <!-- Center badge -->
-      <circle cx="540" cy="660" r="52" stroke="#f5f5f5" stroke-width="1.6" fill="none" opacity="0.88"/>
-      <circle cx="540" cy="660" r="22" fill="#f5f5f5" opacity="0.92"/>
-      <text x="540" y="667" text-anchor="middle" dominant-baseline="middle" fill="#0000f2" font-family="'Cormorant Garamond',serif" font-size="19" font-weight="700" letter-spacing="2">DP</text>
-    </svg>
-
-    <!-- Vignette -->
-    <div class="dp-hero-vignette" aria-hidden="true"></div>
-
-    <!-- Content -->
-    <div class="dp-hero-content">
-      <p class="mono fade">Springfield, IL • Freelance Web Design</p>
-
-      <h1 class="dp-hero-title fade d1">
-        <span>The Site</span>
-        <span>Your Business</span>
-        <span>Deserves.</span>
-      </h1>
-
-      <div class="dp-hero-actions">
-
-        <div class="dp-hero-cta-set fade d2">
-          <p class="mono" style="letter-spacing:0.14em;opacity:0.9;">Start a project</p>
-          <div class="dp-hero-btns">
-            <a href="services.html#pricing" class="dp-btn">
-              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14m0 0-6-6m6 6-6 6"/></svg>
-              View Pricing
-            </a>
-            <a href="contact.html" class="dp-btn dp-btn-outline">Get in touch</a>
+      <section class="section features-intro" id="features" aria-labelledby="features-title">
+        <div class="section-head features-pane reveal">
+          <p class="eyebrow">Built into every site</p>
+          <div>
+            <h2 class="section-title" id="features-title">The whole constellation</h2>
+            <p class="section-intro">Design is only half the job. The invisible parts need to be just as considered as the visible ones.</p>
           </div>
         </div>
+      </section>
+    </div>
 
-        <div class="fade d3">
-          <p class="mono" style="letter-spacing:0.14em;opacity:0.9;margin-bottom:calc(15*var(--u));">Starts at</p>
-          <div class="dp-price-badge">
-            <span class="dim">$</span><strong>299</strong><span class="dim"> one-page site · </span><strong>$75</strong><span class="dim"> deposit to lock your slot</span>
-          </div>
+    <section class="features grain" aria-labelledby="features-title">
+      <div class="feature-stage" id="feature-stage">
+        <div class="feature-list">
+          <article class="feature reveal">
+            <h3>Built from scratch</h3>
+            <div class="feature-copy">
+              <p>No templates. No Wix. No page builders. Every site starts with a blank CSS file and ends with code I can explain, line by line.</p>
+            </div>
+          </article>
+          <article class="feature reveal">
+            <h3>Ships in days</h3>
+            <div class="feature-copy">
+              <p>Starter sites ship in 5–7 days. Business in two weeks. Pro in three. Booked, built, and delivered, not sitting in a queue for months.</p>
+            </div>
+          </article>
+          <article class="feature reveal">
+            <h3>Zero lock-in</h3>
+            <div class="feature-copy">
+              <p>The code is yours. The domain is yours. The hosting account is yours. You leave with everything and owe me nothing after.</p>
+            </div>
+          </article>
+          <article class="feature reveal">
+            <h3>Google-ready</h3>
+            <div class="feature-copy">
+              <p>Semantic HTML, proper metadata, sitemap.xml, robots.txt, and Search Console setup are baked in from day one, not sold as an afterthought.</p>
+            </div>
+          </article>
+          <article class="feature reveal">
+            <h3>Works everywhere</h3>
+            <div class="feature-copy">
+              <p>Built mobile-first and tested at 375px, 768px, 1440px, and beyond. If it breaks on the device in your customer’s hand, it does not ship.</p>
+            </div>
+          </article>
+          <article class="feature reveal">
+            <h3>I don’t ghost you</h3>
+            <div class="feature-copy">
+              <p>Email me a bug Monday morning, it is fixed Monday night. Questions get real answers from the person who designed and built the site.</p>
+            </div>
+          </article>
         </div>
-
       </div>
-    </div>
-  </header>
+      <div class="features-to-proof" id="features-transition" aria-hidden="true"></div>
+    </section>
 
-  <!-- ============================================================
-    TIER CARDS — Starter / Business / Pro
-    ============================================================ -->
-  <section class="dp-tiers" id="tiers" aria-labelledby="tiers-h">
-    <h2 id="tiers-h" class="sr-only">Service tiers</h2>
-
-    <!-- Starter -->
-    <div class="dp-tier fade" aria-label="Starter — $299">
-      <svg class="dp-tier-art" viewBox="0 0 600 520" aria-hidden="true">
-        <defs>
-          <radialGradient id="rg-s" cx="50%" cy="50%"><stop offset="20%" stop-color="#f5f5f5" stop-opacity="1"/><stop offset="100%" stop-color="#f5f5f5" stop-opacity="0"/></radialGradient>
-          <mask id="m-s"><rect width="600" height="520" fill="url(#rg-s)"/></mask>
-          <pattern id="dot-s" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="16" cy="16" r="2.2" fill="#f5f5f5"/></pattern>
-        </defs>
-        <rect width="600" height="520" fill="url(#dot-s)" mask="url(#m-s)" opacity="0.4"/>
-        <!-- Single page wireframe -->
-        <rect x="185" y="90" width="230" height="310" rx="4" stroke="#f5f5f5" stroke-width="2" fill="none" opacity="0.85"/>
-        <rect x="185" y="90" width="230" height="38" fill="#f5f5f5" opacity="0.6"/>
-        <line x1="208" y1="162" x2="393" y2="162" stroke="#f5f5f5" stroke-width="2" opacity="0.5"/>
-        <line x1="208" y1="188" x2="365" y2="188" stroke="#f5f5f5" stroke-width="2" opacity="0.4"/>
-        <line x1="208" y1="212" x2="378" y2="212" stroke="#f5f5f5" stroke-width="2" opacity="0.35"/>
-        <rect x="208" y="252" width="88" height="28" rx="3" fill="#f5f5f5" opacity="0.75"/>
-        <line x1="208" y1="318" x2="393" y2="318" stroke="#f5f5f5" stroke-width="1.5" opacity="0.3"/>
-        <line x1="208" y1="338" x2="355" y2="338" stroke="#f5f5f5" stroke-width="1.5" opacity="0.25"/>
-        <line x1="208" y1="358" x2="372" y2="358" stroke="#f5f5f5" stroke-width="1.5" opacity="0.25"/>
-      </svg>
-      <div class="dp-tier-inner">
-        <p class="dp-tier-sub">1 Page · 5–7 Days</p>
-        <h2 class="dp-tier-name">Starter</h2>
-        <a href="https://buy.stripe.com/00w14m6UxdB2dyw6Mzgfu00" class="dp-btn" target="_blank" rel="noopener noreferrer">
-          <span class="dp-btn-price">$299</span>
-          Deposit $75
-        </a>
+    <section class="proof grain" aria-label="Working principles">
+      <figure class="proof-media reveal">
+        <img src="assets/studio/lunar-weaver.webp" width="1254" height="1254" loading="lazy" alt="A four-armed lunar figure weaving constellations around an astrolabe">
+      </figure>
+      <div class="proof-copy">
+        <p class="eyebrow reveal">Method, not mythology</p>
+        <h2 class="proof-title reveal">Small studio. Serious craft.</h2>
+        <p class="reveal">One person owns the entire arc: strategy, design, code, launch, and care. Fewer handoffs means faster decisions and a site that still feels like one idea when it reaches the browser.</p>
+        <ul class="proof-facts reveal">
+          <li><span>First plan</span><strong>Within 24 hours</strong></li>
+          <li><span>Starter delivery</span><strong>5–7 days</strong></li>
+          <li><span>Ownership</span><strong>100% yours</strong></li>
+          <li><span>Support</span><strong>Direct, same day</strong></li>
+        </ul>
       </div>
-    </div>
+    </section>
 
-    <!-- Business -->
-    <div class="dp-tier fade d1" aria-label="Business — $599">
-      <svg class="dp-tier-art" viewBox="0 0 600 520" aria-hidden="true">
-        <defs>
-          <radialGradient id="rg-b" cx="50%" cy="50%"><stop offset="0%" stop-color="#f5f5f5" stop-opacity="0.8"/><stop offset="100%" stop-color="#f5f5f5" stop-opacity="0"/></radialGradient>
-          <mask id="m-b"><ellipse cx="300" cy="260" rx="270" ry="230" fill="url(#rg-b)"/></mask>
-        </defs>
-        <!-- Speed lines -->
-        <g stroke="#f5f5f5" stroke-width="1.2" mask="url(#m-b)" opacity="0.55">
-          <line x1="-60" y1="70" x2="610" y2="125"/>
-          <line x1="-60" y1="105" x2="610" y2="155"/>
-          <line x1="-60" y1="140" x2="610" y2="185"/>
-          <line x1="-60" y1="175" x2="610" y2="215"/>
-          <line x1="-60" y1="210" x2="610" y2="235"/>
-          <line x1="-60" y1="245" x2="610" y2="255"/>
-          <line x1="-60" y1="260" x2="610" y2="260"/>
-          <line x1="-60" y1="275" x2="610" y2="265"/>
-          <line x1="-60" y1="310" x2="610" y2="285"/>
-          <line x1="-60" y1="345" x2="610" y2="315"/>
-          <line x1="-60" y1="380" x2="610" y2="345"/>
-          <line x1="-60" y1="415" x2="610" y2="375"/>
-          <line x1="-60" y1="450" x2="610" y2="405"/>
-        </g>
-        <!-- Page stack -->
-        <rect x="192" y="132" width="186" height="214" rx="3" stroke="#f5f5f5" stroke-width="2" fill="rgba(0,0,242,0.55)" opacity="0.55"/>
-        <rect x="207" y="118" width="186" height="214" rx="3" stroke="#f5f5f5" stroke-width="2" fill="rgba(0,0,242,0.65)" opacity="0.75"/>
-        <rect x="222" y="104" width="186" height="214" rx="3" stroke="#f5f5f5" stroke-width="2" fill="rgba(0,0,242,0.75)" opacity="0.9"/>
-        <line x1="242" y1="148" x2="390" y2="148" stroke="#f5f5f5" stroke-width="1.5" opacity="0.55"/>
-        <line x1="242" y1="170" x2="368" y2="170" stroke="#f5f5f5" stroke-width="1.5" opacity="0.45"/>
-        <rect x="242" y="198" width="76" height="22" rx="2" fill="#f5f5f5" opacity="0.75"/>
-        <line x1="242" y1="248" x2="390" y2="248" stroke="#f5f5f5" stroke-width="1" opacity="0.35"/>
-        <line x1="242" y1="266" x2="372" y2="266" stroke="#f5f5f5" stroke-width="1" opacity="0.28"/>
-      </svg>
-      <div class="dp-tier-inner">
-        <p class="dp-tier-sub">5 Pages · 10–14 Days</p>
-        <h2 class="dp-tier-name">Business</h2>
-        <a href="https://buy.stripe.com/8x2cN47YB40s2TSc6Tgfu01" class="dp-btn" target="_blank" rel="noopener noreferrer">
-          <span class="dp-btn-price">$599</span>
-          Deposit $150
-        </a>
+    <section class="closing grain" id="contact" aria-labelledby="closing-title">
+      <div class="closing-inner">
+        <p class="eyebrow reveal">Starter · Business · Pro · Custom</p>
+        <h2 class="closing-title reveal" id="closing-title">Ready to build?</h2>
+        <p class="closing-copy reveal">One email starts the whole thing. Tell me what your business does and what the site needs to accomplish. I’ll come back with a plan and a price within 24 hours.</p>
+        <a class="button reveal" href="contact.html">Let’s talk <span aria-hidden="true">→</span></a>
       </div>
-    </div>
+    </section>
+  </main>
 
-    <!-- Pro -->
-    <div class="dp-tier fade d2" aria-label="Pro — $1,099">
-      <svg class="dp-tier-art" viewBox="0 0 600 520" aria-hidden="true">
-        <defs>
-          <radialGradient id="rg-p" cx="50%" cy="50%"><stop offset="5%" stop-color="#f5f5f5" stop-opacity="0.95"/><stop offset="100%" stop-color="#f5f5f5" stop-opacity="0"/></radialGradient>
-          <mask id="m-p"><ellipse cx="300" cy="260" rx="285" ry="245" fill="url(#rg-p)"/></mask>
-        </defs>
-        <g stroke="#f5f5f5" fill="none" mask="url(#m-p)">
-          <circle cx="300" cy="260" r="50" stroke-width="1.5" opacity="0.9"/>
-          <circle cx="300" cy="260" r="100" stroke-width="1" opacity="0.7"/>
-          <circle cx="300" cy="260" r="152" stroke-width="0.8" opacity="0.55"/>
-          <circle cx="300" cy="260" r="205" stroke-width="0.6" opacity="0.4"/>
-          <circle cx="300" cy="260" r="258" stroke-width="0.4" opacity="0.28"/>
-          <line x1="300" y1="0" x2="300" y2="520" stroke-width="0.8" opacity="0.65"/>
-          <line x1="40" y1="260" x2="560" y2="260" stroke-width="0.8" opacity="0.65"/>
-          <line x1="92" y1="52" x2="508" y2="468" stroke-width="0.5" opacity="0.45"/>
-          <line x1="508" y1="52" x2="92" y2="468" stroke-width="0.5" opacity="0.45"/>
-          <!-- Tick marks -->
-          <line x1="300" y1="208" x2="300" y2="196" stroke-width="2.5" opacity="0.9"/>
-          <line x1="352" y1="260" x2="364" y2="260" stroke-width="2.5" opacity="0.9"/>
-          <line x1="300" y1="312" x2="300" y2="324" stroke-width="2.5" opacity="0.9"/>
-          <line x1="248" y1="260" x2="236" y2="260" stroke-width="2.5" opacity="0.9"/>
-        </g>
-        <circle cx="300" cy="260" r="14" fill="#f5f5f5" opacity="0.95"/>
-        <circle cx="300" cy="260" r="6" fill="#0000f2"/>
-      </svg>
-      <div class="dp-tier-inner">
-        <p class="dp-tier-sub">Full Custom · 2–3 Weeks</p>
-        <h2 class="dp-tier-name">Pro</h2>
-        <a href="https://buy.stripe.com/28E8wO92F54w8ecef1gfu02" class="dp-btn" target="_blank" rel="noopener noreferrer">
-          <span class="dp-btn-price">$1,099</span>
-          Deposit $275
-        </a>
-      </div>
-    </div>
-
-  </section>
-
-  <!-- ============================================================
-    FEATURE PANEL — white paper section
-    ============================================================ -->
-  <section class="dp-features" id="features" aria-labelledby="feat-h">
-    <h2 id="feat-h" class="sr-only">What you get</h2>
-
-    <div class="dp-features-badge" aria-hidden="true">
-      <span>What</span><span>You Get</span>
-    </div>
-
-    <div class="dp-features-grid">
-
-      <!-- #1 Design -->
-      <article class="dp-feat fade">
-        <div class="dp-feat-header">
-          <p class="dp-feat-num">#1 Design</p>
-          <h3 class="dp-feat-title">Built From<br>Scratch</h3>
-        </div>
-        <div class="dp-feat-art">
-          <svg viewBox="0 0 666 574" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <rect width="666" height="574" fill="#0000f2"/>
-            <defs>
-              <radialGradient id="f1rg" cx="18%" cy="78%"><stop offset="0%" stop-color="#f5f5f5" stop-opacity="1"/><stop offset="65%" stop-color="#f5f5f5" stop-opacity="0.3"/><stop offset="100%" stop-color="#f5f5f5" stop-opacity="0"/></radialGradient>
-              <mask id="f1m"><rect width="666" height="574" fill="url(#f1rg)"/></mask>
-            </defs>
-            <!-- Halftone dot field -->
-            <g fill="#f5f5f5" mask="url(#f1m)">
-              <circle cx="55" cy="510" r="16"/><circle cx="115" cy="510" r="13.5"/><circle cx="175" cy="510" r="11"/><circle cx="235" cy="510" r="9"/><circle cx="295" cy="510" r="7"/><circle cx="355" cy="510" r="5"/><circle cx="415" cy="510" r="3.5"/><circle cx="475" cy="510" r="2.5"/><circle cx="535" cy="510" r="1.5"/>
-              <circle cx="55" cy="450" r="14"/><circle cx="115" cy="450" r="11.5"/><circle cx="175" cy="450" r="9.5"/><circle cx="235" cy="450" r="7.5"/><circle cx="295" cy="450" r="6"/><circle cx="355" cy="450" r="4.5"/><circle cx="415" cy="450" r="3"/><circle cx="475" cy="450" r="2"/><circle cx="535" cy="450" r="1"/>
-              <circle cx="55" cy="390" r="12"/><circle cx="115" cy="390" r="10"/><circle cx="175" cy="390" r="8.5"/><circle cx="235" cy="390" r="6.5"/><circle cx="295" cy="390" r="5"/><circle cx="355" cy="390" r="3.8"/><circle cx="415" cy="390" r="2.5"/><circle cx="475" cy="390" r="1.5"/>
-              <circle cx="55" cy="330" r="10"/><circle cx="115" cy="330" r="8.5"/><circle cx="175" cy="330" r="7"/><circle cx="235" cy="330" r="5.5"/><circle cx="295" cy="330" r="4"/><circle cx="355" cy="330" r="3"/><circle cx="415" cy="330" r="2"/>
-              <circle cx="55" cy="270" r="8"/><circle cx="115" cy="270" r="6.5"/><circle cx="175" cy="270" r="5.5"/><circle cx="235" cy="270" r="4"/><circle cx="295" cy="270" r="3"/>
-              <circle cx="55" cy="210" r="6"/><circle cx="115" cy="210" r="4.5"/><circle cx="175" cy="210" r="3.5"/><circle cx="235" cy="210" r="2.5"/>
-              <circle cx="55" cy="150" r="4"/><circle cx="115" cy="150" r="3"/><circle cx="175" cy="150" r="2"/>
-            </g>
-            <!-- Page layout wireframe on right -->
-            <rect x="330" y="72" width="290" height="400" rx="4" stroke="#f5f5f5" stroke-width="1.8" fill="rgba(0,0,242,0.6)" opacity="0.9"/>
-            <rect x="330" y="72" width="290" height="42" fill="#f5f5f5" opacity="0.22"/>
-            <line x1="352" y1="150" x2="598" y2="150" stroke="#f5f5f5" stroke-width="1.5" opacity="0.55"/>
-            <line x1="352" y1="178" x2="570" y2="178" stroke="#f5f5f5" stroke-width="1.5" opacity="0.42"/>
-            <line x1="352" y1="204" x2="582" y2="204" stroke="#f5f5f5" stroke-width="1.5" opacity="0.38"/>
-            <rect x="352" y="240" width="108" height="26" rx="3" fill="#f5f5f5" opacity="0.8"/>
-            <line x1="352" y1="298" x2="598" y2="298" stroke="#f5f5f5" stroke-width="1.2" opacity="0.35"/>
-            <line x1="352" y1="322" x2="562" y2="322" stroke="#f5f5f5" stroke-width="1.2" opacity="0.28"/>
-            <line x1="352" y1="346" x2="578" y2="346" stroke="#f5f5f5" stroke-width="1.2" opacity="0.28"/>
-            <line x1="352" y1="394" x2="598" y2="394" stroke="#f5f5f5" stroke-width="1.2" opacity="0.35"/>
-            <line x1="352" y1="418" x2="560" y2="418" stroke="#f5f5f5" stroke-width="1.2" opacity="0.28"/>
-          </svg>
-        </div>
-        <p class="dp-feat-desc">No templates. No Wix. No page builders. Every site starts with a blank CSS file and ends with code I can explain, line by line.</p>
-      </article>
-
-      <!-- #2 Speed -->
-      <article class="dp-feat fade d1">
-        <div class="dp-feat-header">
-          <p class="dp-feat-num">#2 Speed</p>
-          <h3 class="dp-feat-title">Ships in<br>Days</h3>
-        </div>
-        <div class="dp-feat-art">
-          <svg viewBox="0 0 666 574" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <rect width="666" height="574" fill="#0000f2"/>
-            <defs>
-              <radialGradient id="f2rg" cx="62%" cy="50%"><stop offset="0%" stop-color="#f5f5f5" stop-opacity="0.85"/><stop offset="100%" stop-color="#f5f5f5" stop-opacity="0"/></radialGradient>
-              <mask id="f2m"><ellipse cx="420" cy="287" rx="260" ry="240" fill="url(#f2rg)"/></mask>
-            </defs>
-            <!-- Speed rays from right -->
-            <g stroke="#f5f5f5" stroke-width="1.1" mask="url(#f2m)">
-              <line x1="420" y1="287" x2="-60" y2="40" opacity="0.7"/>
-              <line x1="420" y1="287" x2="-60" y2="100" opacity="0.7"/>
-              <line x1="420" y1="287" x2="-60" y2="160" opacity="0.72"/>
-              <line x1="420" y1="287" x2="-60" y2="220" opacity="0.78"/>
-              <line x1="420" y1="287" x2="-60" y2="255" opacity="0.85"/>
-              <line x1="420" y1="287" x2="-60" y2="287" opacity="0.92"/>
-              <line x1="420" y1="287" x2="-60" y2="319" opacity="0.85"/>
-              <line x1="420" y1="287" x2="-60" y2="354" opacity="0.78"/>
-              <line x1="420" y1="287" x2="-60" y2="414" opacity="0.7"/>
-              <line x1="420" y1="287" x2="-60" y2="474" opacity="0.65"/>
-              <line x1="420" y1="287" x2="-60" y2="534" opacity="0.55"/>
-              <line x1="420" y1="287" x2="160" y2="-60" opacity="0.45"/>
-              <line x1="420" y1="287" x2="260" y2="-60" opacity="0.4"/>
-              <line x1="420" y1="287" x2="160" y2="634" opacity="0.45"/>
-              <line x1="420" y1="287" x2="260" y2="634" opacity="0.4"/>
-            </g>
-            <!-- Calendar block -->
-            <rect x="390" y="98" width="238" height="308" rx="5" stroke="#f5f5f5" stroke-width="2" fill="rgba(0,0,242,0.65)" opacity="0.92"/>
-            <rect x="390" y="98" width="238" height="46" fill="#f5f5f5" opacity="0.18"/>
-            <text x="509" y="127" text-anchor="middle" fill="#f5f5f5" font-family="'DM Mono','Courier New',monospace" font-size="14" font-weight="500" letter-spacing="3" opacity="0.9">5–7 DAYS</text>
-            <!-- Calendar grid lines -->
-            <g stroke="#f5f5f5" stroke-width="0.7" opacity="0.3">
-              <line x1="390" y1="184" x2="628" y2="184"/>
-              <line x1="390" y1="224" x2="628" y2="224"/>
-              <line x1="390" y1="264" x2="628" y2="264"/>
-              <line x1="390" y1="304" x2="628" y2="304"/>
-              <line x1="390" y1="344" x2="628" y2="344"/>
-              <line x1="424" y1="144" x2="424" y2="406"/>
-              <line x1="458" y1="144" x2="458" y2="406"/>
-              <line x1="492" y1="144" x2="492" y2="406"/>
-              <line x1="526" y1="144" x2="526" y2="406"/>
-              <line x1="560" y1="144" x2="560" y2="406"/>
-              <line x1="594" y1="144" x2="594" y2="406"/>
-            </g>
-            <!-- Filled calendar cells (days worked) -->
-            <rect x="393" y="187" width="28" height="34" fill="#f5f5f5" opacity="0.68" rx="1"/>
-            <rect x="427" y="187" width="28" height="34" fill="#f5f5f5" opacity="0.68" rx="1"/>
-            <rect x="461" y="187" width="28" height="34" fill="#f5f5f5" opacity="0.68" rx="1"/>
-            <rect x="495" y="187" width="28" height="34" fill="#f5f5f5" opacity="0.68" rx="1"/>
-            <rect x="529" y="187" width="28" height="34" fill="#f5f5f5" opacity="0.9" rx="1"/>
-            <!-- Checkmark on last day -->
-            <polyline points="531,205 537,213 547,195" stroke="#0000f2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-            <!-- Launch indicator -->
-            <circle cx="509" cy="445" r="30" fill="#f5f5f5" opacity="0.88"/>
-            <text x="509" y="454" text-anchor="middle" fill="#0000f2" font-family="'DM Mono','Courier New',monospace" font-size="24" font-weight="500">↑</text>
-          </svg>
-        </div>
-        <p class="dp-feat-desc">Starter sites ship in 5–7 days. Business in two weeks. Pro in three. Booked, built, and delivered — not sitting in a queue for months.</p>
-      </article>
-
-      <!-- #3 Ownership -->
-      <article class="dp-feat fade d2">
-        <div class="dp-feat-header">
-          <p class="dp-feat-num">#3 Yours</p>
-          <h3 class="dp-feat-title">Zero<br>Lock-In</h3>
-        </div>
-        <div class="dp-feat-art">
-          <svg viewBox="0 0 666 574" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <rect width="666" height="574" fill="#0000f2"/>
-            <!-- Background dot grid -->
-            <g fill="#f5f5f5" opacity="0.14">
-              <circle cx="80" cy="80" r="3.5"/><circle cx="140" cy="80" r="3.5"/><circle cx="200" cy="80" r="3.5"/>
-              <circle cx="80" cy="140" r="3.5"/><circle cx="140" cy="140" r="3.5"/><circle cx="200" cy="140" r="3.5"/>
-              <circle cx="80" cy="420" r="3.5"/><circle cx="140" cy="420" r="3.5"/><circle cx="200" cy="420" r="3.5"/>
-              <circle cx="80" cy="480" r="3.5"/><circle cx="140" cy="480" r="3.5"/><circle cx="200" cy="480" r="3.5"/>
-              <circle cx="466" cy="80" r="3.5"/><circle cx="526" cy="80" r="3.5"/><circle cx="586" cy="80" r="3.5"/>
-              <circle cx="466" cy="140" r="3.5"/><circle cx="526" cy="140" r="3.5"/><circle cx="586" cy="140" r="3.5"/>
-              <circle cx="466" cy="420" r="3.5"/><circle cx="526" cy="420" r="3.5"/><circle cx="586" cy="420" r="3.5"/>
-              <circle cx="466" cy="480" r="3.5"/><circle cx="526" cy="480" r="3.5"/><circle cx="586" cy="480" r="3.5"/>
-            </g>
-            <!-- Key -->
-            <circle cx="252" cy="232" r="96" stroke="#f5f5f5" stroke-width="18" fill="none" opacity="0.88"/>
-            <circle cx="252" cy="232" r="52" stroke="#f5f5f5" stroke-width="10" fill="none" opacity="0.7"/>
-            <!-- Key shaft -->
-            <rect x="332" y="216" width="284" height="33" rx="4" fill="#f5f5f5" opacity="0.88"/>
-            <!-- Key teeth -->
-            <rect x="432" y="249" width="28" height="46" rx="3" fill="#f5f5f5" opacity="0.88"/>
-            <rect x="494" y="249" width="24" height="35" rx="3" fill="#f5f5f5" opacity="0.88"/>
-            <rect x="550" y="249" width="24" height="54" rx="3" fill="#f5f5f5" opacity="0.88"/>
-            <!-- Label -->
-            <text x="333" y="366" text-anchor="middle" fill="#f5f5f5" font-family="'DM Mono','Courier New',monospace" font-size="17" letter-spacing="5" opacity="0.88">YOU OWN IT</text>
-            <line x1="140" y1="385" x2="528" y2="385" stroke="#f5f5f5" stroke-width="0.8" opacity="0.32"/>
-            <text x="333" y="414" text-anchor="middle" fill="#f5f5f5" font-family="'DM Mono','Courier New',monospace" font-size="11" letter-spacing="3" opacity="0.52">CODE · DOMAIN · HOSTING</text>
-          </svg>
-        </div>
-        <p class="dp-feat-desc">The code is yours. The domain is yours. The hosting account is yours. I'm not a subscription — I'm a builder. You leave with everything and owe me nothing after.</p>
-      </article>
-
-      <!-- #4 SEO -->
-      <article class="dp-feat fade">
-        <div class="dp-feat-header">
-          <p class="dp-feat-num">#4 Found</p>
-          <h3 class="dp-feat-title">Google-<br>Ready</h3>
-        </div>
-        <div class="dp-feat-art">
-          <svg viewBox="0 0 666 574" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <rect width="666" height="574" fill="#0000f2"/>
-            <!-- Browser/SERP mockup -->
-            <rect x="72" y="54" width="522" height="466" rx="7" stroke="#f5f5f5" stroke-width="1.8" fill="rgba(0,0,242,0.35)" opacity="0.9"/>
-            <rect x="72" y="54" width="522" height="46" fill="#f5f5f5" opacity="0.12"/>
-            <text x="333" y="83" text-anchor="middle" fill="#f5f5f5" font-family="'DM Mono','Courier New',monospace" font-size="11" letter-spacing="1" opacity="0.88">google.com › search?q=your+business</text>
-            <!-- Result 1 (yours) highlighted -->
-            <rect x="92" y="126" width="482" height="108" rx="4" fill="#f5f5f5" opacity="0.1"/>
-            <rect x="92" y="126" width="5" height="108" rx="2" fill="#f5f5f5" opacity="0.9"/>
-            <text x="110" y="152" fill="#f5f5f5" font-family="'DM Mono','Courier New',monospace" font-size="10.5" opacity="0.45" letter-spacing="0.8">yourbusiness.com</text>
-            <text x="110" y="176" fill="#f5f5f5" font-family="'Cormorant Garamond','Times New Roman',serif" font-size="18" opacity="0.92">Your Business — Springfield, IL</text>
-            <text x="110" y="198" fill="#f5f5f5" font-family="'DM Mono','Courier New',monospace" font-size="10" opacity="0.58" letter-spacing="0.4">Professional services in Springfield since 2024. Contact us today for a free...</text>
-            <text x="110" y="220" fill="#f5f5f5" font-family="'DM Mono','Courier New',monospace" font-size="13" opacity="0.75">★★★★★</text>
-            <!-- Result 2 (competitor, faded) -->
-            <text x="110" y="270" fill="#f5f5f5" font-family="'DM Mono','Courier New',monospace" font-size="10.5" opacity="0.2" letter-spacing="0.8">competitor-site.com</text>
-            <text x="110" y="292" fill="#f5f5f5" font-family="'Cormorant Garamond','Times New Roman',serif" font-size="18" opacity="0.22">Competing Business</text>
-            <line x1="92" y1="318" x2="573" y2="318" stroke="#f5f5f5" stroke-width="0.7" opacity="0.12"/>
-            <!-- Result 3 -->
-            <text x="110" y="352" fill="#f5f5f5" font-family="'DM Mono','Courier New',monospace" font-size="10.5" opacity="0.12" letter-spacing="0.8">another-company.net</text>
-            <text x="110" y="375" fill="#f5f5f5" font-family="'Cormorant Garamond','Times New Roman',serif" font-size="18" opacity="0.14">Someone Else</text>
-            <!-- Magnifying glass overlay -->
-            <circle cx="562" cy="436" r="64" stroke="#f5f5f5" stroke-width="3" fill="none" opacity="0.45"/>
-            <line x1="610" y1="484" x2="644" y2="518" stroke="#f5f5f5" stroke-width="5.5" stroke-linecap="round" opacity="0.45"/>
-          </svg>
-        </div>
-        <p class="dp-feat-desc">Semantic HTML, proper meta tags, sitemap.xml, robots.txt, and Google Search Console setup — baked in from day one, not an afterthought upsell.</p>
-      </article>
-
-      <!-- #5 Mobile -->
-      <article class="dp-feat fade d1">
-        <div class="dp-feat-header">
-          <p class="dp-feat-num">#5 Mobile</p>
-          <h3 class="dp-feat-title">Works<br>Everywhere</h3>
-        </div>
-        <div class="dp-feat-art">
-          <svg viewBox="0 0 666 574" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <rect width="666" height="574" fill="#0000f2"/>
-            <!-- Desktop monitor -->
-            <rect x="48" y="76" width="352" height="248" rx="7" stroke="#f5f5f5" stroke-width="2" fill="rgba(0,0,242,0.45)" opacity="0.9"/>
-            <rect x="48" y="76" width="352" height="38" fill="#f5f5f5" opacity="0.16"/>
-            <line x1="72" y1="150" x2="380" y2="150" stroke="#f5f5f5" stroke-width="1.5" opacity="0.48"/>
-            <line x1="72" y1="176" x2="340" y2="176" stroke="#f5f5f5" stroke-width="1.2" opacity="0.38"/>
-            <line x1="72" y1="200" x2="356" y2="200" stroke="#f5f5f5" stroke-width="1.2" opacity="0.32"/>
-            <rect x="72" y="228" width="120" height="28" rx="3" fill="#f5f5f5" opacity="0.72"/>
-            <!-- Monitor stand -->
-            <line x1="224" y1="324" x2="224" y2="368" stroke="#f5f5f5" stroke-width="3" opacity="0.65"/>
-            <line x1="172" y1="368" x2="276" y2="368" stroke="#f5f5f5" stroke-width="3" opacity="0.65"/>
-            <!-- Tablet -->
-            <rect x="392" y="118" width="136" height="192" rx="9" stroke="#f5f5f5" stroke-width="2" fill="rgba(0,0,242,0.45)" opacity="0.9"/>
-            <line x1="408" y1="148" x2="512" y2="148" stroke="#f5f5f5" stroke-width="1.2" opacity="0.48"/>
-            <line x1="408" y1="170" x2="498" y2="170" stroke="#f5f5f5" stroke-width="1" opacity="0.38"/>
-            <line x1="408" y1="190" x2="506" y2="190" stroke="#f5f5f5" stroke-width="1" opacity="0.32"/>
-            <rect x="408" y="214" width="64" height="20" rx="2" fill="#f5f5f5" opacity="0.65"/>
-            <!-- Mobile -->
-            <rect x="540" y="156" width="104" height="198" rx="11" stroke="#f5f5f5" stroke-width="2" fill="rgba(0,0,242,0.45)" opacity="0.9"/>
-            <line x1="556" y1="186" x2="628" y2="186" stroke="#f5f5f5" stroke-width="1.2" opacity="0.48"/>
-            <line x1="556" y1="206" x2="618" y2="206" stroke="#f5f5f5" stroke-width="1" opacity="0.38"/>
-            <line x1="556" y1="225" x2="624" y2="225" stroke="#f5f5f5" stroke-width="1" opacity="0.32"/>
-            <rect x="556" y="248" width="52" height="18" rx="2" fill="#f5f5f5" opacity="0.65"/>
-            <!-- Label -->
-            <text x="333" y="430" text-anchor="middle" fill="#f5f5f5" font-family="'DM Mono','Courier New',monospace" font-size="16" letter-spacing="5" opacity="0.8">RESPONSIVE</text>
-            <line x1="72" y1="448" x2="594" y2="448" stroke="#f5f5f5" stroke-width="0.7" opacity="0.25"/>
-            <text x="333" y="478" text-anchor="middle" fill="#f5f5f5" font-family="'DM Mono','Courier New',monospace" font-size="11" letter-spacing="3" opacity="0.45">DESKTOP · TABLET · MOBILE</text>
-          </svg>
-        </div>
-        <p class="dp-feat-desc">Built mobile-first, tested at 375px, 768px, and 1440px. If it breaks on an iPhone 12, it doesn't ship. Sixty percent of your traffic is on mobile — your site should work there.</p>
-      </article>
-
-      <!-- #6 Support -->
-      <article class="dp-feat fade d2">
-        <div class="dp-feat-header">
-          <p class="dp-feat-num">#6 Care</p>
-          <h3 class="dp-feat-title">I Don't<br>Ghost You</h3>
-        </div>
-        <div class="dp-feat-art">
-          <svg viewBox="0 0 666 574" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <rect width="666" height="574" fill="#0000f2"/>
-            <!-- Chat bubble — client (left) -->
-            <rect x="52" y="72" width="336" height="108" rx="14" fill="rgba(245,245,245,0.14)" stroke="#f5f5f5" stroke-width="1.8" opacity="0.9"/>
-            <polygon points="72,180 96,180 72,214" fill="rgba(245,245,245,0.14)" stroke="#f5f5f5" stroke-width="1.8" stroke-linejoin="round"/>
-            <line x1="76" y1="108" x2="368" y2="108" stroke="#f5f5f5" stroke-width="1.5" opacity="0.5"/>
-            <line x1="76" y1="134" x2="324" y2="134" stroke="#f5f5f5" stroke-width="1.5" opacity="0.38"/>
-            <line x1="76" y1="158" x2="298" y2="158" stroke="#f5f5f5" stroke-width="1.5" opacity="0.3"/>
-            <!-- Chat bubble — me (right) -->
-            <rect x="278" y="252" width="336" height="108" rx="14" fill="#f5f5f5" opacity="0.88"/>
-            <polygon points="594,360 618,360 618,394" fill="#f5f5f5" opacity="0.88"/>
-            <line x1="302" y1="288" x2="590" y2="288" stroke="#0000f2" stroke-width="1.5" opacity="0.45"/>
-            <line x1="302" y1="314" x2="560" y2="314" stroke="#0000f2" stroke-width="1.5" opacity="0.35"/>
-            <line x1="302" y1="338" x2="548" y2="338" stroke="#0000f2" stroke-width="1.5" opacity="0.3"/>
-            <!-- Response time pill -->
-            <rect x="188" y="426" width="290" height="58" rx="29" stroke="#f5f5f5" stroke-width="1.8" fill="none" opacity="0.72"/>
-            <circle cx="238" cy="455" r="18" fill="#f5f5f5" opacity="0.9"/>
-            <text x="238" y="462" text-anchor="middle" fill="#0000f2" font-family="'DM Mono','Courier New',monospace" font-size="15" font-weight="700">✓</text>
-            <text x="373" y="462" text-anchor="middle" fill="#f5f5f5" font-family="'DM Mono','Courier New',monospace" font-size="11.5" letter-spacing="1.5" opacity="0.88">SAME-DAY REPLY</text>
-          </svg>
-        </div>
-        <p class="dp-feat-desc">Email me a bug Monday morning, it's fixed Monday night. Questions get real answers, same day — direct line to the person who built your site.</p>
-      </article>
-
-    </div><!-- /features-grid -->
-
-    <!-- Wordmark at bottom of paper section -->
-    <div class="dp-feat-wordmark" aria-hidden="true">Studio</div>
-
-  </section>
-
-  <!-- ============================================================
-    FOOTER / CTA
-    ============================================================ -->
-  <footer class="dp-footer" id="cta" role="contentinfo">
-
-    <div class="dp-footer-cta">
-      <p class="dp-footer-eyebrow">Starter · Business · Pro · Custom</p>
-      <h2 class="dp-footer-title">Ready to Build?</h2>
-      <p class="dp-footer-sub">One email starts the whole thing. Tell me what your business does and what you need the site to accomplish — I'll come back with a plan and a price in 24 hours.</p>
-      <a href="contact.html" class="dp-btn" style="padding-left:calc(30*var(--u));">Let's talk →</a>
-    </div>
-
-    <!-- Ghost wordmark -->
-    <div class="dp-ghost" aria-hidden="true">Dominic<br>Paoni</div>
-
-    <!-- Footer bar -->
-    <div class="dp-footer-bar">
-      <div>
-        <p style="opacity:0.88;margin-bottom:calc(6*var(--u));">Dominic Paoni — Web Design</p>
-        <p>Springfield, IL · 2026</p>
-      </div>
-      <div class="dp-footer-links">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="work.html">Work</a>
-        <a href="services.html">Services &amp; Pricing</a>
-        <a href="contact.html">Contact</a>
-        <a href="mailto:andrewpaoni@gmail.com" style="margin-top:calc(6*var(--u));opacity:0.45;">andrewpaoni@gmail.com</a>
-      </div>
-    </div>
-
+  <footer class="site-footer">
+    <p>Springfield, Illinois<br>© 2026 Dominic Paoni</p>
+    <div class="footer-mark" aria-label="Dominic Paoni">Dominic<br>Paoni</div>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="work.html">Work</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact</a>
+    </nav>
   </footer>
 
-</div><!-- /.dp -->
+  <script>
+    document.documentElement.classList.add("js");
 
-<script>
-(function () {
-  // Scroll-in observer
-  var fades = document.querySelectorAll('.fade');
-  if (!fades.length) return;
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (e.isIntersecting) {
-        e.target.classList.add('in');
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-  fades.forEach(function (el) { io.observe(el); });
+    const menuButton = document.querySelector(".menu-toggle");
+    const menu = document.querySelector(".nav-actions");
 
-  // Trigger hero elements immediately on load
-  setTimeout(function () {
-    document.querySelectorAll('.dp-hero .fade').forEach(function (el) {
-      el.classList.add('in');
-    });
-  }, 80);
+    if (menuButton && menu) {
+      const closeMenu = () => {
+        menu.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.textContent = "Menu";
+      };
 
-  // Btn hover color fix for tier cards
-  document.querySelectorAll('.dp-btn').forEach(function (btn) {
-    btn.addEventListener('mouseenter', function () { this.style.background = '#ffffff'; });
-    btn.addEventListener('mouseleave', function () { this.style.background = ''; });
-  });
-})();
-</script>
+      menuButton.addEventListener("click", () => {
+        const isOpen = menu.classList.toggle("open");
+        menuButton.setAttribute("aria-expanded", String(isOpen));
+        menuButton.textContent = isOpen ? "Close" : "Menu";
+      });
+
+      menu.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && menu.classList.contains("open")) {
+          closeMenu();
+          menuButton.focus();
+        }
+      });
+    }
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const revealItems = document.querySelectorAll(".reveal");
+
+    if (reduceMotion || !("IntersectionObserver" in window)) {
+      revealItems.forEach((item) => item.classList.add("visible"));
+    } else {
+      const observer = new IntersectionObserver((entries, currentObserver) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            currentObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: "0px 0px -4% 0px" });
+
+      revealItems.forEach((item) => observer.observe(item));
+    }
+  </script>
 </body>
 </html>
