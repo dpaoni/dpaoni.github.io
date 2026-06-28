@@ -801,7 +801,8 @@
       }
       .nav-home { display: none; }
       .brand { justify-self: start; }
-      .menu-toggle { display: block; justify-self: end; }
+      /* Larger tap target for menu toggle */
+      .menu-toggle { display: block; justify-self: end; min-height: 44px; padding: .55rem 0; }
       .nav-actions {
         display: none;
         grid-column: 1 / -1;
@@ -816,10 +817,10 @@
       .nav-actions.open { display: flex; }
       .nav-actions a { padding: 1rem var(--gutter); border-top: 1px solid var(--blue); }
       .hero { padding-top: 130px; padding-bottom: 65px; }
-      .hero-title { font-size: clamp(3.6rem, 16vw, 5.1rem); }
+      .hero-title { font-size: clamp(3.4rem, 14vw, 5.1rem); }
       .hero-title span:nth-child(2) { margin-left: .2em; }
       .hero-art { inset: 0; width: 100%; height: 100%; margin: 0; }
-      .hero-lede { font-size: .88rem; }
+      .hero-lede { font-size: clamp(.88rem, 3.8vw, 1rem); }
       .hero-actions { align-items: stretch; }
       .button { width: 100%; }
       .price-stamp { width: 100%; padding: .9rem 0 0; border-left: 0; border-top: 1px solid rgb(245 242 232 / .45); }
@@ -832,10 +833,14 @@
       .section-intro { margin-left: 0; }
       .tier { min-height: 470px; }
       .tier-emblem { min-height: 210px; }
-      .art-break-copy { min-height: 66svh; }
-      .art-break-quote { font-size: 17vw; }
+      /* Art-break copy: was min(54%, 820px) = ~170px at 375px — completely unreadable */
+      .art-break-copy { width: 100%; min-height: auto; }
+      .art-break-quote { font-size: clamp(3.4rem, 16vw, 5rem); }
+      .art-break-note { font-size: clamp(.88rem, 3.8vw, .98rem); }
       .art-break-media { min-height: 100vw; }
       .features { overflow-x: clip; }
+      /* Fixed background broken on iOS Safari */
+      .feature-stage { background-attachment: scroll; }
       .feature {
         grid-template-columns: minmax(0, 1fr);
         gap: 1rem;
@@ -847,11 +852,13 @@
         font-size: 11.5vw;
         overflow-wrap: anywhere;
       }
+      .feature p { font-size: clamp(.88rem, 3.8vw, 1rem); }
       .feature-copy { gap: 1.5rem; }
       .proof-media { min-height: 100vw; }
-      .proof-title { font-size: 17vw; }
+      .proof-title { font-size: clamp(3.4rem, 16vw, 5rem); }
+      .proof-copy p:not(.eyebrow) { font-size: clamp(.88rem, 3.8vw, 1rem); }
       .closing { min-height: 86svh; }
-      .closing-title { font-size: 20vw; }
+      .closing-title { font-size: clamp(3.8rem, 20vw, 5.5rem); }
       .site-footer { grid-template-columns: 1fr; text-align: center; }
       .footer-mark { grid-row: 1; }
       .footer-links { justify-self: center; justify-content: center; }
