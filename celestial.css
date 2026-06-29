@@ -362,7 +362,7 @@ h1, h2, h3, h4 {
 .celestial-continuum {
   position: relative;
   isolation: isolate;
-  background: #08080d url("assets/studio/celestial-continuum.webp") center top / cover no-repeat;
+  background: #08080d url("assets/studio/celestial-continuum.webp?v=2x") center top / cover no-repeat;
 }
 .index-art-stage {
   position: relative;
