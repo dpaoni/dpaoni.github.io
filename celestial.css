@@ -362,11 +362,11 @@ h1, h2, h3, h4 {
 .celestial-continuum {
   position: relative;
   isolation: isolate;
-  background: #08080d url("assets/studio/celestial-fhd.webp") center top / 100% 100% no-repeat;
+  background: #08080d url("https://raw.githubusercontent.com/dpaoni/dpaoni.github.io/4f90370/assets/studio/celestial-fhd.webp") center top / 100% 100% no-repeat;
 }
 @media (min-width: 2200px) {
   .celestial-continuum {
-    background-image: url("assets/studio/celestial-qhd.webp");
+    background-image: url("https://raw.githubusercontent.com/dpaoni/dpaoni.github.io/4f90370/assets/studio/celestial-qhd.webp");
   }
 }
 .index-art-stage {
