@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Don's Chimney Sweep — Springfield, IL</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,-apple-system,sans-serif;line-height:1.6;color:#1a1a1a}
+.hero{background:linear-gradient(rgba(0,0,0,.5),rgba(35,15,5,.9)),url('https://images.unsplash.com/photo-1484154218962-a197022b5858?w=1200&q=80') center/cover no-repeat;color:#fff;padding:100px 20px;text-align:center}
+.hero h1{font-size:2.5rem;margin-bottom:10px}
+.hero p{font-size:1.2rem;opacity:.9;margin-bottom:25px}
+.hero .phone{font-size:1.8rem;font-weight:700;color:#f4a460}
+.btn{display:inline-block;background:#8b4513;color:#fff;padding:14px 36px;border-radius:6px;text-decoration:none;font-weight:600;font-size:1.1rem;margin-top:15px}
+.btn:hover{background:#6b3410}
+section{padding:60px 20px;max-width:900px;margin:0 auto}
+section h2{font-size:1.8rem;margin-bottom:20px;color:#4a2511;border-bottom:3px solid:#8b4513;padding-bottom:8px;display:inline-block}
+.services{background:#faf6f3}
+.service-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-top:25px}
+.service-card{background:#fff;padding:25px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.08);text-align:center}
+.service-card h3{color:#4a2511;margin-bottom:8px;font-size:1.1rem}
+.area-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:20px}
+.area-item{background:#f0e4da;padding:12px;border-radius:6px;text-align:center;font-weight:500}
+.cta{background:#4a2511;color:#fff;text-align:center}
+.cta h2{color:#fff;border-color:#f4a460}
+.cta p{font-size:1.1rem;margin-bottom:8px}
+.cta .phone{font-size:2rem;font-weight:700;color:#f4a460;margin:15px 0}
+.contact-form{background:#faf6f3}
+.contact-form form{max-width:500px;margin:20px auto 0}
+.contact-form input,.contact-form textarea{width:100%;padding:12px;margin-bottom:15px;border:2px solid #ddd;border-radius:6px;font-size:1rem;font-family:inherit}
+.contact-form textarea{min-height:100px;resize:vertical}
+.contact-form button{background:#4a2511;color:#fff;padding:14px 40px;border:none;border-radius:6px;font-size:1.1rem;font-weight:600;cursor:pointer;width:100%}
+.contact-form button:hover{background:#33190b}
+footer{text-align:center;padding:20px;font-size:.85rem;color:#666;background:#f0f0f0}
+address{font-style:normal;margin-top:20px;font-size:.95rem;color:#555}
+@media(max-width:600px){
+.hero h1{font-size:1.6rem}
+.hero p{font-size:1rem}
+.hero .phone{font-size:1.4rem}
+.hero{padding:50px 15px}
+section{padding:40px 15px}
+section h2{font-size:1.4rem}
+.service-grid{grid-template-columns:1fr}
+.area-grid{grid-template-columns:repeat(2,1fr)}
+.cta .phone{font-size:1.5rem}
+.btn{padding:12px 24px;font-size:1rem}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+<h1>Don's Chimney Sweep</h1>
+<p>Professional Chimney Services — Springfield, IL</p>
+<div class="phone">(217) 544-8477</div>
+<a href="tel:2175448477" class="btn">Schedule Service</a>
+</div>
+
+<section>
+<h2>About Us</h2>
+<p style="margin-top:18px;font-size:1.1rem">Don's Chimney Sweep has been keeping Springfield homes safe and warm for years. A clean chimney is not just about efficiency — it is about protecting your family from chimney fires and carbon monoxide. We provide thorough, honest service at fair prices.</p>
+</section>
+
+<section class="services">
+<h2>Our Services</h2>
+<div class="service-grid">
+<div class="service-card"><h3>Chimney Sweeping</h3><p>Full cleaning and inspection</p></div>
+<div class="service-card"><h3>Inspections</h3><p>Level 1 and Level 2 chimney inspections</p></div>
+<div class="service-card"><h3>Repairs</h3><p>Masonry, flue, and cap repair</p></div>
+<div class="service-card"><h3>Dryer Vent Cleaning</h3><p>Prevent fires, improve efficiency</p></div>
+<div class="service-card"><h3>Animal Removal</h3><p>Birds, squirrels, and raccoons removed safely</p></div>
+<div class="service-card"><h3>Chimney Caps</h3><p>Installation and replacement</p></div>
+</div>
+</section>
+
+<section>
+<h2>Service Area</h2>
+<div class="area-grid">
+<div class="area-item">Springfield</div>
+<div class="area-item">Chatham</div>
+<div class="area-item">New Berlin</div>
+<div class="area-item">Rochester</div>
+<div class="area-item">Sherman</div>
+<div class="area-item">Pleasant Plains</div>
+</div>
+</section>
+
+<section class="contact-form">
+<h2>Request Service</h2>
+<form action="#" method="post">
+<input type="text" name="name" placeholder="Your Name" required>
+<input type="tel" name="phone" placeholder="Phone Number" required>
+<input type="email" name="email" placeholder="Email Address">
+<textarea name="message" placeholder="What service do you need?"></textarea>
+<button type="submit">Send Request</button>
+</form>
+</section>
+
+<section class="cta">
+<h2>Keep Your Home Safe</h2>
+<p>Call today to schedule your chimney sweeping</p>
+<div class="phone">(217) 544-8477</div>
+<p style="margin-top:10px">Licensed | Insured | Family Owned</p>
+</section>
+
+<footer>
+<address>Springfield, IL</address>
+&copy; 2026 Don's Chimney Sweep
+<p style="margin-top:6px;font-size:.8rem">Site by <a href="https://github.com/dpaoni" style="color:#888">dpaoni</a></p>
+</footer>
+
+</body>
+</html>
