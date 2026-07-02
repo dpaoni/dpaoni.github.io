@@ -26,7 +26,14 @@ section h2{font-size:1.8rem;margin-bottom:20px;color:#0d1b2a;border-bottom:3px s
 .cta h2{color:#fff;border-color:#ff6b6b}
 .cta p{font-size:1.1rem;margin-bottom:8px}
 .cta .phone{font-size:2rem;font-weight:700;color:#ff6b6b;margin:15px 0}
+.contact-form{background:#f5f5f5}
+.contact-form form{max-width:500px;margin:20px auto 0}
+.contact-form input,.contact-form textarea{width:100%;padding:12px;margin-bottom:15px;border:2px solid #ddd;border-radius:6px;font-size:1rem;font-family:inherit}
+.contact-form textarea{min-height:100px;resize:vertical}
+.contact-form button{background:#0d1b2a;color:#fff;padding:14px 40px;border:none;border-radius:6px;font-size:1.1rem;font-weight:600;cursor:pointer;width:100%}
+.contact-form button:hover{background:#091620}
 footer{text-align:center;padding:20px;font-size:.85rem;color:#666;background:#f0f0f0}
+address{font-style:normal;margin-top:20px;font-size:.95rem;color:#555}
 </style>
 </head>
 <body>
@@ -50,23 +57,34 @@ footer{text-align:center;padding:20px;font-size:.85rem;color:#666;background:#f0
 <section class="services">
 <h2>Our Services</h2>
 <div class="service-grid">
-<div class="service-card"><h3>🚗 Collision Repair</h3><p>Full body work, frame straightening, paint matching</p></div>
-<div class="service-card"><h3>🪝 24/7 Towing</h3><p>Emergency towing, roadside assistance, recovery</p></div>
-<div class="service-card"><h3>🔧 Welding</h3><p>On-site welding & metal fabrication</p></div>
-<div class="service-card"><h3>🖌️ Paint Services</h3><p>Full resprays, spot repair, color matching</p></div>
-<div class="service-card"><h3>🪟 Glass Replacement</h3><p>Windshield, windows, mirrors</p></div>
-<div class="service-card"><h3>📋 Insurance Claims</h3><p>We work with all insurance companies</p></div>
+<div class="service-card"><h3>Collision Repair</h3><p>Full body work, frame straightening, paint matching</p></div>
+<div class="service-card"><h3>24/7 Towing</h3><p>Emergency towing, roadside assistance, recovery</p></div>
+<div class="service-card"><h3>Welding</h3><p>On-site welding & metal fabrication</p></div>
+<div class="service-card"><h3>Paint Services</h3><p>Full resprays, spot repair, color matching</p></div>
+<div class="service-card"><h3>Glass Replacement</h3><p>Windshield, windows, mirrors</p></div>
+<div class="service-card"><h3>Insurance Claims</h3><p>We work with all insurance companies</p></div>
 </div>
 </section>
 
 <section>
 <h2>Why Choose Us</h2>
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-top:20px">
-<div style="padding:20px"><strong>✓</strong> 24/7 Emergency Service</div>
-<div style="padding:20px"><strong>✓</strong> Free Estimates</div>
-<div style="padding:20px"><strong>✓</strong> Insurance Claim Friendly</div>
-<div style="padding:20px"><strong>✓</strong> Quality Guaranteed</div>
+<div style="padding:20px"><strong>24/7 Emergency Service</strong></div>
+<div style="padding:20px"><strong>Free Estimates</strong></div>
+<div style="padding:20px"><strong>Insurance Claim Friendly</strong></div>
+<div style="padding:20px"><strong>Quality Guaranteed</strong></div>
 </div>
+</section>
+
+<section class="contact-form">
+<h2>Request a Free Estimate</h2>
+<form action="#" method="post">
+<input type="text" name="name" placeholder="Your Name" required>
+<input type="tel" name="phone" placeholder="Phone Number" required>
+<input type="email" name="email" placeholder="Email Address">
+<textarea name="message" placeholder="Tell us about your auto body or towing needs..."></textarea>
+<button type="submit">Send Request</button>
+</form>
 </section>
 
 <section class="cta">
@@ -77,7 +95,8 @@ footer{text-align:center;padding:20px;font-size:.85rem;color:#666;background:#f0
 </section>
 
 <footer>
-&copy; 2026 Springfield Auto Body & Towing — 2720 Holmes Ave, Springfield, IL 62704
+<address>2720 Holmes Ave, Springfield, IL 62704</address>
+&copy; 2026 Springfield Auto Body & Towing
 </footer>
 
 </body>
