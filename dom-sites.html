@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dom Sites — Websites for Local Businesses</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,-apple-system,sans-serif;line-height:1.6;color:#ededf0;background:#0a0a0c}
+.hero{background:linear-gradient(135deg,#0a0a0c 0%,#1a1a22 50%,#131318 100%);padding:100px 20px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 30% 50%,rgba(176,148,255,.08) 0%,transparent 50%),radial-gradient(circle at 70% 30%,rgba(255,181,71,.06) 0%,transparent 50%)}
+.hero h1{font-size:3rem;margin-bottom:10px;position:relative;background:linear-gradient(135deg,#ffb547,#b094ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:1.2rem;color:#8b8b95;margin-bottom:30px;position:relative}
+.btn{display:inline-block;background:#ffb547;color:#0a0a0c;padding:16px 40px;border-radius:8px;text-decoration:none;font-weight:700;font-size:1.1rem;transition:transform .2s}
+.btn:hover{transform:scale(1.03)}
+.btn-outline{background:transparent;border:2px solid #b094ff;color:#b094ff;margin-left:12px}
+section{padding:80px 20px;max-width:1000px;margin:0 auto}
+section h2{font-size:2rem;margin-bottom:15px;color:#ffb547}
+.price-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px;margin-top:30px}
+.price-card{background:#131318;padding:35px;border-radius:12px;border:1px solid #1a1a22;text-align:center}
+.price-card h3{font-size:1.5rem;color:#ffb547;margin-bottom:10px}
+.price-card .price{font-size:2.5rem;font-weight:800;color:#ededf0;margin:15px 0}
+.price-card ul{list-style:none;text-align:left;margin:20px 0}
+.price-card li{padding:8px 0;color:#8b8b95;border-bottom:1px solid #1a1a22}
+.price-card li:before{content:'✓ ';color:#b094ff}
+.portfolio{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px;margin-top:25px}
+.port-item{background:#131318;padding:25px;border-radius:8px;border:1px solid #1a1a22}
+.port-item h3{color:#ffb547;font-size:1rem}
+.port-item p{color:#8b8b95;font-size:.85rem;margin-top:5px}
+footer{text-align:center;padding:40px 20px;background:#131318;color:#8b8b95}
+footer a{color:#b094ff}
+@media(max-width:600px){
+.hero h1{font-size:2rem}
+.price-grid{grid-template-columns:1fr}
+.btn-outline{margin-left:0;margin-top:10px}
+.phone-row{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+<h1>Dom Sites</h1>
+<p>Websites for local businesses. One price. You own it.</p>
+<a href="tel:2175535112" class="btn">(217) 553-5112</a>
+<a href="#services" class="btn btn-outline">See Pricing</a>
+</div>
+
+<section id="services">
+<h2>What I Do</h2>
+<p style="color:#8b8b95;font-size:1.1rem">I build clean, professional websites for small businesses that don't have one yet. Plumbers, roofers, tree services, auto shops -- if you run a local business and people Google you, you need a website.</p>
+</section>
+
+<section>
+<h2>Pricing</h2>
+<div class="price-grid">
+<div class="price-card">
+<h3>Website</h3>
+<div class="price">$500</div>
+<p style="color:#8b8b95">One-time payment</p>
+<ul>
+<li>5-page professional site</li>
+<li>Mobile responsive</li>
+<li>Contact form</li>
+<li>Google Maps integration</li>
+<li>You own it forever</li>
+</ul>
+</div>
+<div class="price-card">
+<h3>Google Profile</h3>
+<div class="price">$150</div>
+<p style="color:#8b8b95">One-time setup</p>
+<ul>
+<li>Google Business Profile</li>
+<li>Verified listing</li>
+<li>Services & hours added</li>
+<li>Photos optimized</li>
+<li>Shows on Google Maps</li>
+</ul>
+</div>
+<div class="price-card">
+<h3>Bundle</h3>
+<div class="price">$600</div>
+<p style="color:#8b8b95">Website + Google Profile</p>
+<ul>
+<li>Everything in Website</li>
+<li>Everything in Google Profile</li>
+<li>Save $50</li>
+<li>Best value</li>
+<li>Full online presence</li>
+</ul>
+</div>
+</div>
+</section>
+
+<section>
+<h2>Recent Work</h2>
+<div class="portfolio">
+<div class="port-item"><h3>Jesse Wilkin Plumbing</h3><p>New Berlin, IL</p></div>
+<div class="port-item"><h3>Central Roofing</h3><p>Springfield, IL</p></div>
+<div class="port-item"><h3>Springfield Auto Body</h3><p>Springfield, IL</p></div>
+<div class="port-item"><h3>Crawford Lawn Care</h3><p>Springfield, IL</p></div>
+<div class="port-item"><h3>Elite Cleaning</h3><p>Springfield, IL</p></div>
+<div class="port-item"><h3>No Prob-Limb Tree</h3><p>Springfield, IL</p></div>
+</div>
+</section>
+
+<footer>
+<p>Dominic Paoni — New Berlin, IL</p>
+<p style="margin-top:8px">(217) 553-5112 · <a href="https://github.com/dpaoni">github.com/dpaoni</a></p>
+</footer>
+
+</body>
+</html>
