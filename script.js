@@ -35,11 +35,10 @@ function copyDiscord(btn) {
   };
 
   if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText('domisawsum')
+    navigator.clipboard.writeText('')
       .then(() => flash('Copied!'))
-      .catch(() => flash('domisawsum'));
+      .catch(() => flash(''));
   } else {
-    // Insecure context / unsupported: surface the handle so it can be copied manually
-    flash('domisawsum');
+    flash('');
   }
 }

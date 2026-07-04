@@ -62,8 +62,8 @@ function copyDiscord(btn) {
     setTimeout(() => { handle.textContent = original; }, 1500);
   };
   if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText('domisawsum').then(() => flash('Copied!')).catch(() => flash('domisawsum'));
+    navigator.clipboard.writeText('').then(() => flash('Copied!')).catch(() => flash(''));
   } else {
-    flash('domisawsum');
+    flash('');
   }
 }
