@@ -839,8 +839,30 @@
       .art-break-note { font-size: clamp(.88rem, 3.8vw, .98rem); }
       .art-break-media { min-height: 100vw; }
       .features { overflow-x: clip; }
-      /* Fixed background broken on iOS Safari */
-      .feature-stage { background-attachment: scroll; }
+      /* Mobile art pass: use portrait/square assets instead of stretching wide background art */
+      .covenant-surface {
+        background-image: url("assets/studio/winged-oracle.webp");
+        background-size: min(135vw, 640px) auto;
+        background-position: center top;
+        background-repeat: no-repeat;
+      }
+      .covenant-surface::after { inset: 38% 0 0; }
+      .art-break {
+        min-height: auto;
+        align-items: flex-start;
+        padding-block: clamp(390px, 112vw, 520px) 56px;
+      }
+      /* Fixed/cover landscape backgrounds look blown up on phone */
+      .feature-stage {
+        background-image:
+          linear-gradient(180deg, rgb(0 0 242 / .82), rgb(0 0 242 / .58) 28%, rgb(5 55 73 / .72) 100%),
+          url("assets/studio/warrior-arsenal.webp");
+        background-size: cover, min(135vw, 640px) auto;
+        background-position: center top, center top;
+        background-repeat: no-repeat;
+        background-attachment: scroll;
+      }
+      .feature-list { padding-top: clamp(280px, 82vw, 420px); }
       .feature {
         grid-template-columns: minmax(0, 1fr);
         gap: 1rem;
