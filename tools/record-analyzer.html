@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Record Analyzer — Dominic Paoni Tools</title>
+<meta name="description" content="Free genealogy record analyzer. Paste text from census records, birth certificates, immigration documents, or obituaries and pull out names, dates, places, and relationships.">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0a0a0c">
+<link rel="canonical" href="https://dpaoni.github.io/tools/record-analyzer.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Record Analyzer">
+<meta property="og:description" content="Paste any genealogy record and pull out the names, dates, places, and relationships.">
+<meta property="og:url" content="https://dpaoni.github.io/tools/record-analyzer.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0c;
+    --bg-card: #111115;
+    --bg-card-hover: #16161b;
+    --border: #1e1e24;
+    --border-focus: #3a3a44;
+    --text: #c8c8d0;
+    --text-dim: #6b6b76;
+    --text-bright: #e8e8f0;
+    --accent: #c9a96e;
+    --accent-glow: rgba(201,169,110,0.15);
+    --accent-soft: rgba(201,169,110,0.08);
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
+
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 2rem; max-width: 1100px; margin: 0 auto;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; color: var(--text-bright); text-decoration: none; font-weight: 500; }
+  .nav-links { display: flex; gap: 1.75rem; list-style: none; align-items: center; }
+  .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.875rem; transition: color .2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--text-bright); }
+  .nav-badge {
+    font-size: 0.7rem; background: var(--accent-soft); color: var(--accent);
+    padding: 0.15rem 0.5rem; border-radius: 99px; font-weight: 500;
+  }
+
+  .tool-header { padding: 4rem 0 2rem; text-align: center; }
+  .tool-badge {
+    display: inline-block; font-size: 0.75rem; text-transform: uppercase;
+    letter-spacing: 0.12em; color: var(--accent); margin-bottom: 1rem;
+    font-weight: 500;
+  }
+  .tool-header h1 {
+    font-family: 'Cormorant Garamond', serif; font-size: 2.75rem;
+    font-weight: 400; color: var(--text-bright); line-height: 1.15;
+    margin-bottom: 0.75rem;
+  }
+  .tool-header p { color: var(--text-dim); font-size: 1.05rem; max-width: 560px; margin: 0 auto; }
+
+  .input-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 2rem; margin-bottom: 2rem;
+  }
+  .input-card label {
+    display: block; font-size: 0.8rem; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--text-dim); margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+  .input-card textarea {
+    width: 100%; min-height: 220px; padding: 1rem; background: var(--bg);
+    border: 1px solid var(--border); border-radius: var(--radius-sm);
+    color: var(--text-bright); font-family: inherit; font-size: 0.92rem;
+    line-height: 1.6; resize: vertical; transition: border-color .2s;
+  }
+  .input-card textarea:focus { outline: none; border-color: var(--accent); }
+  .input-card textarea::placeholder { color: var(--text-dim); }
+  .btn-row { display: flex; gap: 0.6rem; margin-top: 1rem; flex-wrap: wrap; }
+  .privacy-note { font-size: 0.78rem; color: var(--text-dim); margin-top: 0.9rem; }
+
+  .btn {
+    display: inline-block; padding: 0.65rem 1.5rem; border-radius: var(--radius-sm);
+    font-family: inherit; font-size: 0.85rem; font-weight: 500; text-decoration: none;
+    transition: all .2s; cursor: pointer; border: none;
+  }
+  .btn-primary { background: var(--accent); color: var(--bg); }
+  .btn-primary:hover { filter: brightness(1.1); }
+  .btn-ghost { border: 1px solid var(--border); background: transparent; color: var(--text); }
+  .btn-ghost:hover { border-color: var(--border-focus); color: var(--text-bright); }
+
+  /* Results */
+  .results { display: none; }
+  .results.visible { display: block; }
+  .results-summary {
+    font-size: 0.85rem; color: var(--text-dim); text-align: center;
+    margin-bottom: 1.25rem;
+  }
+  .results-summary strong { color: var(--accent); font-weight: 500; }
+  .results-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  @media (max-width: 640px) { .results-grid { grid-template-columns: 1fr; } }
+
+  .result-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.4rem;
+  }
+  .result-card.wide { grid-column: 1 / -1; }
+  .result-card h2 {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.3rem;
+    color: var(--text-bright); font-weight: 500; margin-bottom: 0.8rem;
+    display: flex; align-items: baseline; justify-content: space-between;
+  }
+  .result-count { font-family: 'DM Sans', sans-serif; font-size: 0.75rem; color: var(--accent); font-weight: 500; }
+  .chip-list { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .chip {
+    padding: 0.3rem 0.75rem; border-radius: 99px; font-size: 0.8rem;
+    background: var(--bg); border: 1px solid var(--border); color: var(--text-bright);
+  }
+  .chip.accent { background: var(--accent-soft); border-color: transparent; color: var(--accent); }
+  .none-found { font-size: 0.85rem; color: var(--text-dim); font-style: italic; }
+
+  .snippet-list { display: flex; flex-direction: column; gap: 0.6rem; }
+  .snippet-item {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 0.75rem 1rem;
+    display: flex; gap: 0.85rem; align-items: baseline;
+  }
+  .snippet-tag {
+    flex-shrink: 0; font-size: 0.7rem; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--accent); font-weight: 500;
+    min-width: 84px;
+  }
+  .snippet-text { font-size: 0.87rem; color: var(--text); line-height: 1.5; }
+  .snippet-text mark { background: var(--accent-glow); color: var(--accent); border-radius: 3px; padding: 0 2px; }
+
+  .disclaimer {
+    font-size: 0.78rem; color: var(--text-dim); text-align: center;
+    margin-top: 1.5rem; line-height: 1.5;
+  }
+
+  /* CTA */
+  .cta-section {
+    margin-top: 3rem; padding: 2.5rem; background: var(--bg-card);
+    border: 1px solid var(--border); border-radius: var(--radius); text-align: center;
+  }
+  .cta-section h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--text-bright); margin-bottom: 0.5rem; font-weight: 400; }
+  .cta-section p { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 1.25rem; }
+
+  footer {
+    text-align: center; padding: 3rem 1.5rem; color: var(--text-dim);
+    font-size: 0.8rem; border-top: 1px solid var(--border); margin-top: 4rem;
+  }
+  footer a { color: var(--text-dim); text-decoration: none; }
+  footer a:hover { color: var(--text-bright); }
+
+  .fade-in { opacity: 0; transform: translateY(12px); animation: fadeIn .5s ease forwards; }
+  @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+  .fade-in:nth-child(2) { animation-delay: .1s; }
+  .fade-in:nth-child(3) { animation-delay: .2s; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">Dominic Paoni</a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../about.html">About</a></li>
+    <li><a href="../work.html">Work</a></li>
+    <li><a href="index.html" class="active">Tools</a> <span class="nav-badge">new</span></li>
+    <li><a href="../contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<main class="container">
+
+  <header class="tool-header fade-in">
+    <span class="tool-badge">Genealogy Tool</span>
+    <h1>Record Analyzer</h1>
+    <p>Paste the text of a census record, birth certificate, immigration document, or obituary. The analyzer pulls out the names, dates, places, relationships, and life events it finds.</p>
+  </header>
+
+  <div class="input-card fade-in">
+    <label for="recordText">Record text</label>
+    <textarea id="recordText" placeholder="Paste the text of your record here, or load a sample below to see how it works."></textarea>
+    <div class="btn-row">
+      <button class="btn btn-primary" id="btnAnalyze">Analyze record</button>
+      <button class="btn btn-ghost" id="btnSample">Load sample record</button>
+      <button class="btn btn-ghost" id="btnClear">Clear</button>
+    </div>
+    <p class="privacy-note">Everything runs in your browser. Nothing you paste is uploaded or saved anywhere.</p>
+  </div>
+
+  <section class="results" id="results" aria-live="polite">
+    <p class="results-summary" id="resultsSummary"></p>
+    <div class="results-grid">
+      <div class="result-card">
+        <h2>Names <span class="result-count" id="countNames"></span></h2>
+        <div class="chip-list" id="listNames"></div>
+      </div>
+      <div class="result-card">
+        <h2>Dates <span class="result-count" id="countDates"></span></h2>
+        <div class="chip-list" id="listDates"></div>
+      </div>
+      <div class="result-card">
+        <h2>Places <span class="result-count" id="countPlaces"></span></h2>
+        <div class="chip-list" id="listPlaces"></div>
+      </div>
+      <div class="result-card wide">
+        <h2>Relationships <span class="result-count" id="countRels"></span></h2>
+        <div class="snippet-list" id="listRels"></div>
+      </div>
+      <div class="result-card wide">
+        <h2>Life Events <span class="result-count" id="countEvents"></span></h2>
+        <div class="snippet-list" id="listEvents"></div>
+      </div>
+    </div>
+    <p class="disclaimer">This tool uses pattern matching, not full AI. It can miss things or flag words that are not really names. Always check results against the original record.</p>
+  </section>
+
+  <section class="cta-section fade-in">
+    <h2>Turn your findings into a story</h2>
+    <p>Once you have the facts, the Family History Writer helps you turn them into a readable family narrative. Free preview available.</p>
+    <a href="family-history-writer.html" class="btn btn-primary">Try the Family History Writer</a>
+    <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border)">
+      <p style="font-size:0.82rem;margin-bottom:0.75rem">Get notified when new tools launch:</p>
+      <div style="display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap">
+        <input type="email" id="ctaEmail" placeholder="your@email.com" style="padding:.55rem .85rem;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-bright);font-family:inherit;font-size:.82rem;min-width:220px">
+        <button class="btn btn-primary" id="btnNotify" style="font-size:.8rem;padding:.55rem 1rem">Notify me</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p><a href="../index.html">Dominic Paoni</a> · <a href="index.html">Tools</a> · Springfield, IL</p>
+</footer>
+
+<script>
+// ponytail: regex pattern matching, swap for a real extraction API when one exists
+function analyzeRecord(text) {
+  var MONTHS = 'January|February|March|April|May|June|July|August|September|October|November|December';
+  var US_STATES = ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming'];
+  var COUNTRIES = ['Ireland','Germany','Italy','England','Scotland','Wales','Poland','Russia','Sweden','Norway','Denmark','France','Austria','Hungary','Greece','Mexico','Canada','China','Japan','Lithuania','Bohemia','Prussia','Sicily'];
+  var STOPWORDS = (MONTHS.split('|')).concat(['County','Census','Certificate','Record','Township','Ward','Street','Avenue','Road','Bureau','Federal','State','States','United','Department','District','Cemetery','Church','Hospital','Registry','Registrar','Office','Enumeration','Sheet','Page','Line','Head','Household','Occupation','Survivors','Burial','Wife','Son','Daughter','Father','Mother','Brother','Sister','Widow','Certifies','Registered','Birth','Death','Marriage','This','The','She','He','They']);
+
+  function dedupe(arr) {
+    var seen = {}, out = [];
+    arr.forEach(function(s) {
+      var k = s.toLowerCase();
+      if (!seen[k]) { seen[k] = true; out.push(s); }
+    });
+    return out;
+  }
+
+  function matchAll(re, str) {
+    var out = [], m;
+    while ((m = re.exec(str)) !== null) {
+      out.push({ text: m[0], index: m.index });
+      if (m.index === re.lastIndex) re.lastIndex++;
+    }
+    return out;
+  }
+
+  // Grab the sentence-ish chunk around a match position, capped in length
+  function snippetAt(index, length) {
+    var start = index, end = index + length;
+    while (start > 0 && text[start - 1] !== '.' && text[start - 1] !== '\n' && index - start < 70) start--;
+    while (end < text.length && text[end] !== '.' && text[end] !== '\n' && end - (index + length) < 70) end++;
+    return text.slice(start, end).replace(/\s+/g, ' ').trim();
+  }
+
+  // --- Dates ---
+  var dateRes = [
+    new RegExp('\\b(?:' + MONTHS + ')\\s+\\d{1,2},?\\s+(?:18|19|20)\\d{2}\\b', 'g'),
+    new RegExp('\\b\\d{1,2}\\s+(?:' + MONTHS + ')\\s+(?:18|19|20)\\d{2}\\b', 'g'),
+    new RegExp('\\b(?:' + MONTHS + ')\\s+(?:18|19|20)\\d{2}\\b', 'g')
+  ];
+  var dates = [];
+  var masked = text;
+  dateRes.forEach(function(re) {
+    matchAll(re, masked).forEach(function(m) {
+      dates.push(m.text);
+      masked = masked.slice(0, m.index) + ' '.repeat(m.text.length) + masked.slice(m.index + m.text.length);
+    });
+  });
+  matchAll(/\b(?:18|19|20)\d{2}\b/g, masked).forEach(function(m) { dates.push(m.text); });
+  dates = dedupe(dates);
+
+  // --- Places ---
+  var places = [];
+  var placeRe = new RegExp('\\b([A-Z][a-z]+(?:\\s[A-Z][a-z]+)?(?:\\s(?:County|Township))?)(?:,\\s[A-Z][a-z]+(?:\\s[A-Z][a-z]+)?\\s(?:County|Parish))?,\\s(' + US_STATES.join('|') + ')\\b', 'g');
+  matchAll(placeRe, text).forEach(function(m) { places.push(m.text); });
+  matchAll(/\b[A-Z][a-z]+(?:\s[A-Z][a-z]+)?\sCounty\b/g, text).forEach(function(m) { places.push(m.text); });
+  var countryRe = new RegExp('\\b(?:' + COUNTRIES.concat(US_STATES).join('|') + ')\\b', 'g');
+  matchAll(countryRe, text).forEach(function(m) { places.push(m.text); });
+  places = dedupe(places);
+
+  // --- Names: 2-4 capitalized words, none of which are stopwords or part of a found place ---
+  var names = [];
+  var placeBlob = places.join(' | ').toLowerCase();
+  matchAll(/\b[A-Z][a-z]+(?:\s(?:[A-Z]\.|[A-Z][a-z]+)){1,3}\b/g, text).forEach(function(m) {
+    var words = m.text.split(/\s+/);
+    var bad = words.some(function(w) { return STOPWORDS.indexOf(w.replace('.', '')) !== -1; });
+    if (!bad && placeBlob.indexOf(m.text.toLowerCase()) === -1) names.push(m.text);
+  });
+  names = dedupe(names);
+
+  // --- Relationships ---
+  var relationships = [];
+  var relRe = /\b(son of|daughter of|wife of|husband of|widow of|mother of|father of|brother of|sister of|married to|married|n[eé]e)\b/gi;
+  matchAll(relRe, text).forEach(function(m) {
+    relationships.push({ tag: m.text.toLowerCase(), snippet: snippetAt(m.index, m.text.length) });
+  });
+
+  // --- Life events ---
+  var EVENT_TYPES = [
+    { tag: 'Birth', re: /\b(was born|born)\b/gi },
+    { tag: 'Death', re: /\b(died|death|passed away)\b/gi },
+    { tag: 'Marriage', re: /\b(married|marriage|wed)\b/gi },
+    { tag: 'Immigration', re: /\b(immigrated|emigrated|arrived|naturalized)\b/gi },
+    { tag: 'Burial', re: /\b(buried|burial|interred)\b/gi },
+    { tag: 'Baptism', re: /\b(baptized|christened)\b/gi }
+  ];
+  var events = [];
+  EVENT_TYPES.forEach(function(t) {
+    matchAll(t.re, text).forEach(function(m) {
+      events.push({ tag: t.tag, keyword: m.text, snippet: snippetAt(m.index, m.text.length) });
+    });
+  });
+
+  // Dedupe snippets so one sentence with several keywords doesn't repeat
+  function dedupeSnippets(items) {
+    var seen = {}, out = [];
+    items.forEach(function(it) {
+      var k = it.tag + '|' + it.snippet.toLowerCase();
+      if (!seen[k]) { seen[k] = true; out.push(it); }
+    });
+    return out;
+  }
+
+  return {
+    names: names,
+    dates: dates,
+    places: places,
+    relationships: dedupeSnippets(relationships),
+    events: dedupeSnippets(events)
+  };
+}
+
+(function() {
+  var SAMPLES = [
+'1900 United States Federal Census\nSpringfield, Sangamon County, Illinois — Enumeration District 108, Sheet 4\n\nHead of household: Giuseppe Paoni, born March 1858 in Italy, immigrated 1884, naturalized 1892. Occupation: coal miner.\nWife: Maria Paoni, born June 1862 in Italy, immigrated 1886. Mother of six children, five living.\nSon: Antonio Paoni, born September 1888 in Illinois.\nDaughter: Rosa Paoni, born January 1891 in Illinois.',
+'Certificate of Birth — State of Illinois, Sangamon County\n\nThis certifies that Dominic Anthony Paoni was born on April 12, 1923 in Springfield, Illinois.\nFather: Antonio Paoni, occupation coal miner, born in Illinois.\nMother: Lucia Romano, born in Chicago, Illinois.\nRegistered April 19, 1923.',
+'MARCONI — Rosa Marconi, 84, of Springfield, Illinois, died Tuesday, February 3, 1975 at St. John\'s Hospital. She was born January 8, 1891 in Springfield, the daughter of Giuseppe and Maria Paoni. She married Pietro Marconi in 1912; he died in 1968. Survivors include one son, Louis Marconi of Decatur, Illinois. Burial was in Calvary Cemetery, Springfield.'
+  ];
+  var sampleIdx = 0;
+
+  function esc(s) {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function renderChips(el, countEl, items, accent) {
+    countEl.textContent = items.length || '';
+    el.innerHTML = items.length
+      ? items.map(function(s) { return '<span class="chip' + (accent ? ' accent' : '') + '">' + esc(s) + '</span>'; }).join('')
+      : '<span class="none-found">None found.</span>';
+  }
+
+  function renderSnippets(el, countEl, items) {
+    countEl.textContent = items.length || '';
+    el.innerHTML = items.length
+      ? items.map(function(it) {
+          var kw = it.keyword || it.tag;
+          var html = esc(it.snippet).replace(new RegExp('\\b(' + kw + ')\\b', 'i'), '<mark>$1</mark>');
+          return '<div class="snippet-item"><span class="snippet-tag">' + esc(it.tag) + '</span><span class="snippet-text">' + html + '</span></div>';
+        }).join('')
+      : '<span class="none-found">None found.</span>';
+  }
+
+  document.getElementById('btnAnalyze').addEventListener('click', function() {
+    var text = document.getElementById('recordText').value.trim();
+    var results = document.getElementById('results');
+    if (!text) { results.classList.remove('visible'); return; }
+
+    var r = analyzeRecord(text);
+    renderChips(document.getElementById('listNames'), document.getElementById('countNames'), r.names, true);
+    renderChips(document.getElementById('listDates'), document.getElementById('countDates'), r.dates, false);
+    renderChips(document.getElementById('listPlaces'), document.getElementById('countPlaces'), r.places, false);
+    renderSnippets(document.getElementById('listRels'), document.getElementById('countRels'), r.relationships);
+    renderSnippets(document.getElementById('listEvents'), document.getElementById('countEvents'), r.events);
+
+    var total = r.names.length + r.dates.length + r.places.length + r.relationships.length + r.events.length;
+    document.getElementById('resultsSummary').innerHTML =
+      'Found <strong>' + total + '</strong> item' + (total === 1 ? '' : 's') + ': ' +
+      r.names.length + ' names, ' + r.dates.length + ' dates, ' + r.places.length + ' places, ' +
+      r.relationships.length + ' relationships, ' + r.events.length + ' events.';
+
+    results.classList.add('visible');
+    results.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+
+  document.getElementById('btnSample').addEventListener('click', function() {
+    document.getElementById('recordText').value = SAMPLES[sampleIdx];
+    sampleIdx = (sampleIdx + 1) % SAMPLES.length;
+    document.getElementById('btnAnalyze').click();
+  });
+
+  document.getElementById('btnClear').addEventListener('click', function() {
+    document.getElementById('recordText').value = '';
+    document.getElementById('results').classList.remove('visible');
+  });
+
+  document.getElementById('btnNotify').addEventListener('click', function() {
+    var email = document.getElementById('ctaEmail').value.trim();
+    if (!email || email.indexOf('@') === -1) return;
+    localStorage.setItem('tools-email', email);
+    document.getElementById('ctaEmail').value = '';
+    var t = document.createElement('div');
+    t.style.cssText = 'position:fixed;bottom:2rem;right:2rem;background:#111115;border:1px solid #c9a96e;border-radius:6px;padding:.75rem 1.25rem;color:#e8e8f0;font-size:.85rem;z-index:99';
+    t.textContent = 'Got it! We will let you know when new tools launch.';
+    document.body.appendChild(t);
+    setTimeout(function(){ t.remove(); }, 3000);
+  });
+})();
+</script>
+
+</body>
+</html>
