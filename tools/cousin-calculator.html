@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cousin Relationship Calculator — Dominic Paoni Tools</title>
+<meta name="description" content="Free cousin relationship calculator. Figure out how any two people in a family tree are related — first cousin, second cousin once removed, and more.">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0a0a0c">
+<link rel="canonical" href="https://dpaoni.github.io/tools/cousin-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cousin Relationship Calculator">
+<meta property="og:description" content="Instantly figure out how any two people in a family tree are related.">
+<meta property="og:url" content="https://dpaoni.github.io/tools/cousin-calculator.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0c;
+    --bg-card: #111115;
+    --bg-card-hover: #16161b;
+    --border: #1e1e24;
+    --border-focus: #3a3a44;
+    --text: #c8c8d0;
+    --text-dim: #6b6b76;
+    --text-bright: #e8e8f0;
+    --accent: #c9a96e;
+    --accent-glow: rgba(201,169,110,0.15);
+    --accent-soft: rgba(201,169,110,0.08);
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* Nav */
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 2rem; max-width: 1100px; margin: 0 auto;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; color: var(--text-bright); text-decoration: none; font-weight: 500; }
+  .nav-links { display: flex; gap: 1.75rem; list-style: none; align-items: center; }
+  .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.875rem; transition: color .2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--text-bright); }
+  .nav-badge {
+    font-size: 0.7rem; background: var(--accent-soft); color: var(--accent);
+    padding: 0.15rem 0.5rem; border-radius: 99px; font-weight: 500;
+  }
+
+  /* Tool header */
+  .tool-header { padding: 4rem 0 2rem; text-align: center; }
+  .tool-badge {
+    display: inline-block; font-size: 0.75rem; text-transform: uppercase;
+    letter-spacing: 0.12em; color: var(--accent); margin-bottom: 1rem;
+    font-weight: 500;
+  }
+  .tool-header h1 {
+    font-family: 'Cormorant Garamond', serif; font-size: 2.75rem;
+    font-weight: 400; color: var(--text-bright); line-height: 1.15;
+    margin-bottom: 0.75rem;
+  }
+  .tool-header p { color: var(--text-dim); font-size: 1.05rem; max-width: 520px; margin: 0 auto; }
+
+  /* Calculator */
+  .calc-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 2.25rem; margin-bottom: 2rem;
+  }
+  .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.75rem; }
+  @media (max-width: 600px) { .calc-grid { grid-template-columns: 1fr; } }
+
+  .calc-field label {
+    display: block; font-size: 0.8rem; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--text-dim); margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+  .calc-field select {
+    width: 100%; padding: 0.75rem 1rem; background: var(--bg);
+    border: 1px solid var(--border); border-radius: var(--radius-sm);
+    color: var(--text-bright); font-family: inherit; font-size: 0.95rem;
+    cursor: pointer; transition: border-color .2s; appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1.5l5 5 5-5' stroke='%236b6b76' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 1rem center;
+  }
+  .calc-field select:focus { outline: none; border-color: var(--accent); }
+  .calc-vs {
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-dim); font-size: 0.85rem; padding-top: 1.75rem;
+    font-weight: 500; letter-spacing: 0.05em;
+  }
+
+  /* Result */
+  .result-box {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 2rem; text-align: center;
+    margin-bottom: 1.5rem; display: none;
+  }
+  .result-box.visible { display: block; }
+  .result-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-dim); margin-bottom: 0.5rem; }
+  .result-rel {
+    font-family: 'Cormorant Garamond', serif; font-size: 2rem;
+    color: var(--accent); font-weight: 500; line-height: 1.2;
+  }
+  .result-expl {
+    color: var(--text-dim); font-size: 0.9rem; margin-top: 0.75rem;
+    line-height: 1.5;
+  }
+
+  /* Tree viz */
+  .tree-viz {
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    margin: 1.5rem 0; font-size: 0.8rem; color: var(--text-dim);
+  }
+  .tree-row { display: flex; align-items: center; gap: 0.35rem; }
+  .tree-node {
+    padding: 0.3rem 0.7rem; border-radius: 99px; font-size: 0.75rem;
+    font-weight: 500; white-space: nowrap;
+  }
+  .tree-node.ancestor { background: var(--accent-soft); color: var(--accent); }
+  .tree-node.person { background: var(--bg-card-hover); color: var(--text-bright); border: 1px solid var(--border); }
+  .tree-node.highlight { background: var(--accent-soft); color: var(--accent); border: 1px solid var(--accent); }
+  .tree-line { color: var(--border); }
+
+  /* Relationship list */
+  .examples-section { margin-top: 3rem; }
+  .examples-section h2 {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.5rem;
+    color: var(--text-bright); margin-bottom: 1rem; font-weight: 400;
+  }
+  .example-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+  @media (max-width: 600px) { .example-grid { grid-template-columns: 1fr; } }
+  .example-item {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 0.85rem 1rem;
+    cursor: pointer; transition: all .2s; display: flex; justify-content: space-between; align-items: center;
+  }
+  .example-item:hover { border-color: var(--border-focus); background: var(--bg-card-hover); }
+  .example-label { font-size: 0.9rem; color: var(--text-bright); }
+  .example-rel { font-size: 0.8rem; color: var(--accent); font-weight: 500; }
+
+  /* CTA */
+  .cta-section {
+    margin-top: 3rem; padding: 2.5rem; background: var(--bg-card);
+    border: 1px solid var(--border); border-radius: var(--radius); text-align: center;
+  }
+  .cta-section h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--text-bright); margin-bottom: 0.5rem; font-weight: 400; }
+  .cta-section p { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 1.25rem; }
+  .btn {
+    display: inline-block; padding: 0.65rem 1.5rem; border-radius: var(--radius-sm);
+    font-family: inherit; font-size: 0.85rem; font-weight: 500; text-decoration: none;
+    transition: all .2s; cursor: pointer;
+  }
+  .btn-primary { background: var(--accent); color: var(--bg); }
+  .btn-primary:hover { filter: brightness(1.1); }
+  .btn-ghost { border: 1px solid var(--border); color: var(--text); }
+  .btn-ghost:hover { border-color: var(--border-focus); color: var(--text-bright); }
+
+  /* Footer */
+  footer {
+    text-align: center; padding: 3rem 1.5rem; color: var(--text-dim);
+    font-size: 0.8rem; border-top: 1px solid var(--border); margin-top: 4rem;
+  }
+  footer a { color: var(--text-dim); text-decoration: none; }
+  footer a:hover { color: var(--text-bright); }
+
+  /* Fade in */
+  .fade-in { opacity: 0; transform: translateY(12px); animation: fadeIn .5s ease forwards; }
+  @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+  .fade-in:nth-child(2) { animation-delay: .1s; }
+  .fade-in:nth-child(3) { animation-delay: .2s; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">Dominic Paoni</a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../about.html">About</a></li>
+    <li><a href="../work.html">Work</a></li>
+    <li><a href="index.html" class="active">Tools</a> <span class="nav-badge">new</span></li>
+    <li><a href="../contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<main class="container">
+
+  <header class="tool-header fade-in">
+    <span class="tool-badge">Genealogy Tool</span>
+    <h1>Cousin Relationship Calculator</h1>
+    <p>Select how each person relates to the common ancestor, and instantly see the family relationship between them.</p>
+  </header>
+
+  <div class="calc-card fade-in">
+    <div class="calc-grid">
+      <div class="calc-field">
+        <label for="personA">Person A is the common ancestor's...</label>
+        <select id="personA">
+          <option value="" disabled selected>-- Select relationship --</option>
+          <option value="0">This IS the common ancestor</option>
+          <option value="1">Child</option>
+          <option value="2">Grandchild</option>
+          <option value="3">Great-grandchild</option>
+          <option value="4">Great-great-grandchild</option>
+          <option value="5">3x-great-grandchild</option>
+          <option value="6">4x-great-grandchild</option>
+          <option value="7">5x-great-grandchild</option>
+          <option value="8">6x-great-grandchild</option>
+        </select>
+      </div>
+      <div class="calc-field">
+        <label for="personB">Person B is the common ancestor's...</label>
+        <select id="personB">
+          <option value="" disabled selected>-- Select relationship --</option>
+          <option value="0">This IS the common ancestor</option>
+          <option value="1">Child</option>
+          <option value="2">Grandchild</option>
+          <option value="3">Great-grandchild</option>
+          <option value="4">Great-great-grandchild</option>
+          <option value="5">3x-great-grandchild</option>
+          <option value="6">4x-great-grandchild</option>
+          <option value="7">5x-great-grandchild</option>
+          <option value="8">6x-great-grandchild</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="result" class="result-box">
+      <div class="result-label">Relationship</div>
+      <div class="result-rel" id="resultRel"></div>
+      <div id="treeViz" class="tree-viz"></div>
+      <div class="result-expl" id="resultExpl"></div>
+    </div>
+  </div>
+
+  <section class="examples-section fade-in">
+    <h2>Common relationships</h2>
+    <div class="example-grid" id="exampleGrid"></div>
+  </section>
+
+  <section class="cta-section fade-in">
+    <h2>More genealogy tools coming</h2>
+    <p>Family history writer, record analyzer, and more — built to make genealogy research easier.</p>
+    <a href="index.html" class="btn btn-ghost">Browse all tools</a>
+  </section>
+
+</main>
+
+<footer>
+  <p><a href="../index.html">Dominic Paoni</a> · <a href="index.html">Tools</a> · Springfield, IL</p>
+</footer>
+
+<script>
+(function() {
+  const NUM = ['','first','second','third','fourth','fifth','sixth','seventh','eighth','ninth','tenth'];
+  const ORD = ['','1st','2nd','3rd','4th','5th','6th','7th','8th','9th','10th'];
+
+  function ord(n) { return ORD[n] || n + 'th'; }
+  function num(n) { return NUM[n] || n + 'th'; }
+
+  function nthGreat(n) {
+    if (n === 0) return '';
+    if (n === 1) return 'grand';
+    if (n === 2) return 'great-grand';
+    return (n-1) + 'x-great-grand';
+  }
+
+  function calcRelation(genA, genB) {
+    if (genA === genB && genA === 0) return { rel: 'Same person', expl: 'Both are the common ancestor — this is the same person.' };
+    const lower = Math.min(genA, genB);
+    const higher = Math.max(genA, genB);
+
+    // Direct ancestor/descendant
+    if (lower === 0) {
+      const diff = higher;
+      const prefix = diff === 1 ? '' : nthGreat(diff-1) + ' ';
+      return {
+        rel: prefix + 'parent and ' + prefix + 'child',
+        expl: 'One person is the direct ancestor of the other. They are ' + diff + ' generation' + (diff > 1 ? 's' : '') + ' apart.'
+      };
+    }
+
+    // Siblings
+    if (genA === 1 && genB === 1) {
+      return { rel: 'Siblings', expl: 'They share the same parents — they are brothers and/or sisters.' };
+    }
+
+    // Aunt/Uncle/Niece/Nephew (one person is gen 1 from ancestor)
+    if (lower === 1) {
+      const diff = higher - 1;
+      const greatPrefix = diff > 1 ? nthGreat(diff-1) + ' ' : '';
+      const isGreat = diff > 1;
+
+      return {
+        rel: (isGreat ? greatPrefix : '') + 'aunt/uncle and ' + (isGreat ? greatPrefix : '') + 'niece/nephew',
+        expl: 'The person closer to the common ancestor is the ' + (isGreat ? greatPrefix : '') + 'aunt or uncle of the other.'
+      };
+    }
+
+    // Cousins
+    const cousinNum = lower - 1;
+    const removed = higher - lower;
+    let rel = num(cousinNum) + ' cousin';
+    if (removed > 0) rel += ' ' + (removed === 1 ? 'once' : removed + ' times') + ' removed';
+
+    let expl = 'They share ' + (cousinNum === 1 ? 'grandparents' : nthGreat(cousinNum) + 'parents') + '. ';
+    if (removed > 0) {
+      expl += 'The "removed" means they are ' + removed + ' generation' + (removed > 1 ? 's' : '') + ' apart.';
+    } else {
+      expl += 'They are in the same generation.';
+    }
+
+    return { rel, expl };
+  }
+
+  function buildTreeViz(genA, genB) {
+    if (genA === 0 && genB === 0) return '';
+
+    const maxGen = Math.max(genA, genB);
+    let html = '';
+
+    // Common ancestor row
+    html += '<div class="tree-row"><span class="tree-node ancestor">Common Ancestor</span></div>';
+    html += '<div class="tree-row"><span class="tree-line">│</span></div>';
+
+    // Build tree rows
+    for (let g = 1; g <= maxGen; g++) {
+      let rowParts = [];
+
+      // Left side path to A (if A reaches this gen)
+      if (g <= genA) {
+        const isPerson = g === genA;
+        rowParts.push('<span class="tree-node ' + (isPerson ? 'highlight' : 'person') + '">' +
+          (isPerson ? 'Person A' : (g === 1 ? 'child' : nthGreat(g-1) + 'child')) + '</span>');
+      } else {
+        rowParts.push('<span style="width:80px"></span>');
+      }
+
+      // Middle connector or spacing
+      if (g <= genA && g <= genB) {
+        rowParts.push('<span class="tree-line">──</span>');
+        rowParts.push('<span class="tree-node person">' + (g === 1 ? 'siblings' : ord(g-1) + ' cousins') + '</span>');
+        rowParts.push('<span class="tree-line">──</span>');
+      } else if (g <= genA) {
+        rowParts.push('<span class="tree-line">──</span>');
+        rowParts.push('<span class="tree-node person">' + ord(Math.min(genA,g)-1) + ' cousin' + (g > Math.min(genA,genB) ? ' ' + (g-Math.min(genA,genB)) + 'x removed' : '') + '</span>');
+        rowParts.push('<span class="tree-line">──</span>');
+      } else if (g <= genB) {
+        rowParts.push('<span style="width:80px"></span>');
+        rowParts.push('<span class="tree-line">──</span>');
+        rowParts.push('<span class="tree-node person">' + ord(Math.min(genB,g)-1) + ' cousin' + (g > Math.min(genA,genB) ? ' ' + (g-Math.min(genA,genB)) + 'x removed' : '') + '</span>');
+        rowParts.push('<span class="tree-line">──</span>');
+      }
+
+      // Right side path to B (if B reaches this gen)
+      if (g <= genB) {
+        const isPerson = g === genB;
+        rowParts.push('<span class="tree-node ' + (isPerson ? 'highlight' : 'person') + '">' +
+          (isPerson ? 'Person B' : (g === 1 ? 'child' : nthGreat(g-1) + 'child')) + '</span>');
+      }
+
+      html += '<div class="tree-row">' + rowParts.join('') + '</div>';
+      if (g < maxGen) html += '<div class="tree-row"><span class="tree-line">│</span></div>';
+    }
+
+    return html;
+  }
+
+  function update() {
+    const a = document.getElementById('personA');
+    const b = document.getElementById('personB');
+    const result = document.getElementById('result');
+    const rel = document.getElementById('resultRel');
+    const expl = document.getElementById('resultExpl');
+    const tree = document.getElementById('treeViz');
+
+    if (!a.value || !b.value) {
+      result.classList.remove('visible');
+      return;
+    }
+
+    const genA = parseInt(a.value);
+    const genB = parseInt(b.value);
+    const r = calcRelation(genA, genB);
+
+    rel.textContent = r.rel;
+    expl.textContent = r.expl;
+    tree.innerHTML = buildTreeViz(genA, genB);
+    result.classList.add('visible');
+  }
+
+  document.getElementById('personA').addEventListener('change', update);
+  document.getElementById('personB').addEventListener('change', update);
+
+  // Examples
+  const examples = [
+    { a: 1, b: 1, label: 'Same parents' },
+    { a: 2, b: 2, label: 'Share grandparents' },
+    { a: 3, b: 3, label: 'Share great-grandparents' },
+    { a: 2, b: 3, label: 'First cousin\'s child' },
+    { a: 3, b: 2, label: 'Parent\'s first cousin' },
+    { a: 1, b: 2, label: 'Aunt/uncle & niece/nephew' },
+    { a: 4, b: 4, label: 'Share great-great-grandparents' },
+    { a: 3, b: 5, label: 'Distant cousins' },
+  ];
+
+  const grid = document.getElementById('exampleGrid');
+  examples.forEach(function(ex) {
+    const r = calcRelation(ex.a, ex.b);
+    const item = document.createElement('div');
+    item.className = 'example-item';
+    item.innerHTML = '<span class="example-label">' + ex.label + '</span><span class="example-rel">' + r.rel + '</span>';
+    item.addEventListener('click', function() {
+      document.getElementById('personA').value = ex.a;
+      document.getElementById('personB').value = ex.b;
+      update();
+      document.querySelector('.calc-card').scrollIntoView({ behavior: 'smooth' });
+    });
+    grid.appendChild(item);
+  });
+})();
+</script>
+
+</body>
+</html>
