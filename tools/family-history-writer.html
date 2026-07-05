@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Family History Writer — Dominic Paoni Tools</title>
+<meta name="description" content="Turn your genealogy research notes into a polished, publishable family history narrative. AI-powered drafting with editable output.">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0a0a0c">
+<link rel="canonical" href="https://dpaoni.github.io/tools/family-history-writer.html">
+<meta property="og:title" content="Family History Writer">
+<meta property="og:description" content="Turn research notes into a polished family history narrative.">
+<meta property="og:url" content="https://dpaoni.github.io/tools/family-history-writer.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#0a0a0c;--bg-card:#111115;--bg-card-hover:#16161b;--border:#1e1e24;
+    --border-focus:#3a3a44;--text:#c8c8d0;--text-dim:#6b6b76;--text-bright:#e8e8f0;
+    --accent:#c9a96e;--accent-soft:rgba(201,169,110,0.08);--accent-glow:rgba(201,169,110,0.15);
+    --radius:10px;--radius-sm:6px;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+  .container{max-width:900px;margin:0 auto;padding:0 1.5rem}
+  nav{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 2rem;max-width:1100px;margin:0 auto;border-bottom:1px solid var(--border)}
+  .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.25rem;color:var(--text-bright);text-decoration:none;font-weight:500}
+  .nav-links{display:flex;gap:1.75rem;list-style:none;align-items:center}
+  .nav-links a{color:var(--text-dim);text-decoration:none;font-size:.875rem;transition:color .2s}
+  .nav-links a:hover,.nav-links a.active{color:var(--text-bright)}
+
+  .tool-header{padding:3rem 0 1.5rem;text-align:center}
+  .tool-badge{display:inline-block;font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);margin-bottom:.75rem;font-weight:500}
+  .tool-header h1{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:400;color:var(--text-bright);line-height:1.15;margin-bottom:.5rem}
+  .tool-header p{color:var(--text-dim);font-size:1rem;max-width:520px;margin:0 auto}
+
+  .card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1.75rem;margin-bottom:1.5rem}
+  .card h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--text-bright);margin-bottom:.75rem;font-weight:500}
+
+  textarea{width:100%;min-height:180px;padding:1rem;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-bright);font-family:'DM Sans',monospace;font-size:.85rem;line-height:1.6;resize:vertical;transition:border-color .2s}
+  textarea:focus{outline:none;border-color:var(--accent)}
+  textarea::placeholder{color:var(--text-dim)}
+
+  .tone-select{display:flex;gap:.5rem;margin:1rem 0;flex-wrap:wrap}
+  .tone-btn{padding:.45rem 1rem;border:1px solid var(--border);border-radius:99px;background:transparent;color:var(--text-dim);font-family:inherit;font-size:.8rem;cursor:pointer;transition:all .2s}
+  .tone-btn:hover{border-color:var(--border-focus);color:var(--text-bright)}
+  .tone-btn.active{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+
+  .btn{display:inline-flex;align-items:center;gap:.35rem;padding:.65rem 1.5rem;border-radius:var(--radius-sm);font-family:inherit;font-size:.85rem;font-weight:500;cursor:pointer;transition:all .2s;border:none}
+  .btn-primary{background:var(--accent);color:var(--bg)}
+  .btn-primary:hover{filter:brightness(1.1)}
+  .btn-ghost{border:1px solid var(--border);color:var(--text);background:transparent}
+  .btn-ghost:hover{border-color:var(--border-focus);color:var(--text-bright)}
+  .btn-block{width:100%;justify-content:center;padding:.85rem}
+
+  .output-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-top:1.5rem}
+  .output-card h2{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--text-bright);margin-bottom:.75rem;font-weight:500}
+  .output-card p{font-size:.9rem;line-height:1.75;color:var(--text);margin-bottom:.75rem}
+  .output-card .byline{font-style:italic;color:var(--text-dim);font-size:.85rem;margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border)}
+
+  .preview-badge{display:inline-block;font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;padding:.2rem .6rem;border-radius:3px;background:var(--accent-soft);color:var(--accent);margin-bottom:1rem;font-weight:600}
+
+  .upsell{background:linear-gradient(135deg,var(--bg-card),var(--bg-card-hover));border:1px solid var(--accent);border-radius:var(--radius);padding:1.75rem;margin-top:1.5rem;text-align:center}
+  .upsell h3{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--text-bright);margin-bottom:.35rem;font-weight:500}
+  .upsell p{color:var(--text-dim);font-size:.85rem;margin-bottom:1rem}
+  .upsell .price{font-size:1.5rem;color:var(--accent);font-weight:600;margin-bottom:.75rem}
+  .upsell .features{text-align:left;max-width:380px;margin:0 auto 1.25rem;font-size:.85rem;color:var(--text)}
+  .upsell .features li{margin-bottom:.35rem;list-style:none;padding-left:1.2rem;position:relative}
+  .upsell .features li::before{content:'+';position:absolute;left:0;color:var(--accent)}
+  .email-form{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-top:1rem}
+  .email-form input{padding:.6rem 1rem;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-bright);font-family:inherit;font-size:.85rem;min-width:240px}
+  .email-form input:focus{outline:none;border-color:var(--accent)}
+  .email-form input::placeholder{color:var(--text-dim)}
+
+  footer{text-align:center;padding:3rem 1.5rem;color:var(--text-dim);font-size:.8rem;border-top:1px solid var(--border);margin-top:3rem}
+  footer a{color:var(--text-dim);text-decoration:none}
+  footer a:hover{color:var(--text-bright)}
+  .fade-in{opacity:0;transform:translateY(12px);animation:fadeIn .5s ease forwards}
+  @keyframes fadeIn{to{opacity:1;transform:translateY(0)}}
+  .hidden{display:none!important}
+  .spinner{display:inline-block;width:16px;height:16px;border:2px solid var(--bg);border-top-color:transparent;border-radius:50%;animation:spin .6s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .toast{position:fixed;bottom:2rem;right:2rem;background:var(--bg-card);border:1px solid var(--accent);border-radius:var(--radius-sm);padding:.75rem 1.25rem;color:var(--text-bright);font-size:.85rem;z-index:99;animation:fadeIn .3s ease}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">Dominic Paoni</a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../about.html">About</a></li>
+    <li><a href="../work.html">Work</a></li>
+    <li><a href="index.html" class="active">Tools</a></li>
+    <li><a href="../contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<main class="container">
+
+  <header class="tool-header fade-in">
+    <span class="tool-badge">Premium AI Tool — Early Access</span>
+    <h1>Family History Writer</h1>
+    <p>Paste your genealogy research notes and get a polished, publishable family history narrative in seconds.</p>
+  </header>
+
+  <!-- Input card -->
+  <div class="card fade-in">
+    <h3>Your research notes</h3>
+    <p style="color:var(--text-dim);font-size:.82rem;margin-bottom:.75rem">Paste names, dates, locations, stories, census records — anything you have. The more detail, the better the result.</p>
+    <textarea id="notesInput" placeholder="Example:
+
+John Henry Paoni, born March 15, 1935 in Springfield, Illinois. Son of Frank Anthony Paoni and Eleanor. Worked at the coal mine until it closed in 1968, then opened a small grocery store on the east side. Married Patricia in 1958. They had three children: Thomas (1960), Mary (1963), and Joseph (1966). John was known for his garden — grew tomatoes that won the county fair three years running. Passed away in 2005, buried at Camp Butler National Cemetery."></textarea>
+
+    <div style="margin-top:.75rem">
+      <span style="font-size:.8rem;color:var(--text-dim);margin-right:.75rem">Tone:</span>
+      <div class="tone-select" id="toneSelect">
+        <button class="tone-btn active" data-tone="narrative">Narrative</button>
+        <button class="tone-btn" data-tone="scholarly">Scholarly</button>
+        <button class="tone-btn" data-tone="casual">Casual / Story</button>
+        <button class="tone-btn" data-tone="obituary">Obituary-style</button>
+      </div>
+    </div>
+
+    <button class="btn btn-primary btn-block" id="btnGenerate" style="margin-top:1rem">
+      <span id="btnText">Generate Family History</span>
+      <span id="btnSpinner" class="spinner hidden"></span>
+    </button>
+  </div>
+
+  <!-- Output -->
+  <div class="output-card hidden fade-in" id="outputCard">
+    <span class="preview-badge">AI-Generated Draft</span>
+    <div id="outputContent"></div>
+    <div class="byline">Generated by Family History Writer — edit, refine, and make it yours.</div>
+  </div>
+
+  <!-- Upsell -->
+  <div class="upsell fade-in" id="upsellCard">
+    <h3>Full AI-Powered Version</h3>
+    <p>The real Family History Writer uses advanced AI to craft a complete, accurate narrative from your research. This preview shows the concept — the full version does the real work.</p>
+    <div class="price">$9.99 per family history</div>
+    <ul class="features">
+      <li>Full AI narrative generation from your notes</li>
+      <li>Multiple tones and styles</li>
+      <li>Download as PDF or Word document</li>
+      <li>Automatic timeline extraction</li>
+      <li>Source citations included</li>
+      <li>Editable before finalizing</li>
+    </ul>
+    <p style="color:var(--text-dim);font-size:.82rem">Be first in line. Drop your email and we'll notify you when it launches.</p>
+    <div class="email-form">
+      <input type="email" id="upsellEmail" placeholder="your@email.com">
+      <button class="btn btn-primary" id="btnUpsellNotify">Get early access</button>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <p><a href="../index.html">Dominic Paoni</a> · <a href="index.html">Tools</a> · Springfield, IL</p>
+</footer>
+
+<script>
+(function() {
+  // Demo generator - template-based preview of concept
+  function generatePreview(notes, tone) {
+    const lines = notes.split('\n').filter(l => l.trim());
+    const fullText = notes.toLowerCase();
+
+    // Extract names (capitalized words)
+    const names = notes.match(/\b([A-Z][a-z]+(?:\s+[A-Z][a-z]+)*)\b/g) || ['the subject'];
+    const uniqueNames = [...new Set(names)].filter(n => n.length > 2 && !['The','And','But','For','With'].includes(n));
+    const mainName = uniqueNames[0] || 'the subject';
+
+    // Extract years
+    const years = notes.match(/\b(1[89][0-9]{2}|20[0-9]{2})\b/g) || [];
+    const sortedYears = [...new Set(years)].sort();
+    const birthYear = sortedYears[0] || '19--';
+    const deathYear = sortedYears[sortedYears.length-1] || '20--';
+
+    // Extract locations
+    const locations = notes.match(/([A-Z][a-z]+(?:,\s*(?:IL|Illinois|MO|Missouri|IA|Iowa|IN|Indiana|KY|Kentucky|WI|Wisconsin|OH|Ohio|MI|Michigan))?)/g) || [];
+    const uniqueLocs = [...new Set(locations.map(l => l.replace(/,\s*(?:IL|Illinois)/,'').trim()))].slice(0,3);
+
+    const location = uniqueLocs[0] || 'Springfield, Illinois';
+
+    // Detect themes
+    let themes = [];
+    if (fullText.includes('coal') || fullText.includes('mine')) themes.push('coal mining');
+    if (fullText.includes('farm') || fullText.includes('garden') || fullText.includes('grew')) themes.push('agriculture');
+    if (fullText.includes('war') || fullText.includes('army') || fullText.includes('navy') || fullText.includes('served')) themes.push('military service');
+    if (fullText.includes('store') || fullText.includes('business') || fullText.includes('shop')) themes.push('small business');
+    if (fullText.includes('church') || fullText.includes('faith') || fullText.includes('catholic') || fullText.includes('priest')) themes.push('faith');
+    if (fullText.includes('immigra') || fullText.includes('italy') || fullText.includes('italian') || fullText.includes('ellis')) themes.push('immigration');
+
+    const narratives = {
+      narrative: `The story of ${mainName} begins in ${birthYear}, in ${location}. Born into a family that had already put down deep roots in the community, ${names[1] || 'they'} would grow to become a central figure in the lives of everyone who knew ${names[2] || 'them'}.
+
+${themes.includes('coal mining') ? `Like many in ${location}, ${mainName.split(' ')[0]} found work in the coal mines — a hard living that shaped both character and community. The mines ran deep beneath the Illinois prairie, and the men who worked them ran just as deep in their commitment to family and neighbors.` : ''}
+
+${themes.includes('small business') ? `After years of hard labor, ${mainName.split(' ')[0]} took a chance on something new — opening a small business that would serve the neighborhood for decades. It wasn't just a store. It was a gathering place, a lifeline, a testament to what one person with determination could build.` : ''}
+
+${themes.includes('agriculture') ? `There was always a garden. ${mainName.split(' ')[0]} had a way with the soil that seemed almost instinctual — a connection to the land that produced not just vegetables but a sense of pride that spread through the whole neighborhood. The tomatoes, people still say, were the best in the county.` : ''}
+
+Through it all, family remained the center. ${uniqueNames.length > 1 ? `With ${uniqueNames.slice(1,3).join(' and ')} by ${names[2] ? 'their' : 'the'} side, ${mainName} built a life defined not by wealth or status, but by the quieter measures that matter — children raised well, neighbors helped without being asked, a reputation for showing up when it counted.` : 'They built a life defined not by wealth or status, but by the quieter measures that matter most.'}
+
+${themes.includes('military service') ? `When duty called, they answered. Military service marked a defining chapter — one that shaped their understanding of sacrifice and deepened their appreciation for the community they came home to.` : ''}
+
+${deathYear > '2000' ? `When ${mainName.split(' ')[0]} passed in ${deathYear}, the line at the funeral home stretched around the block. Not because they were famous — because they had touched that many lives, one conversation, one favor, one quiet kindness at a time.` : `The legacy of ${mainName.split(' ')[0]} lives on — not in monuments, but in the family stories told at reunions, the recipes still cooked from memory, and the simple knowledge that someone came before who lived with integrity.`}
+
+Buried at Camp Butler National Cemetery, ${mainName} rests among generations of others who called ${location} home. Their story is just one thread in a much larger tapestry — but it is a thread worth remembering, worth telling, and worth passing on.`,
+
+      scholarly: `**${mainName}** (${birthYear}–${deathYear}) was a resident of ${location} who contributed to the ${themes[0] || 'local'} economy and community life throughout the mid-to-late twentieth century.
+
+**Early Life and Family Background**
+
+${mainName} was born in ${birthYear} in ${location}, the child of ${uniqueNames[1] || 'immigrant parents'} who had settled in the area during the early decades of the century. The family belonged to the wave of ${themes.includes('immigration') ? 'Italian immigration' : 'migration'} that reshaped central Illinois during this period.
+
+**Occupation and Economic Contribution**
+
+${themes.includes('coal mining') ? `During the peak of Illinois coal production, ${mainName.split(' ')[0]} was employed in the mining industry, which at the time represented one of the largest employers in Sangamon County. The closure of the mines in the late 1960s marked a significant economic transition.` : ''}
+
+${themes.includes('small business') ? `Following the decline of mining employment, ${mainName.split(' ')[0]} transitioned to small business ownership, operating a retail establishment that served the local community. This pattern of economic adaptation was common among second-generation immigrant families in the region.` : ''}
+
+**Community and Family Life**
+
+${uniqueNames.length > 2 ? `Marriage to ${uniqueNames[2]} produced ${sortedYears.length > 2 ? 'several' : ''} children, continuing the family line in ${location}.` : ''} Records indicate active participation in community affairs ${themes.includes('faith') ? 'and religious institutions' : ''}.
+
+**Legacy and Burial**
+
+${mainName.split(' ')[0]} is interred at Camp Butler National Cemetery, a site of historical significance established in 1862. The cemetery contains the remains of veterans and civilians who contributed to the development of the Springfield area across multiple generations.
+
+**Research Notes**
+
+Further genealogical research may yield additional documentation from county records, census data, and church archives. Descendants are encouraged to contribute oral histories to supplement the documentary record.`,
+
+      casual: `Let me tell you about ${mainName} — and trust me, this is a story worth telling.
+
+${mainName.split(' ')[0]} was born in ${location} back in ${birthYear}, and from day one, ${names[1] || 'they'} seemed destined to leave a mark on this town. Not the kind of mark that gets you in history books — the kind that gets people nodding at the mention of your name fifty years later.
+
+${themes.includes('coal mining') ? `The coal mines. That's where a lot of the story starts. ${mainName.split(' ')[0]} spent years underground, doing the kind of work that makes everything else seem easy by comparison. When the mines shut down, most people would've folded. Not ${mainName.split(' ')[0]}.` : ''}
+
+${themes.includes('small business') ? `Instead, ${mainName.split(' ')[0]} opened up a shop. Nothing fancy — just a place where people could get what they needed and catch up on the neighborhood news while they were at it. That store became a fixture, the kind of place that feels like it's always been there.` : ''}
+
+${themes.includes('agriculture') ? `And the garden. You haven't heard about the garden yet? ${mainName.split(' ')[0]} grew tomatoes that people still talk about. County fair, three years running — that's not luck, that's someone who understood the dirt in a way most of us never will.` : ''}
+
+The thing about ${mainName.split(' ')[0]} was this: they showed up. Whether it was a neighbor who needed help, a kid who needed guidance, or a community that needed somebody to care — ${names[2] || 'they'} were there. No fanfare, no expectations. Just presence.
+
+${mainName.split(' ')[0]} passed away in ${deathYear}. The funeral was packed — not because anyone felt obligated, but because ${mainName.split(' ')[0]} had earned that turnout, one small kindness at a time, over a lifetime.
+
+Some people build monuments. ${mainName.split(' ')[0]} built relationships. And those last a whole lot longer.`,
+
+      obituary: `${mainName}, ${birthYear}–${deathYear}
+
+${mainName}, a longtime resident of ${location}, passed away peacefully in ${deathYear} at the age of ${parseInt(deathYear) - parseInt(birthYear)}.
+
+Born in ${location} in ${birthYear} to ${uniqueNames[1] || 'a hardworking family'}, ${mainName.split(' ')[0]} spent ${names[1] ? 'their' : 'a'} lifetime in service to family and community. ${themes.includes('coal mining') ? `A coal miner by trade, ${mainName.split(' ')[0]} worked the Springfield mines until their closure and later ` : ''}${themes.includes('small business') ? `operated a small business serving the local neighborhood for many years.` : 'built a life of quiet dignity and steady work.'}
+
+${uniqueNames.length > 2 ? `${mainName.split(' ')[0]} was married to ${uniqueNames[2]} and together they raised a family that continues to call ${location} home.` : ''}
+
+${themes.includes('agriculture') ? `An avid gardener, ${mainName.split(' ')[0]} was known throughout the community for prizewinning tomatoes and a generosity with the harvest that made the whole neighborhood feel like family.` : ''}
+
+${themes.includes('military service') ? `A proud veteran, ${mainName.split(' ')[0]} served with honor and carried the values of that service throughout civilian life.` : ''}
+
+${mainName.split(' ')[0]} is survived by a legacy of love, hard work, and the countless lives touched by a life well lived.
+
+Services will be held at [location TBD]. Burial at Camp Butler National Cemetery.
+
+In lieu of flowers, the family requests that you share a story about ${mainName.split(' ')[0]} with someone you love. That's how ${names[2] || 'they'} would have wanted it.`
+    };
+
+    return narratives[tone] || narratives.narrative;
+  }
+
+  let currentTone = 'narrative';
+
+  document.querySelectorAll('.tone-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.tone-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      currentTone = this.dataset.tone;
+    });
+  });
+
+  document.getElementById('btnGenerate').addEventListener('click', function() {
+    const notes = document.getElementById('notesInput').value.trim();
+    if (!notes) {
+      toast('Paste some research notes first!');
+      return;
+    }
+
+    // Show loading
+    const btnText = document.getElementById('btnText');
+    const spinner = document.getElementById('btnSpinner');
+    btnText.textContent = 'Generating...';
+    spinner.classList.remove('hidden');
+
+    // Simulate AI processing delay
+    setTimeout(() => {
+      const output = generatePreview(notes, currentTone);
+      document.getElementById('outputContent').innerHTML = output.split('\n\n').map(p =>
+        p.startsWith('**') ? `<h2>${p.replace(/\*\*/g,'')}</h2>` : `<p>${p}</p>`
+      ).join('');
+      document.getElementById('outputCard').classList.remove('hidden');
+      document.getElementById('outputCard').scrollIntoView({behavior:'smooth'});
+
+      btnText.textContent = 'Generate Family History';
+      spinner.classList.add('hidden');
+    }, 1200);
+  });
+
+  // Email capture
+  function captureEmail(inputId) {
+    const email = document.getElementById(inputId).value.trim();
+    if (!email || !email.includes('@')) { toast('Please enter a valid email'); return; }
+    localStorage.setItem('tools-email', email);
+    document.getElementById(inputId).value = '';
+    toast('Got it! You\'ll be first to know when the full AI version launches.');
+  }
+
+  document.getElementById('btnUpsellNotify').addEventListener('click', () => captureEmail('upsellEmail'));
+
+  function toast(msg) {
+    let t = document.querySelector('.toast');
+    if (t) t.remove();
+    t = document.createElement('div');
+    t.className = 'toast';
+    t.textContent = msg;
+    document.body.appendChild(t);
+    setTimeout(() => t.remove(), 3000);
+  }
+})();
+</script>
+</body>
+</html>

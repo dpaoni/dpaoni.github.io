@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Family Timeline Builder — Dominic Paoni Tools</title>
+<meta name="description" content="Build a visual family history timeline. Add births, marriages, deaths, and milestones — see your family's story mapped across generations.">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0a0a0c">
+<link rel="canonical" href="https://dpaoni.github.io/tools/timeline-builder.html">
+<meta property="og:title" content="Family Timeline Builder">
+<meta property="og:description" content="Build a visual family history timeline across generations.">
+<meta property="og:url" content="https://dpaoni.github.io/tools/timeline-builder.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#0a0a0c;--bg-card:#111115;--bg-card-hover:#16161b;--border:#1e1e24;
+    --border-focus:#3a3a44;--text:#c8c8d0;--text-dim:#6b6b76;--text-bright:#e8e8f0;
+    --accent:#c9a96e;--accent-soft:rgba(201,169,110,0.08);--accent-glow:rgba(201,169,110,0.15);
+    --red:#c96e6e;--green:#6ec99a;--blue:#6e9ac9;--radius:10px;--radius-sm:6px;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+  .container{max-width:900px;margin:0 auto;padding:0 1.5rem}
+  nav{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 2rem;max-width:1100px;margin:0 auto;border-bottom:1px solid var(--border)}
+  .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.25rem;color:var(--text-bright);text-decoration:none;font-weight:500}
+  .nav-links{display:flex;gap:1.75rem;list-style:none;align-items:center}
+  .nav-links a{color:var(--text-dim);text-decoration:none;font-size:.875rem;transition:color .2s}
+  .nav-links a:hover,.nav-links a.active{color:var(--text-bright)}
+
+  .tool-header{padding:3rem 0 1.5rem;text-align:center}
+  .tool-badge{display:inline-block;font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);margin-bottom:.75rem;font-weight:500}
+  .tool-header h1{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:400;color:var(--text-bright);line-height:1.15;margin-bottom:.5rem}
+  .tool-header p{color:var(--text-dim);font-size:1rem;max-width:520px;margin:0 auto}
+
+  /* Add event form */
+  .add-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1.75rem;margin-bottom:1.5rem}
+  .add-card h3{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--text-bright);margin-bottom:1rem;font-weight:500}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.75rem;margin-bottom:0.75rem}
+  @media(max-width:650px){.form-grid{grid-template-columns:1fr}}
+  .form-grid input,.form-grid select{width:100%;padding:.65rem .85rem;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-bright);font-family:inherit;font-size:.875rem;transition:border-color .2s}
+  .form-grid input:focus,.form-grid select:focus{outline:none;border-color:var(--accent)}
+  .form-grid input::placeholder{color:var(--text-dim)}
+  .desc-row{display:flex;gap:.75rem;margin-bottom:.75rem}
+  .desc-row input{flex:1;padding:.65rem .85rem;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-bright);font-family:inherit;font-size:.875rem}
+  .desc-row input:focus{outline:none;border-color:var(--accent)}
+  .desc-row input::placeholder{color:var(--text-dim)}
+  .btn{display:inline-flex;align-items:center;gap:.35rem;padding:.6rem 1.25rem;border-radius:var(--radius-sm);font-family:inherit;font-size:.85rem;font-weight:500;cursor:pointer;transition:all .2s;border:none}
+  .btn-primary{background:var(--accent);color:var(--bg)}
+  .btn-primary:hover{filter:brightness(1.1)}
+  .btn-ghost{border:1px solid var(--border);color:var(--text);background:transparent}
+  .btn-ghost:hover{border-color:var(--border-focus);color:var(--text-bright)}
+  .btn-sm{padding:.4rem .85rem;font-size:.8rem}
+  .form-actions{display:flex;gap:.5rem;align-items:center}
+
+  /* Event type colors */
+  .type-birth{--evt-color:var(--green)}
+  .type-marriage{--evt-color:var(--accent)}
+  .type-death{--evt-color:var(--red)}
+  .type-immigration{--evt-color:var(--blue)}
+  .type-milestone{--evt-color:var(--text-dim)}
+
+  /* Timeline */
+  .timeline-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:1.5rem;min-height:100px}
+  .timeline-card h3{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--text-bright);margin-bottom:1rem;font-weight:500}
+  .timeline-empty{text-align:center;padding:2rem;color:var(--text-dim);font-size:.9rem}
+  .timeline{position:relative;padding-left:2rem}
+  .timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--border)}
+  .tl-event{position:relative;padding:0 0 1.75rem 1.5rem}
+  .tl-event::before{content:'';position:absolute;left:-.1rem;top:.35rem;width:9px;height:9px;border-radius:50%;background:var(--evt-color,var(--accent));border:2px solid var(--bg-card);z-index:1}
+  .tl-event:last-child{padding-bottom:0}
+  .tl-date{font-size:.75rem;color:var(--accent);font-weight:500;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.15rem}
+  .tl-name{font-size:1rem;color:var(--text-bright);font-weight:500;margin-bottom:.15rem}
+  .tl-desc{font-size:.85rem;color:var(--text-dim);line-height:1.4}
+  .tl-type{font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--evt-color,var(--text-dim));font-weight:600;margin-bottom:.15rem}
+  .tl-actions{margin-top:.35rem;display:flex;gap:.5rem}
+  .tl-actions button{font-size:.7rem;padding:.2rem .6rem;background:transparent;border:1px solid var(--border);color:var(--text-dim);border-radius:3px;cursor:pointer;transition:all .15s}
+  .tl-actions button:hover{border-color:var(--red);color:var(--red)}
+
+  /* Stat bar */
+  .stat-bar{display:flex;gap:1rem;margin-bottom:1rem;flex-wrap:wrap}
+  .stat{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.5rem .85rem;font-size:.8rem}
+  .stat strong{color:var(--text-bright)}
+
+  /* Export */
+  .export-bar{display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap}
+
+  /* CTA */
+  .cta-card{background:var(--bg-card);border:1px solid var(--accent);border-radius:var(--radius);padding:1.75rem;margin:2rem 0;text-align:center}
+  .cta-card h3{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--text-bright);margin-bottom:.35rem;font-weight:500}
+  .cta-card p{color:var(--text-dim);font-size:.85rem;margin-bottom:1rem}
+  .cta-email{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap}
+  .cta-email input{padding:.6rem 1rem;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-bright);font-family:inherit;font-size:.85rem;min-width:260px}
+  .cta-email input:focus{outline:none;border-color:var(--accent)}
+  .cta-email input::placeholder{color:var(--text-dim)}
+
+  footer{text-align:center;padding:3rem 1.5rem;color:var(--text-dim);font-size:.8rem;border-top:1px solid var(--border);margin-top:3rem}
+  footer a{color:var(--text-dim);text-decoration:none}
+  footer a:hover{color:var(--text-bright)}
+  .fade-in{opacity:0;transform:translateY(12px);animation:fadeIn .5s ease forwards}
+  @keyframes fadeIn{to{opacity:1;transform:translateY(0)}}
+  .hidden{display:none!important}
+  .toast{position:fixed;bottom:2rem;right:2rem;background:var(--bg-card);border:1px solid var(--accent);border-radius:var(--radius-sm);padding:.75rem 1.25rem;color:var(--text-bright);font-size:.85rem;z-index:99;animation:fadeIn .3s ease}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">Dominic Paoni</a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../about.html">About</a></li>
+    <li><a href="../work.html">Work</a></li>
+    <li><a href="index.html" class="active">Tools</a></li>
+    <li><a href="../contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<main class="container">
+
+  <header class="tool-header fade-in">
+    <span class="tool-badge">Genealogy Tool</span>
+    <h1>Family Timeline Builder</h1>
+    <p>Add births, marriages, deaths, and milestones — see your family's story mapped across generations.</p>
+  </header>
+
+  <!-- Add event form -->
+  <div class="add-card fade-in" id="addForm">
+    <h3>Add an event</h3>
+    <div class="form-grid">
+      <input type="text" id="evtName" placeholder="Person name (e.g. John Paoni)">
+      <input type="text" id="evtDate" placeholder="Date (e.g. 1924 or Mar 1924)">
+      <select id="evtType">
+        <option value="birth">Birth</option>
+        <option value="marriage">Marriage</option>
+        <option value="death">Death</option>
+        <option value="immigration">Immigration</option>
+        <option value="milestone">Milestone</option>
+      </select>
+    </div>
+    <div class="desc-row">
+      <input type="text" id="evtDesc" placeholder="Short description (e.g. Born in Springfield, IL)">
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-primary" id="btnAdd">+ Add event</button>
+      <button class="btn btn-ghost btn-sm" id="btnSample">Load sample data</button>
+    </div>
+  </div>
+
+  <!-- Timeline display -->
+  <div class="timeline-card fade-in">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;margin-bottom:.75rem">
+      <h3 style="margin-bottom:0">Timeline</h3>
+      <div class="export-bar">
+        <button class="btn btn-ghost btn-sm hidden" id="btnCopy">Copy as text</button>
+        <button class="btn btn-ghost btn-sm hidden" id="btnClear">Clear all</button>
+      </div>
+    </div>
+    <div class="stat-bar hidden" id="statBar"></div>
+    <div id="timeline"><div class="timeline-empty">Add events above to build your family timeline.</div></div>
+  </div>
+
+  <!-- Premium CTA -->
+  <div class="cta-card fade-in">
+    <h3>Want a full narrative family history?</h3>
+    <p>Our AI Family History Writer turns your timeline and research notes into a polished, publishable family history narrative. Drop your email to get early access.</p>
+    <div class="cta-email">
+      <input type="email" id="ctaEmail" placeholder="your@email.com">
+      <button class="btn btn-primary" id="btnNotify">Notify me</button>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <p><a href="../index.html">Dominic Paoni</a> · <a href="index.html">Tools</a> · Springfield, IL</p>
+</footer>
+
+<script>
+(function() {
+  const STORAGE_KEY = 'family-timeline-events';
+  let events = [];
+
+  function load() {
+    try { events = JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; } catch(e) { events = []; }
+  }
+  function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(events)); }
+
+  function formatDate(d) {
+    if (!d || !d.trim()) return '';
+    let s = d.trim();
+    // Try to extract year
+    let m = s.match(/\b(1[0-9]{3}|20[0-9]{2})\b/);
+    return s;
+  }
+
+  function extractYear(d) {
+    if (!d || !d.trim()) return 9999;
+    let m = d.trim().match(/\b(1[0-9]{3}|20[0-9]{2})\b/);
+    return m ? parseInt(m[0]) : 9999;
+  }
+
+  function sortEvents(evts) {
+    return [...evts].sort((a,b) => {
+      let ya = extractYear(a.date), yb = extractYear(b.date);
+      if (ya !== yb) return ya - yb;
+      return a.name.localeCompare(b.name);
+    });
+  }
+
+  function typeLabel(t) {
+    return {birth:'Birth',marriage:'Marriage',death:'Death',immigration:'Immigration',milestone:'Milestone'}[t] || t;
+  }
+
+  function render() {
+    const tl = document.getElementById('timeline');
+    const statBar = document.getElementById('statBar');
+    const btnCopy = document.getElementById('btnCopy');
+    const btnClear = document.getElementById('btnClear');
+
+    if (events.length === 0) {
+      tl.innerHTML = '<div class="timeline-empty">Add events above to build your family timeline.</div>';
+      statBar.classList.add('hidden');
+      btnCopy.classList.add('hidden');
+      btnClear.classList.add('hidden');
+      return;
+    }
+
+    btnCopy.classList.remove('hidden');
+    btnClear.classList.remove('hidden');
+
+    // Stats
+    let counts = {};
+    events.forEach(e => { counts[e.type] = (counts[e.type]||0)+1; });
+    let years = events.map(e => extractYear(e.date)).filter(y => y < 9999);
+    let range = years.length ? `${Math.min(...years)} – ${Math.max(...years)}` : 'unknown';
+    statBar.innerHTML = `
+      <div class="stat"><strong>${events.length}</strong> events</div>
+      <div class="stat">Range: <strong>${range}</strong></div>
+      ${Object.entries(counts).map(([k,v]) => `<div class="stat">${typeLabel(k)}: <strong>${v}</strong></div>`).join('')}
+    `;
+    statBar.classList.remove('hidden');
+
+    const sorted = sortEvents(events);
+    tl.innerHTML = '<div class="timeline">' + sorted.map((e,i) => `
+      <div class="tl-event type-${e.type}">
+        <div class="tl-type">${typeLabel(e.type)}</div>
+        <div class="tl-date">${e.date || 'Date unknown'}</div>
+        <div class="tl-name">${e.name}</div>
+        ${e.desc ? `<div class="tl-desc">${e.desc}</div>` : ''}
+        <div class="tl-actions"><button onclick="window._removeEvent(${i})">Remove</button></div>
+      </div>
+    `).join('') + '</div>';
+  }
+
+  function addEvent() {
+    const name = document.getElementById('evtName').value.trim();
+    const date = document.getElementById('evtDate').value.trim();
+    const type = document.getElementById('evtType').value;
+    const desc = document.getElementById('evtDesc').value.trim();
+
+    if (!name) { toast('Please enter a person name'); return; }
+    if (!date) { toast('Please enter a date'); return; }
+
+    events.push({name, date, type, desc});
+    save();
+    render();
+    document.getElementById('evtName').value = '';
+    document.getElementById('evtDate').value = '';
+    document.getElementById('evtDesc').value = '';
+    document.getElementById('evtName').focus();
+  }
+
+  function removeEvent(idx) {
+    events.splice(idx, 1);
+    save();
+    render();
+  }
+
+  window._removeEvent = removeEvent;
+
+  function copyTimeline() {
+    const sorted = sortEvents(events);
+    let text = 'Family Timeline\n' + '='.repeat(40) + '\n\n';
+    sorted.forEach(e => {
+      text += `${e.date} — ${typeLabel(e.type)}: ${e.name}`;
+      if (e.desc) text += ` — ${e.desc}`;
+      text += '\n';
+    });
+    navigator.clipboard.writeText(text).then(() => toast('Timeline copied to clipboard!'));
+  }
+
+  function clearAll() {
+    if (confirm('Delete all events? This cannot be undone.')) {
+      events = [];
+      save();
+      render();
+    }
+  }
+
+  function loadSample() {
+    events = [
+      {name:'Giuseppe Paoni',date:'1885',type:'birth',desc:'Born in Italy'},
+      {name:'Giuseppe Paoni',date:'1905',type:'immigration',desc:'Arrived at Ellis Island, New York'},
+      {name:'Giuseppe Paoni',date:'1908',type:'marriage',desc:'Married Maria in Springfield, IL'},
+      {name:'Frank Paoni',date:'1910',type:'birth',desc:'First child, born in Springfield'},
+      {name:'Frank Paoni',date:'1932',type:'marriage',desc:'Married Eleanor'},
+      {name:'Frank Paoni',date:'1942',type:'milestone',desc:'Served in WWII'},
+      {name:'John Paoni',date:'1935',type:'birth',desc:'Born in Springfield, IL'},
+      {name:'John Paoni',date:'1958',type:'marriage',desc:'Married Patricia'},
+      {name:'Thomas Paoni Sr.',date:'1960',type:'birth',desc:'Born in Springfield, IL'},
+      {name:'Maria Paoni',date:'1965',type:'death',desc:'Passed away in Springfield, buried at Camp Butler'},
+      {name:'Giuseppe Paoni',date:'1972',type:'death',desc:'Passed away in Springfield, buried at Camp Butler'},
+      {name:'Dominic Paoni',date:'1998',type:'birth',desc:'Born in Springfield, IL'},
+    ];
+    save();
+    render();
+    toast('Sample family timeline loaded!');
+  }
+
+  function toast(msg) {
+    let t = document.querySelector('.toast');
+    if (t) t.remove();
+    t = document.createElement('div');
+    t.className = 'toast';
+    t.textContent = msg;
+    document.body.appendChild(t);
+    setTimeout(() => t.remove(), 2500);
+  }
+
+  // Email capture
+  function notifyMe() {
+    const email = document.getElementById('ctaEmail').value.trim();
+    if (!email || !email.includes('@')) { toast('Please enter a valid email'); return; }
+    // In production: POST to email service (ConvertKit, Mailchimp, etc.)
+    // For now: store locally and show confirmation
+    localStorage.setItem('tools-email', email);
+    document.getElementById('ctaEmail').value = '';
+    toast('Got it! We\'ll let you know when the Family History Writer launches.');
+  }
+
+  // Init
+  load();
+  render();
+  if (events.length === 0) loadSample(); // Auto-load sample on first visit
+
+  document.getElementById('btnAdd').addEventListener('click', addEvent);
+  document.getElementById('btnCopy').addEventListener('click', copyTimeline);
+  document.getElementById('btnClear').addEventListener('click', clearAll);
+  document.getElementById('btnSample').addEventListener('click', loadSample);
+  document.getElementById('btnNotify').addEventListener('click', notifyMe);
+  document.getElementById('evtName').addEventListener('keydown', e => { if (e.key==='Enter') addEvent(); });
+  document.getElementById('evtDate').addEventListener('keydown', e => { if (e.key==='Enter') addEvent(); });
+  document.getElementById('evtDesc').addEventListener('keydown', e => { if (e.key==='Enter') addEvent(); });
+})();
+</script>
+</body>
+</html>

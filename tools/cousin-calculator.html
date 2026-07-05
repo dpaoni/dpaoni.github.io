@@ -249,9 +249,16 @@
   </section>
 
   <section class="cta-section fade-in">
-    <h2>More genealogy tools coming</h2>
-    <p>Family history writer, record analyzer, and more — built to make genealogy research easier.</p>
-    <a href="index.html" class="btn btn-ghost">Browse all tools</a>
+    <h2>Write your family's story</h2>
+    <p>Try the Family History Writer — turns your research into a complete narrative. Free preview available.</p>
+    <a href="family-history-writer.html" class="btn btn-primary">Try it now</a>
+    <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border)">
+      <p style="font-size:0.82rem;margin-bottom:0.75rem">Get notified when new tools launch:</p>
+      <div style="display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap">
+        <input type="email" id="ctaEmail" placeholder="your@email.com" style="padding:.55rem .85rem;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-bright);font-family:inherit;font-size:.82rem;min-width:220px">
+        <button class="btn btn-primary" id="btnNotify" style="font-size:.8rem;padding:.55rem 1rem">Notify me</button>
+      </div>
+    </div>
   </section>
 
 </main>
@@ -401,6 +408,19 @@
 
   document.getElementById('personA').addEventListener('change', update);
   document.getElementById('personB').addEventListener('change', update);
+
+  // Email notify
+  document.getElementById('btnNotify').addEventListener('click', function() {
+    var email = document.getElementById('ctaEmail').value.trim();
+    if (!email || email.indexOf('@') === -1) return;
+    localStorage.setItem('tools-email', email);
+    document.getElementById('ctaEmail').value = '';
+    var t = document.createElement('div');
+    t.style.cssText = 'position:fixed;bottom:2rem;right:2rem;background:#111115;border:1px solid #c9a96e;border-radius:6px;padding:.75rem 1.25rem;color:#e8e8f0;font-size:.85rem;z-index:99';
+    t.textContent = 'Got it! We will let you know when new tools launch.';
+    document.body.appendChild(t);
+    setTimeout(function(){ t.remove(); }, 3000);
+  });
 
   // Examples
   const examples = [

@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tools — Dominic Paoni</title>
-<meta name="description" content="Free genealogy and research tools — cousin calculator, family history tools, and more.">
+<meta name="description" content="Free genealogy tools: cousin calculator, family timeline builder, and AI family history writer.">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#0a0a0c">
 <link rel="canonical" href="https://dpaoni.github.io/tools/">
 <meta property="og:title" content="Tools — Dominic Paoni">
-<meta property="og:description" content="Free genealogy and research tools.">
+<meta property="og:description" content="Free genealogy and family history tools.">
 <meta property="og:url" content="https://dpaoni.github.io/tools/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,14 +43,26 @@
     transition: all .25s; display: block; position: relative; overflow: hidden;
   }
   .tool-card:hover { border-color: var(--border-focus); background: var(--bg-card-hover); transform: translateY(-2px); }
-  .tool-card-icon { font-size: 1.75rem; margin-bottom: 0.75rem; }
   .tool-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; color: var(--text-bright); margin-bottom: 0.4rem; font-weight: 500; }
   .tool-card p { color: var(--text-dim); font-size: 0.88rem; line-height: 1.5; margin-bottom: 0.75rem; }
   .tool-card-status { font-size: 0.72rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; }
   .status-live { color: #4a9; }
+  .status-premium { color: var(--accent); }
   .status-soon { color: var(--text-dim); }
 
-  .coming-soon { opacity: 0.5; pointer-events: none; }
+  .cta-section {
+    background: var(--bg-card); border: 1px solid var(--accent); border-radius: var(--radius);
+    padding: 2rem; text-align: center; margin-bottom: 2rem;
+  }
+  .cta-section h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--text-bright); margin-bottom: 0.35rem; font-weight: 500; }
+  .cta-section p { color: var(--text-dim); font-size: 0.88rem; margin-bottom: 1rem; }
+  .email-form { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }
+  .email-form input { padding: 0.6rem 1rem; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text-bright); font-family: inherit; font-size: 0.85rem; min-width: 240px; }
+  .email-form input:focus { outline: none; border-color: var(--accent); }
+  .email-form input::placeholder { color: var(--text-dim); }
+  .btn { display: inline-block; padding: 0.6rem 1.4rem; border-radius: var(--radius-sm); font-family: inherit; font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all .2s; border: none; text-decoration: none; }
+  .btn-primary { background: var(--accent); color: var(--bg); }
+  .btn-primary:hover { filter: brightness(1.1); }
 
   footer { text-align: center; padding: 3rem 1.5rem; color: var(--text-dim); font-size: 0.8rem; border-top: 1px solid var(--border); margin-top: 4rem; }
   footer a { color: var(--text-dim); text-decoration: none; }
@@ -59,6 +71,7 @@
   @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
   .fade-in:nth-child(2) { animation-delay: .1s; }
   .fade-in:nth-child(3) { animation-delay: .2s; }
+  .toast { position: fixed; bottom: 2rem; right: 2rem; background: var(--bg-card); border: 1px solid var(--accent); border-radius: var(--radius-sm); padding: 0.75rem 1.25rem; color: var(--text-bright); font-size: 0.85rem; z-index: 99; animation: fadeIn .3s ease; }
 </style>
 </head>
 <body>
@@ -76,37 +89,42 @@
 
 <div class="container">
   <header class="page-header fade-in">
-    <h1>Tools</h1>
-    <p>Free utilities for genealogy research, family history, and more. Built to solve real problems.</p>
+    <h1>Genealogy Tools</h1>
+    <p>Free tools to help you research and write your family history. No sign-up needed.</p>
   </header>
 
   <div class="tools-grid fade-in">
     <a href="cousin-calculator.html" class="tool-card">
-      <div class="tool-card-icon">🌳</div>
-      <h3>Cousin Relationship Calculator</h3>
-      <p>Instantly figure out how any two people in a family tree are related — first cousin, second cousin once removed, and more.</p>
-      <span class="tool-card-status status-live">Live</span>
+      <h3>Cousin Calculator</h3>
+      <p>Find out how any two people in a family tree are related. Just pick how each person connects to a shared ancestor.</p>
+      <span class="tool-card-status status-live">Free</span>
     </a>
 
-    <div class="tool-card coming-soon">
-      <div class="tool-card-icon">📝</div>
-      <h3>Family History Writer</h3>
-      <p>Paste your research notes and get a polished narrative family history. AI-powered drafting with editable output.</p>
-      <span class="tool-card-status status-soon">Coming soon</span>
-    </div>
-
-    <div class="tool-card coming-soon">
-      <div class="tool-card-icon">🔍</div>
-      <h3>Record Analyzer</h3>
-      <p>Upload census records, birth certificates, or immigration docs and extract structured family data automatically.</p>
-      <span class="tool-card-status status-soon">Coming soon</span>
-    </div>
-
-    <div class="tool-card coming-soon">
-      <div class="tool-card-icon">📊</div>
+    <a href="timeline-builder.html" class="tool-card">
       <h3>Timeline Builder</h3>
-      <p>Generate a visual family timeline from names, dates, and locations. See your family's story mapped across generations.</p>
+      <p>Build a visual timeline of family events. Add births, marriages, and milestones across generations.</p>
+      <span class="tool-card-status status-live">Free</span>
+    </a>
+
+    <a href="family-history-writer.html" class="tool-card">
+      <h3>Family History Writer</h3>
+      <p>Turn your research notes into a full family history narrative. Try the free preview, then upgrade for AI-powered writing.</p>
+      <span class="tool-card-status status-premium">Preview</span>
+    </a>
+
+    <div class="tool-card" style="opacity:0.45;pointer-events:none;">
+      <h3>Record Analyzer</h3>
+      <p>Upload census records, birth certificates, or immigration papers. The AI pulls out names, dates, and relationships for you.</p>
       <span class="tool-card-status status-soon">Coming soon</span>
+    </div>
+  </div>
+
+  <div class="cta-section fade-in">
+    <h2>Get notified when new tools launch</h2>
+    <p>We're building more tools for family history research. Join the list to hear about them first.</p>
+    <div class="email-form">
+      <input type="email" id="ctaEmail" placeholder="your@email.com">
+      <button class="btn btn-primary" id="btnNotify">Notify me</button>
     </div>
   </div>
 </div>
@@ -115,5 +133,29 @@
   <p><a href="../index.html">Dominic Paoni</a> · Springfield, IL</p>
 </footer>
 
+<script>
+document.getElementById('btnNotify').addEventListener('click', function() {
+  const email = document.getElementById('ctaEmail').value.trim();
+  if (!email || !email.includes('@')) {
+    let t = document.querySelector('.toast');
+    if (t) t.remove();
+    t = document.createElement('div');
+    t.className = 'toast';
+    t.textContent = 'Please enter a valid email address.';
+    document.body.appendChild(t);
+    setTimeout(() => t.remove(), 2500);
+    return;
+  }
+  localStorage.setItem('tools-email', email);
+  document.getElementById('ctaEmail').value = '';
+  let t = document.querySelector('.toast');
+  if (t) t.remove();
+  t = document.createElement('div');
+  t.className = 'toast';
+  t.textContent = 'You are on the list! We will let you know when new tools launch.';
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 3000);
+});
+</script>
 </body>
 </html>
